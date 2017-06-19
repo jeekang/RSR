@@ -16,6 +16,8 @@ class Person (models.Model):
     title = models.CharField(max_length=200)
     work_authorization = models.CharField(max_length=100)
     security_clearance = models.CharField(max_length=100)
+    test_field = models.CharField(max_length=50)
+
 
 
 
