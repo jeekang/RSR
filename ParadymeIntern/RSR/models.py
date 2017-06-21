@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+<<<<<<< HEAD
 
 school_choices = (
     ('University of Maryland', 'University of Maryland'),
@@ -12,6 +13,8 @@ school_level_choices = (
     ('Graduate', 'Graduate'),
     ('PhD', 'PhD'),
 )
+=======
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
 
 class Person (models.Model):
     name = models.CharField(max_length=200)
@@ -29,9 +32,12 @@ class Person (models.Model):
     title = models.CharField(max_length=200)
     work_authorization = models.CharField(max_length=100)
     security_clearance = models.CharField(max_length=100)
+<<<<<<< HEAD
 
     def __str__(self):
         return self.name
+=======
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
 
 
 

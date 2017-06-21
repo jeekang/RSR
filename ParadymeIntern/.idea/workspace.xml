@@ -18,6 +18,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RSR/models.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="285">
               <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
               <folding>
@@ -45,6 +46,13 @@
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="135">
+              <caret line="9" column="47" lean-forward="true" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
             </state>
           </provider>
         </entry>
@@ -70,7 +78,11 @@
         <option value="$PROJECT_DIR$/RSR/urls.py" />
         <option value="$PROJECT_DIR$/RSR/views.py" />
         <option value="$PROJECT_DIR$/RSR/models.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/RSR/templates/RSR/index.html" />
+=======
+        <option value="$PROJECT_DIR$/.gitignore" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
       </list>
     </option>
   </component>
@@ -81,8 +93,13 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="4" />
     <option name="y" value="24" />
+=======
+    <option name="x" value="127" />
+    <option name="y" value="59" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
     <option name="width" value="1225" />
     <option name="height" value="796" />
   </component>
@@ -101,6 +118,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+      <pane id="Scratches" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -165,8 +187,11 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scratches" />
       <pane id="Scope" />
+=======
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -460,7 +485,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="4" y="24" width="1225" height="796" extended-state="0" />
+=======
+    <frame x="127" y="59" width="1225" height="796" extended-state="0" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25359255" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -470,7 +499,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -520,6 +553,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -528,6 +562,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
     <entry file="file://$PROJECT_DIR$/RSR/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -538,20 +574,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ParadymeIntern/settings.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="414">
           <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+=======
+        <state relative-caret-position="481">
+          <caret line="115" column="31" lean-forward="true" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="31" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/RSR/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="5" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/RSR/filters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -620,6 +669,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+=======
+    <entry file="file://$PROJECT_DIR$/RSR/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="47" lean-forward="true" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+>>>>>>> 6f9fe1e7892e4c7bc112dc1208bab0dfc1dfa8b6
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
