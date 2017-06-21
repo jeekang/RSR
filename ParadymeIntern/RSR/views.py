@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-from django.shortcuts import render
+#<<<<<<< HEAD
+#from django.shortcuts import render
 from .models import * # testing branch
 
 # Create your views here.
-=======
+#=======
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.template import RequestContext
@@ -35,4 +35,4 @@ def uploaddoc(request):
         'index.html',
         {'documents': documents, 'form': form}
     )
->>>>>>> master
+#>>>>>>> master
