@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'RSR.apps.RsrConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
