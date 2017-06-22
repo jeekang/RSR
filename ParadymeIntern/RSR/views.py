@@ -13,6 +13,9 @@ from RSR.models import Document
 from RSR.forms import DocumentForm
 
 
+def main(request):
+    return render(request, 'main.html')
+
 def uploaddoc(request):
     # Handle file upload
     if request.method == 'POST':
@@ -52,3 +55,4 @@ def export(request):
 
 def linkanalysis(request):
     return render(request, 'linkanalysis.html')
+

@@ -16,9 +16,19 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from. import views
-from RSR.views import uploaddoc
+from RSR.views import *
 
 urlpatterns = [
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
+
+    url(r'^main/$', main, name = 'main'),
+    url(r'^ocr/$', ocr, name='ocr'),
+    url(r'^parsing/$', parsing, name='parsing'),
+    url(r'^search/$', search, name='search'),
+    url(r'^user_access/$', user_acc_cont, name='user_access'),
+    url(r'^export/$', export, name='export'),
+    url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+
+
 
 ]
