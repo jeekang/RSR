@@ -34,3 +34,21 @@ def uploaddoc(request):
         'index.html',
         {'documents': documents, 'form': form}
     )
+
+def ocr (request):
+    return render(request, 'ocr.html')
+
+def parsing(request):
+    return render(request, 'parsing.html')
+
+def search (request):
+    return render(request, 'search.html')
+
+def user_acc_cont (request):
+    return render(request, 'acc_cont.html')
+
+def export(request):
+    return render (request, 'export.html')
+
+def linkanalysis(request):
+    return render(request, 'linkanalysis.html')
