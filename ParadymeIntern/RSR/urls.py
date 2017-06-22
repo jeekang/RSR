@@ -20,6 +20,5 @@ from RSR.views import uploaddoc
 
 urlpatterns = [
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
-    #url(r'^uploadfile/', views.uploadfile, name='uploadfile'),
-    #url(r'^$', views.index, name="index"),
+
 ]

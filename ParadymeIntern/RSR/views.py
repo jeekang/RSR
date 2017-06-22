@@ -1,6 +1,5 @@
-#<<<<<<< HEAD
-#from django.shortcuts import render
-from .models import * # testing branch
+
+from .models import * 
 
 # Create your views here.
 #=======
@@ -35,4 +34,3 @@ def uploaddoc(request):
         'index.html',
         {'documents': documents, 'form': form}
     )
-#>>>>>>> master
