@@ -20,9 +20,7 @@ def uploaddoc(request):
     else:
         form = DocumentForm()
 
-
     documents = Document.objects.all()
-
 
     return render(
         request,

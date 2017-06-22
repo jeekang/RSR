@@ -62,14 +62,24 @@
 			  </form>
             -->
 
+            {% if documents %}
+               <ul>
+                  {% for document in documents %}
+                        <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                    {% else %}
+                <h3> No document saved in the database! </h3>
+            {% endif %}
+
             <form action="{% url 'uploaddoc' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-            <p>{{ form.docfile.errors }}
-                {{ form.docfile }}</p>
-            <p><input class="btn bn-lg btn-default" type="submit" name="submit"  value="Upload" style="border-color:black"/></p>
-        </form>
+                <p>{{ form.non_field_errors }}</p>
+                <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+                <p>{{ form.docfile.errors }}
+                    {{ form.docfile }}</p>
+                <p><input type="submit" value="Upload"/></p>
+            </form>
 			  <!--<input class="btn btn-lg btn-default" type="file" value="Select" onclick="msg()" display=hidden>-->
 			  <!--<input class="btn bn-lg btn-default" type="file" name="my_file" id="my-file" style="position:absolute; text-align:center">-->
 
