@@ -10,3 +10,5 @@ def search(request):
 class detail(generic.DetailView):
     model = Person
     template_name = 'RSR/detail.html'
+
+#test
