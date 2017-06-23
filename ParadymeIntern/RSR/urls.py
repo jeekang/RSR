@@ -5,6 +5,8 @@ app_name = 'RSR'
 
 urlpatterns = [
 
-    #/index
-    url(r'^$', views.person_list, name='person_list'),
+    # /RSR/
+    url(r'^$', views.search, name='search'),
+
+    url(r'^(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
 ]
