@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'RSR.apps.RsrConfig',
     'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

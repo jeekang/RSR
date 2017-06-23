@@ -5,6 +5,6 @@ app_name = 'RSR'
 
 urlpatterns = [
 
-    #/index
-    url(r'^$', views.person_list, name='person_list'),
+    # /RSR/
+    url(r'^$', views.search, name='search'),
 ]
