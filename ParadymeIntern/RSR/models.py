@@ -85,6 +85,28 @@ class Person (models.Model):
     def __str__(self):
         return self.name
 
+    def __iter__(self):
+        yield self.name
+        yield self.school
+        yield self.school_level
+        yield self.major
+        yield self.gpa
+        yield self.graduation_year
+        yield self.graduation_month
+        yield self.language
+        yield self.skills
+        yield self.certificate
+        yield self.awards
+        yield self.conference
+        yield self.prior_company
+        yield self.year_of_experience
+        yield self.title
+        yield self.work_authorization
+        yield self.security_clearance
+
+
+
+
 
 
 

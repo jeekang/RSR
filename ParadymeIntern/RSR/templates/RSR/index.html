@@ -97,7 +97,9 @@
     <div align="center">
         <h4>Name:</h4>
         {% for obj in filter.qs %}
-        {{ obj.name }}<br>
+        <li>
+        <a href="{% url 'RSR:detail' obj.pk %}">{{obj.name}}</a>
+        </li>
         {% endfor %}
     </div>
 
