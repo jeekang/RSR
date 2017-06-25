@@ -86,23 +86,13 @@ class Person (models.Model):
         return self.name
 
     def __iter__(self):
-        yield self.name
-        yield self.school
-        yield self.school_level
-        yield self.major
-        yield self.gpa
-        yield self.graduation_year
-        yield self.graduation_month
-        yield self.language
-        yield self.skills
-        yield self.certificate
-        yield self.awards
-        yield self.conference
-        yield self.prior_company
-        yield self.year_of_experience
-        yield self.title
-        yield self.work_authorization
-        yield self.security_clearance
+        #for field in Person._meta.get_fields():
+         #   value = getattr(self, field, None)
+          #  yield (field, value)
+        for field in self._meta.fields:
+            field_name=field.get_attname()
+            value=getattr(self, field_name)
+            yield field_name+": "+str(value)
 
 
 
