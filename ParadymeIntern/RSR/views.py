@@ -1,5 +1,5 @@
 
-from .models import * 
+from .models import *
 
 # Create your views here.
 #=======
@@ -55,4 +55,3 @@ def export(request):
 
 def linkanalysis(request):
     return render(request, 'linkanalysis.html')
-
