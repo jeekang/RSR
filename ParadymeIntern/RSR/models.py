@@ -1,4 +1,5 @@
 from django.db import models
+import string
 
 school_choices = (
     ('University of Maryland', 'University of Maryland'),
@@ -86,12 +87,12 @@ class Person (models.Model):
         return self.name
 
     def __iter__(self):
-        #for field in Person._meta.get_fields():
-         #   value = getattr(self, field, None)
-          #  yield (field, value)
         for field in self._meta.fields:
             field_name=field.get_attname()
             value=getattr(self, field_name)
+            # Removing underscore and capitalizing the first word for each field name
+            field_name=field_name.replace('_',' ')
+            field_name=string.capwords(field_name)
             yield field_name+": "+str(value)
 
 
