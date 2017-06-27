@@ -4,32 +4,23 @@
  
            <div class="inner cover">
              <h1 class="cover-heading">Upload your resume</h1>
-             <p>
 
-            <!--put this in a new page-->
-            {% if documents %}
-               <ul>
-                  {% for document in documents %}
-                        <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></p>
-                    {% endfor %}
-                </ul>
-                    {% else %}
-                <h3> No document saved in the database! </h3>
-            {% endif %}
-               <!--ends here-->
- 
-             <form action="{% url 'uploaddoc' %}" method="post" enctype="multipart/form-data">
+
+             <form action="{% url 'uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
              {% csrf_token %}
                 <p>{{ form.non_field_errors }}</p>
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-                <p>{{ form.docfile.errors }}
-                    {{ form.docfile }}</p>
-                <p><input type="submit" value="Upload"/></p>
+                <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
+                <input type="submit" value="Upload"/>
             </form>
 
+            <p>
+            <form action="{% url 'uploadlist' %}">
+                 <input type="submit" value="Check the uplaod list" />
+             </form>
             </p>
-           </div>
 
+           </div>
 
 
       
