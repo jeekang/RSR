@@ -19,8 +19,9 @@ from. import views
 from RSR.views import *
 
 urlpatterns = [
-    url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
 
+    url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
+    url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
     url(r'^main/$', main, name = 'main'),
     url(r'^ocr/$', ocr, name='ocr'),
     url(r'^parsing/$', parsing, name='parsing'),

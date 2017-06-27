@@ -28,15 +28,10 @@ def uploaddoc(request):
     else:
         form = DocumentForm()
 
-
     documents = Document.objects.all()
+    return render(request,'index.html',{'documents': documents, 'form': form})
 
 
-    return render(
-        request,
-        'index.html',
-        {'documents': documents, 'form': form}
-    )
 
 def ocr (request):
     return render(request, 'ocr.html')
@@ -55,3 +50,8 @@ def export(request):
 
 def linkanalysis(request):
     return render(request, 'linkanalysis.html')
+
+def uploadlist (request):
+    documents = Document.objects.all()
+    context ={'documents':documents}
+    return render(request,'uploadlist.html',context)
