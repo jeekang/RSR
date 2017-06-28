@@ -22,6 +22,6 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^myapp/', include('RSR.urls')),
-    url(r'^$', RedirectView.as_view(url='myapp/uploaddoc/', permanent=True)),
+    url(r'^RSR/', include('RSR.urls')),
+    url(r'^$', RedirectView.as_view(url='RSR/uploaddoc/', permanent=True)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

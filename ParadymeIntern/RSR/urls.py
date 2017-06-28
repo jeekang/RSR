@@ -18,9 +18,11 @@ from django.contrib import admin
 from. import views
 from RSR.views import *
 
+app_name = 'RSR'
+
 urlpatterns = [
 
-    url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
+    url(r'^uploaddoc/$', views.uploaddoc, name='uploaddoc'),
     url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
     url(r'^main/$', main, name = 'main'),
     url(r'^ocr/$', ocr, name='ocr'),
@@ -30,6 +32,8 @@ urlpatterns = [
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
 
+    #Search/Export Team
+    url(r'^search/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
 
 
 ]

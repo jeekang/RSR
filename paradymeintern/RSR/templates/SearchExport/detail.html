@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<h1>
+    {{person.name}}
+</h1>
+
+<div align="center">
+    {% for field in person %}
+    {{field}}<br>
+    {% endfor %}
+</div>
+
+</body>
+</html>
