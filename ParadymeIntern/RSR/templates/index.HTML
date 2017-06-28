@@ -1,0 +1,27 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+
+           <div class="inner cover">
+             <h1 class="cover-heading">Upload your resume</h1>
+
+
+             <form action="{% url 'RSR:uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
+             {% csrf_token %}
+                <p>{{ form.non_field_errors }}</p>
+                <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+                <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
+                <input type="submit" value="Upload"/>
+            </form>
+
+            <p>
+            <form action="{% url 'RSR:uploadlist' %}">
+                 <input type="submit" value="Check the uplaod list" />
+             </form>
+            </p>
+
+           </div>
+
+
+
+  {% endblock %}
