@@ -89,20 +89,13 @@ class Person (models.Model):
     def __iter__(self):
         for field in self._meta.fields:
             field_name=field.get_attname()
-            value=getattr(self, field_name)
+            val=getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
             field_name=field_name.replace('_',' ')
             field_name=string.capwords(field_name)
-            yield field_name+": "+str(value)
+            yield field_name+": "+str(val)
 
 
 
-
-
-
-
-
-
-
-
-
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/%Y%m%d')

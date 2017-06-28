@@ -1,0 +1,32 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+
+           <div class="inner cover">
+             <h2 class="cover-heading">list of your upload</h2>
+             <p>
+
+                 <!-- LIST OF THE UPLOAD FILE-->
+            {% if documents %}
+               <ul>
+                  {% for document in documents %}
+                        <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></p>
+                    {% endfor %}
+                </ul>
+                    {% else %}
+                <h3> No document saved in the database! </h3>
+            {% endif %}
+
+            <!--back btn-->
+            <button onclick="goBack()">Go Back</button>
+
+            </p>
+           </div>
+
+            <script>
+            function goBack() {
+                window.history.back();
+            }
+            </script>
+
+  {% endblock %}

@@ -1,0 +1,150 @@
+
+                   {%load static%}
+                   <!DOCTYPE html>
+                   <html lang="en">
+                   <style>
+                   .TextBox{
+                     -moz-border-radius:1px;
+                     -webkit-border-radius:1px;
+                     border-radius:1px;
+                     border: #solid 10px #000;
+                     background-color: rgba(255,255,255,0.8);
+                     height:100%;
+                     width:100%;
+                     margin-left: auto ;
+                     margin-right: auto ;
+                   }
+
+                   </style>
+                   <head>
+
+                       <meta charset="utf-8">
+                       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                       <meta name="viewport" content="width=device-width, initial-scale=1">
+                       <meta name="description" content="">
+                       <meta name="author" content="">
+
+                       <title>RSR</title>
+
+                       <!-- Bootstrap Core CSS -->
+                       <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+                       <!-- Custom Fonts -->
+                       <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+                       <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+                       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+                       <!-- Theme CSS -->
+                       <link href="{% static 'css/grayscale.min.css' %}" rel="stylesheet">
+
+                       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                       <!--[if lt IE 9]>
+                           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                       <![endif]-->
+
+                   </head>
+
+                   <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+                       <!-- Navigation -->
+                       <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+                           <div class="container">
+                               <div class="navbar-header">
+                                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                                       Menu <i class="fa fa-bars"></i>
+                                   </button>
+                                   <a class="navbar-brand page-scroll" href="#page-top">
+                                       <img style = "width: auto; height: 25px;" src = "http://www.paradymemanagement.com/wp-content/uploads/2015/11/paradyme-green.png">
+                                   </a>
+                               </div>
+
+                               <!-- Collect the nav links, forms, and other content for toggling -->
+                               <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                                   <ul class="nav navbar-nav">
+                                       <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                                       <li class="hidden">
+                                           <a href="#page-top"></a>
+                                       </li>
+                                       <li>
+                                           <a href="{% url 'RSR:uploaddoc' %}" >Upload</a>
+                                       </li>
+                                       <li>
+                                           <a href="{% url 'RSR:search' %}">Search</a>
+                                       </li>
+                                       <li>
+                                           <a href="{% url 'RSR:linkanalysis' %}">Link Analysis</a>
+                                       </li>
+                                       <li>
+                                           <a href="{% url 'RSR:user_access' %}">User Access</a>
+                                       </li>
+                                       <li>
+                                           <a href="#">Log Out</a>
+                                       </li>
+                                   </ul>
+                               </div>
+                               <!-- /.navbar-collapse -->
+                           </div>
+                           <!-- /.container -->
+                       </nav>
+
+                       <!-- Intro Header -->
+                       <header class="intro">
+                           <div class="intro-body">
+                               <div class="container">
+                                   <div class="row">
+                                       <div class="col-md-8 col-md-offset-2">
+                                         <div class="TextBox">
+                                           <h2 style = "color: #262626; font-family: Open Sans  , Arial, sans-serif;text-decoration: underline;text-decoration-color: orange;"class="brand-heading">RSR</h2>
+                                           <h4 style = "font-weight: normal;color: #666666; font-family:  Open Sans  , Arial, sans-serif;">Resume Parser and Skills Repository</h4>
+                                         </div>
+                                           <a href="#about" class="btn btn-circle page-scroll">
+                                               <i class="fa fa-angle-double-down animated"></i>
+                                           </a>
+
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </header>
+
+                       <!-- About Section -->
+                       <section id="about" class="container content-section text-center">
+                           <div class="row">
+                               <div class="col-lg-8 col-lg-offset-2">
+                                   <h2 style = " text-decoration: underline;text-decoration-color: orange;font-family: 'Open Sans', Helvetica, Arial, sans-serif;">About RSR</h2>
+                                   <p>Use this place if needed for an about. </p>
+                                   <p>Here too, maybe a user guide</p>
+                                   <p>Continued.</p>
+                               </div>
+                           </div>
+                       </section>
+
+
+
+                       <!-- Footer -->
+                       <footer>
+                           <div class="container text-center">
+                               <p>Copyright &copy; Paradyme Management 2017</p>
+                           </div>
+                       </footer>
+
+                       <!-- jQuery -->
+                       <script src="{% static 'vendor/jquery/jquery.js' %}"></script>
+
+                       <!-- Bootstrap Core JavaScript -->
+                       <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+                       <!-- Plugin JavaScript -->
+                       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+                       <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+                       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+                       <!-- Theme JavaScript -->
+                       <script src="{% static 'js/grayscale.min.js' %}"></script>
+
+                   </body>
+
+                   </html>
