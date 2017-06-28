@@ -1,5 +1,5 @@
 
-from .models import * 
+from .models import *
 
 # Create your views here.
 #=======
@@ -13,6 +13,9 @@ from RSR.models import Document
 from RSR.forms import DocumentForm
 
 
+def main(request):
+    return render(request, 'main.html')
+
 def uploaddoc(request):
     # Handle file upload
     if request.method == 'POST':
@@ -25,12 +28,30 @@ def uploaddoc(request):
     else:
         form = DocumentForm()
 
-
     documents = Document.objects.all()
+    return render(request,'index.html',{'documents': documents, 'form': form})
 
 
-    return render(
-        request,
-        'index.html',
-        {'documents': documents, 'form': form}
-    )
+
+def ocr (request):
+    return render(request, 'ocr.html')
+
+def parsing(request):
+    return render(request, 'parsing.html')
+
+def search (request):
+    return render(request, 'search.html')
+
+def user_acc_cont (request):
+    return render(request, 'acc_cont.html')
+
+def export(request):
+    return render (request, 'export.html')
+
+def linkanalysis(request):
+    return render(request, 'linkanalysis.html')
+
+def uploadlist (request):
+    documents = Document.objects.all()
+    context ={'documents':documents}
+    return render(request,'uploadlist.html',context)
