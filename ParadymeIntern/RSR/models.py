@@ -1,98 +1,80 @@
 from django.db import models
 import string
 
-school_choices = (
-    ('University of Maryland', 'University of Maryland'),
-    ('Ohio State University', 'Ohio State University'),
-    ('Indiana University', 'Indiana University'),
-)
+class School(models.Model):
+    school = models.CharField(max_length=200)
 
-school_level_choices = (
-    ('Undergraduate', 'Undergraduate'),
-    ('Graduate', 'Graduate'),
-)
+    def __str__(self):
+        return self.school
 
-major_choices = (
-    ('Accounting', 'Accounting'),
-    ('Finance', 'Finance'),
-    ('Information Systems', 'Information Systems'),
-    ('Marketing', 'Marketing'),
-    ('Management', 'Management'),
-    ('Computer Science', 'Computer Science'),
-    ('Supply Chain Mgmt', 'Supply Chain Mgmt'),
-)
+class School_level(models.Model):
+    school_level = models.CharField(max_length=30)
 
-work_authorization_choices = (
-    ('Citizenship', 'Citizenship'),
-    ('Permanent Resident', 'Permanent Resident'),
-    ('Visa', 'Visa'),
-)
+    def __str__(self):
+        return self.school_level
 
-security_clearance_choices = (
-    ('Top Secret', 'Top Secret'),
-    ('Secret', 'Secret'),
-    ('Confidential', 'Confidential'),
-)
+class Major(models.Model):
+    major = models.CharField(max_length=100)
 
-graduation_year_choices = (
-    ('2007', '2007'),
-    ('2008', '2008'),
-    ('2009', '2009'),
-    ('2010', '2010'),
-    ('2011', '2011'),
-    ('2012', '2012'),
-    ('2013', '2013'),
-    ('2014', '2014'),
-    ('2015', '2015'),
-    ('2016', '2016'),
-    ('2017', '2017'),
-    ('2018', '2018'),
+    def __str__(self):
+        return self.major
 
-)
-graduation_month_choices = (
-    ('01', 'January'),
-    ('02', 'February'),
-    ('03', 'March'),
-    ('04', 'April'),
-    ('05', 'May'),
-    ('06', 'June'),
-    ('07', 'July'),
-    ('08', 'August'),
-    ('09', 'September'),
-    ('10', 'October'),
-    ('11', 'November'),
-    ('12', 'December'),
-)
+class Graduation_Year(models.Model):
+    graduation_year = models.IntegerField(default=1900)
+
+    def __str__(self):
+        return str(self.graduation_year)
+
+class Graduation_Month(models.Model):
+    graduation_month = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.graduation_month
+
+class Work_Authorization(models.Model):
+    work_authorization = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.work_authorization
+
+class Security_Clearance(models.Model):
+    security_clearance = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.security_clearance
 
 class Person (models.Model):
     name = models.CharField(max_length=200)
-    school = models.CharField(max_length=200, choices=school_choices)
-    school_level = models.CharField(max_length=30, choices=school_level_choices)
-    major = models.CharField(max_length=100, choices=major_choices)
+    school = models.ForeignKey(School)
+    school_level = models.ForeignKey(School_level)
+    major = models.ForeignKey(Major)
     gpa = models.DecimalField(default=0, max_digits=3, decimal_places=2)
-    graduation_year = models.IntegerField(default=1900, choices=graduation_year_choices)
-    graduation_month = models.IntegerField(default=0, choices=graduation_month_choices)
+    graduation_year = models.ForeignKey(Graduation_Year)
+    graduation_month = models.ForeignKey(Graduation_Month)
     language = models.CharField(max_length=200)
     skills = models.CharField(max_length=500)
     certificate = models.CharField(max_length=500)
     awards = models.CharField(max_length=500)
-    conference = models.CharField(max_length=500)
+    professional_development = models.CharField(max_length=500)
     prior_company = models.CharField(max_length=100)
     year_of_experience = models.DecimalField(default=0, max_digits=3, decimal_places=1)
     title = models.CharField(max_length=200)
-    work_authorization = models.CharField(max_length=100, choices=work_authorization_choices)
-    security_clearance = models.CharField(max_length=100, choices=security_clearance_choices)
+    work_authorization = models.ForeignKey(Work_Authorization)
+    security_clearance = models.ForeignKey(Security_Clearance)
 
     def __str__(self):
         return self.name
 
     def __iter__(self):
         for field in self._meta.fields:
-            field_name=field.get_attname()
-            val=getattr(self, field_name)
+            field_name = field.get_attname()
+            val = getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
             field_name=field_name.replace('_',' ')
             field_name=string.capwords(field_name)
+            if field_name == "Id":
+                continue
+            field_name=field_name.replace(' Id','')
             yield field_name+": "+str(val)
 
 
