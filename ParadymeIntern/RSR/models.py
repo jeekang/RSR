@@ -72,6 +72,9 @@ class Person (models.Model):
             # Removing underscore and capitalizing the first word for each field name
             field_name=field_name.replace('_',' ')
             field_name=string.capwords(field_name)
+            if field_name == "Id":
+                continue
+            field_name=field_name.replace(' Id','')
             yield field_name+": "+str(val)
 
 
