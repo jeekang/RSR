@@ -13,10 +13,10 @@ a:hover {
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: #333;
+  color: #000;
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
-  border: 1px solid #fff;
+  border: 1px solid #333;
 }
 
 
@@ -121,9 +121,15 @@ body {
 /*
  * Footer
  */
+footer {
+  background: #fff;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align: center;
+}
 
 .mastfoot {
-  color: #999; /* IE8 proofing */
+  color: #333; /* IE8 proofing */
   color: rgba(255,255,255,.5);
 }
 
