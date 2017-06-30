@@ -12,6 +12,11 @@
     .jumbotron {
         background-color: #e8ebef !important;
     }
+
+    ul{
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;}
 </style>
 <body>
     {% load widget_tweaks %}
@@ -19,7 +24,7 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{% url 'RSR:search' %}">Home</a></li>
+                    <li><a href="{% url 'RSR:search' %}">New Search</a></li>
                 </ul>
             </div>
         </div>
@@ -54,6 +59,10 @@
                     {% render_field filter.form.major class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.gpa_gt.label_tag }}
+                    {% render_field filter.form.gpa_gt class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
                     {{ filter.form.skills.label_tag }}
                     {% render_field filter.form.skills class="form-control" %}
                 </div>
@@ -78,6 +87,14 @@
                     {% render_field filter.form.prior_company class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.title.label_tag }}
+                    {% render_field filter.form.title class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.year_of_experience_gt.label_tag }}
+                    {% render_field filter.form.year_of_experience_gt class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
                     {{ filter.form.work_authorization.label_tag }}
                     {% render_field filter.form.work_authorization class="form-control" %}
                 </div>
@@ -85,6 +102,7 @@
                     {{ filter.form.security_clearance.label_tag }}
                     {% render_field filter.form.security_clearance class="form-control" %}
                 </div>
+
             </div>
             <div align="center">
             <button type="submit" class="btn btn-primary btn-lg">
@@ -93,14 +111,20 @@
         </div>
         </div>
     </form>
+<<<<<<< HEAD
     <div align="center">
         <h4>Name:</h4>
+=======
+
+        <h4 align="center">Name:</h4>
+>>>>>>> a61840254f1fec4a351f16ae3b22f159e5d28780
         {% for obj in filter.qs %}
-        <li>
-        <a href="{% url 'RSR:detail' obj.pk %}">{{obj.name}}</a>
-        </li>
+            <ul>
+                <li>
+                <a href="{% url 'RSR:detail' obj.pk %}">{{obj.name}}</a>
+                </li>
+            </ul>
         {% endfor %}
-    </div>
 
 </body>
 

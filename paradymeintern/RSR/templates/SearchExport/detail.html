@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<style>
+    .navbar-default {
+        background-color: #e8ebef !important;
+        border-color: transparent;
+        font-size: 20px !important;
+    }
+    .jumbotron {
+        background-color: #e8ebef !important;
+    }
+</style>
 <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{% url 'RSR:search' %}">New Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="about" class="jumbotron text-center">
+        <h1>Resume Filter System</h1>
+        <p>Please see the detail info for a candidate below</p>
+    </div>
 <h1>
     {{person.name}}
 </h1>

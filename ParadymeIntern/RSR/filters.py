@@ -9,10 +9,13 @@ class PersonFilter(django_filters.FilterSet):
     awards = django_filters.CharFilter(name='awards', lookup_expr='icontains')
     professional_development = django_filters.CharFilter(name='professional_development', lookup_expr='icontains')
     prior_company = django_filters.CharFilter(name='prior_company', lookup_expr='icontains')
+    title = django_filters.CharFilter(name='title', lookup_expr='icontains')
+    gpa_gt = django_filters.NumberFilter(name='gpa', lookup_expr='gt')
+    year_of_experience_gt = django_filters.NumberFilter(name='year_of_experience', lookup_expr='gt')
 
     class Meta:
         model = Person
-        fields = ['school', 'school_level', 'graduation_year', 'graduation_month', 'major', 'skills',
-                  'language', 'certificate', 'awards', 'professional_development', 'prior_company', 'work_authorization',
-                  'security_clearance']
+        fields = ['school', 'school_level', 'graduation_year', 'graduation_month', 'major', 'gpa', 'skills',
+                  'language', 'certificate', 'awards', 'professional_development', 'prior_company', 'title',
+                  'year_of_experience', 'work_authorization','security_clearance']
 
