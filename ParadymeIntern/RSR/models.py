@@ -77,12 +77,7 @@ class Person (models.Model):
             field_name = string.capwords(field_name)
             if field_name == "Id":
                 continue
-<<<<<<< HEAD
-            yield field_name+": "+str(val)
-=======
-            field_name = field_name.replace(' Id', '')
             yield field_name + ": " + str(val)
->>>>>>> a61840254f1fec4a351f16ae3b22f159e5d28780
 
 
 
