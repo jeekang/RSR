@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 
 from RSR.models import Document
 from RSR.forms import DocumentForm
-
+from django.shortcuts import get_object_or_404
 
 def main(request):
     return render(request, 'main.html')
@@ -55,3 +55,12 @@ def uploadlist (request):
     documents = Document.objects.all()
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
+
+def listdelete(request, template_name='uploadlist.html'):
+    docId = request.POST.get('docfile', None)
+    documents = get_object_or_404(Document, pk=docId)
+    if request.method == 'POST':
+        documents.delete()
+        return HttpResponseRedirect(reverse('uploadlist'))
+
+    return render(request, template_name, {'object': documents})
