@@ -1,7 +1,11 @@
 from django.db import models
 import string
+
 class School(models.Model):
     school = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ('school',)
 
     def __str__(self):
         return self.school
@@ -9,11 +13,17 @@ class School(models.Model):
 class School_level(models.Model):
     school_level = models.CharField(max_length=30)
 
+    class Meta:
+        ordering = ('school_level',)
+
     def __str__(self):
         return self.school_level
 
 class Major(models.Model):
     major = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ('major',)
 
     def __str__(self):
         return self.major
@@ -33,11 +43,17 @@ class Graduation_Month(models.Model):
 class Work_Authorization(models.Model):
     work_authorization = models.CharField(max_length=50)
 
+    class Meta:
+        ordering = ('work_authorization',)
+
     def __str__(self):
         return self.work_authorization
 
 class Security_Clearance(models.Model):
     security_clearance = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ('security_clearance',)
 
     def __str__(self):
         return self.security_clearance
@@ -50,7 +66,7 @@ class Person (models.Model):
     gpa = models.DecimalField(default=0, max_digits=3, decimal_places=2)
     graduation_year = models.ForeignKey(Graduation_Year)
     graduation_month = models.ForeignKey(Graduation_Month)
-    language = models.CharField(max_length=200)
+    language = models.CharField(max_length=30)
     skills = models.CharField(max_length=500)
     certificate = models.CharField(max_length=500)
     awards = models.CharField(max_length=500)
