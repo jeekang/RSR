@@ -12,6 +12,7 @@ from django.views import generic
 from RSR.models import *
 from RSR.forms import DocumentForm
 from .filters import PersonFilter
+from django.db.models import Q
 
 # UI/INGEST TEAM
 def main(request):
@@ -56,6 +57,14 @@ def search (request):
 class detail(generic.DetailView):
     model = Person
     template_name = 'SearchExport/detail.html'
+
+def search_bar (request):
+    query_set=Person.objects.all()
+    query=request.GET.get("q")
+    if query:
+        query_set=query_set.filter(Q(name__icontains=query)|Q(skills__icontains=query))
+    return render(request, 'SearchExport/detail2.html', {'person':query_set})
+
 
 def export(request):
     return render (request, 'export.html')
