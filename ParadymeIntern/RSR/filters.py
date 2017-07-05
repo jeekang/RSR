@@ -1,9 +1,10 @@
 import django_filters
 from .models import Person
+from django import forms
 
 class PersonFilter(django_filters.FilterSet):
 
-    language = django_filters.CharFilter(name='language', lookup_expr='icontains')
+    language = django_filters.CharFilter(name='language',lookup_expr='icontains')
     skills = django_filters.CharFilter(name='skills', lookup_expr='icontains')
     certificate = django_filters.CharFilter(name='certificate', lookup_expr='icontains')
     awards = django_filters.CharFilter(name='awards', lookup_expr='icontains')
@@ -18,4 +19,3 @@ class PersonFilter(django_filters.FilterSet):
         fields = ['school', 'school_level', 'graduation_year', 'graduation_month', 'major', 'gpa', 'skills',
                   'language', 'certificate', 'awards', 'professional_development', 'prior_company', 'title',
                   'year_of_experience', 'work_authorization','security_clearance']
-
