@@ -18,6 +18,7 @@ from django.contrib import admin
 from. import views
 from RSR.views import *
 
+
 urlpatterns = [
 
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
