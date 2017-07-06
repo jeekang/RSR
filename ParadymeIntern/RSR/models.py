@@ -31,7 +31,7 @@ class Person(models.Model):
     ZipCode = models.IntegerField()
     State = models.CharField("State", max_length = 25)
     PhoneNumber = models.CharField("Phone", max_length = 50)
-    Resume = models.FileField(upload_to = '/resumes')
+    Resume = models.FileField(upload_to = 'resumes')
     CreationDate = models.DateTimeField("Creation")
     LastUpdated = models.DateTimeField("Update",blank =True,null=True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -52,7 +52,7 @@ class OCR(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Resume = models.FileField(upload_to = '/PreOCR')
+    Resume = models.FileField(upload_to = 'PreOCR')
     CreationDate = models.DateTimeField("Creation")
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     NewPath = models.ForeignKey(Person,blank = True, null = True)
