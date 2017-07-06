@@ -85,7 +85,7 @@ class Person (models.Model):
             field_name = field.get_attname()
             # In self._meta.fields for foreign key it returns field_name +"_id" so I just removed id so we get the value
             # of the field instead of id.
-            if field_name.find('_id'):
+            if field_name.find('_id')!=-1:
                 field_name = field_name.replace('_id', '')
             val = getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
