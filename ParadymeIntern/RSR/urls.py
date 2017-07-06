@@ -22,6 +22,7 @@ urlpatterns = [
 
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
     url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
+    url(r'^listdelete/$', listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
     url(r'^ocr/$', ocr, name='ocr'),
     url(r'^parsing/$', parsing, name='parsing'),
