@@ -8,11 +8,13 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 
 from RSR.models import *
 from RSR.forms import DocumentForm
 from .filters import PersonFilter
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 
 # UI/INGEST TEAM
@@ -44,6 +46,15 @@ def uploadlist(request):
     documents = Document.objects.all()
     context = {'documents': documents}
     return render(request, 'uploadlist.html', context)
+
+def listdelete(request, template_name='uploadlist.html'):
+    docId = request.POST.get('docfile', None)
+    documents = get_object_or_404(Document, pk=docId)
+    if request.method == 'POST':
+        documents.delete()
+        return HttpResponseRedirect(reverse('uploadlist'))
+
+    return render(request, template_name, {'object': documents})
 
 
 # OCR TEAM
