@@ -1,5 +1,6 @@
-
+# -*- coding: utf-8 -*-
 from .models import *
+import docx2txt
 
 # Create your views here.
 #=======
@@ -23,7 +24,7 @@ def uploaddoc(request):
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
-
+            newdoc.docfile.wordstr = parse_word_file(newdoc.docfile.path)
             return HttpResponseRedirect(reverse('uploaddoc'))
     else:
         form = DocumentForm()
@@ -64,3 +65,7 @@ def listdelete(request, template_name='uploadlist.html'):
         return HttpResponseRedirect(reverse('uploadlist'))
 
     return render(request, template_name, {'object': documents})
+	
+def parse_word_file(filepath):
+	parsed_string = docx2txt.process(filepath)
+	return parsed_string
