@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+import os
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from datetime import date, datetime
+from django.dispatch import receiver
+
+
 
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
@@ -322,3 +327,12 @@ class Person_Clubs_Hobbies(models.Model):
 class Person_Volunteering(models.Model):
 	PersonID = models.ForeignKey(Person)
 	VolunName = models.ForeignKey(Volunteering)
+
+
+#tina pull request delete functions
+#@receiver(models.signals.post_delete, sender=Document)
+#def auto_delete_file_on_delete(sender, instance, **kwargs):
+
+    #if instance.file:
+        #if os.path.isfile(instance.file.path):
+         #   os.remove(instance.file.path)
