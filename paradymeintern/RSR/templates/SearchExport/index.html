@@ -102,6 +102,10 @@
                     {{ filter.form.security_clearance.label_tag }}
                     {% render_field filter.form.security_clearance class="form-control" %}
                 </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Search Bar:
+                    <input type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
+                </div>
 
             </div>
             <div align="center">
