@@ -8,14 +8,19 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+
 
 from RSR.models import Document
 from RSR.forms import DocumentForm
 from django.shortcuts import get_object_or_404
 
+
+@login_required
 def main(request):
     return render(request, 'main.html')
 
+@login_required
 def uploaddoc(request):
     # Handle file upload
     if request.method == 'POST':
@@ -32,25 +37,31 @@ def uploaddoc(request):
     return render(request,'index.html',{'documents': documents, 'form': form})
 
 
-
+@login_required
 def ocr (request):
     return render(request, 'ocr.html')
 
+@login_required
 def parsing(request):
     return render(request, 'parsing.html')
 
+@login_required
 def search (request):
     return render(request, 'search.html')
 
+@login_required
 def user_acc_cont (request):
     return render(request, 'acc_cont.html')
 
+@login_required
 def export(request):
     return render (request, 'export.html')
 
+@login_required
 def linkanalysis(request):
     return render(request, 'linkanalysis.html')
 
+@login_required
 def uploadlist (request):
     documents = Document.objects.all()
     context ={'documents':documents}
