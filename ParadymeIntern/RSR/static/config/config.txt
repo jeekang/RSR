@@ -1,1 +1,1 @@
-image/*,application/pdf
+image/*,application/pdf,.docx

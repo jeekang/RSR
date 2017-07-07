@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from datetime import date, datetime
 from django.db.models.signals import post_delete
 
+import docx2txt
+
 import os
 
 
@@ -23,6 +25,9 @@ class Document(models.Model):
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
+
+    wordstr = models.TextField()
+	
 
 class Person(models.Model):
     def get_absolute_url (self):
@@ -69,6 +74,7 @@ class OCR(models.Model):
             yield (field, value)
 
     Resume = models.FileField(upload_to = 'PreOCR')
+
     CreationDate = models.DateTimeField("Creation")
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     NewPath = models.ForeignKey(Person,blank = True, null = True)
