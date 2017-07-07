@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
+from django.forms import ModelForm
 
 from RSR.models import Document
 from RSR.forms import DocumentForm
@@ -26,8 +26,11 @@ def uploaddoc(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
+            temp_doc = Document(docfile=request.FILES['docfile'])
+            temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
+            temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
+            temp_doc.type = Document(docfile=request.POST.get('type'))
+            temp_doc.save()
 
             return HttpResponseRedirect(reverse('uploaddoc'))
     else:

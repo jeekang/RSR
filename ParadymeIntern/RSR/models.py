@@ -12,6 +12,9 @@ from django.dispatch import receiver
 
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    type = models.CharField(max_length=128)
 
 class Person(models.Model):
     def get_absolute_url (self):

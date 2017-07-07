@@ -11,6 +11,17 @@
                 <p>{{ form.non_field_errors }}</p>
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
                 <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
+                First name:
+                <input type="text" name="firstname" value="Mickey">
+
+                Last name:
+                <input type="text" name="lastname" value="Mouse">
+                <br><br>
+  
+                <input type="radio" name="type" value="prospective"> Prospective<br>
+                <input type="radio" name="type" value="intern"> Intern<br>
+                <input type="radio" name="type" value="employee"> Employee<br><br>
+            
                 <input type="submit" value="Upload"/>
             </form>
 
