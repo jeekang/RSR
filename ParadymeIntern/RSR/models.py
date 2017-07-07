@@ -13,6 +13,29 @@ from django.dispatch import receiver
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
 
+
+class OCR(models.Model):
+
+    def get_absolute_url (self):
+        return reverse('major_detail',  args=[str(self.id)])
+
+    def __str__(self):
+        return self.Name
+
+    def __iter__(self):
+        for field in self._meta.get_fields(include_parents = True, inclue_hidden = False):
+            value = getattr(self, field.name, None)
+            yield (field, value)
+
+    Resume = models.FileField(upload_to = 'PreOCR')
+    CreationDate = models.DateTimeField("Creation")
+    CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
+    NewPath = models.ForeignKey(Person,blank = True, null = True)
+
+
+#### Core Tables
+################################
+
 class Person(models.Model):
     def get_absolute_url (self):
         return reverse('major_detail',  args=[str(self.id)])
@@ -41,27 +64,72 @@ class Person(models.Model):
     LastUpdated = models.DateTimeField("Update",blank =True,null=True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     Linkden = models.CharField("Linkden", max_length = 70)
-    GitHun = models.CharField("GitHub", max_length = 70)
+    GitHub = models.CharField("GitHub", max_length = 70)
     TypeResume = models.CharField(max_length = 50,choices = EmpChoices,default = ProspectiveEmployee)
 
-class OCR(models.Model):
+#### INTERMEDIARY TABLES (Inner Tables)
+################################
 
-    def get_absolute_url (self):
-        return reverse('major_detail',  args=[str(self.id)])
+class Person_Company(models.Model):
+	PersonID = models.ForeignKey(Person)
+	CompanyName = models.ForeignKey(Company)
+	Title = models.CharField("Title", max_length = 100, default = None)
+	ExperienceOnJob = models.CharField("Experience on Job", max_length = 300, default = None)
+	StartDate = models.DateField("Start Date", default=datetime.now().day)
+	EndDate = models.DateField("End Date", default=datetime.now().day)
 
-    def __str__(self):
-        return self.Name
+class Person_Awards(models.Model):
+	PersonID = models.ForeignKey(Person)
+	AwardName = models.ForeignKey(Awards)
 
-    def __iter__(self):
-        for field in self._meta.get_fields(include_parents = True, inclue_hidden = False):
-            value = getattr(self, field.name, None)
-            yield (field, value)
+class Person_Clubs_Hobbies(models.Model):
+	PersonID = models.ForeignKey(Person)
+	CHName = models.ForeignKey(Clubs_Hobbies)
 
-    Resume = models.FileField(upload_to = 'PreOCR')
-    CreationDate = models.DateTimeField("Creation")
-    CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
-    NewPath = models.ForeignKey(Person,blank = True, null = True)
+class Person_Volunteering(models.Model):
+	PersonID = models.ForeignKey(Person)
+	VolunName = models.ForeignKey(Volunteering)
 
+class Person_Certificate(models.Model):
+
+	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+	CertID = models.ForeignKey(Certificate, models.DO_NOTHING, db_column='CertID')
+
+class Person_Side(models.Model):
+
+	SideID = models.ForeignKey(SideProject, models.DO_NOTHING, db_column='SideID')
+	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+
+class Person_Skills(models.Model):
+
+	YearsOfExperience = models.CharField("Years Of Experience", db_column='YrsOfExp', max_length=3)
+	SkillsID = models.ForeignKey(Skills, models.DO_NOTHING, db_column='SkillsID')
+	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+
+class Person_Language(models.Model):
+
+	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+	LangID = models.ForeignKey(LanguageSpoken, models.DO_NOTHING, db_column='LangID')
+
+class Person_Clearence(models.Model):
+
+	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+	ClearenceLevel = models.ForeignKey(Clearence, models.DO_NOTHING, db_column='ClearenceLevel')
+
+class Person_Course(models.Model):
+    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
+    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+
+class Person_School(models.Model):
+    GradDate = models.CharField("Grad Date", db_column = 'GradDate', max_length = 20)
+    GPA = models.CharField("GPA", db_column = 'GPA', max_length = 20)
+    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
+    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+    SchoolID = models.ForeignKey(School, models.DO_NOTHING, db_column='SchoolID')
+    MajorID = models.ForeignKey(Major, models.DO_NOTHING, db_column='MajorID')
+
+#### Outer Tables
+################################
 
 class Major(models.Model):
 
@@ -80,7 +148,6 @@ class Major(models.Model):
     Dept = models.CharField("Department Name", db_column='Dept', max_length = 50)
     MajorMinor = models.CharField("Major/Minor", db_column='Major/Minor', max_length = 50)
 
-
 class School(models.Model):
 
     def get_absolute_url (self):
@@ -96,7 +163,6 @@ class School(models.Model):
 
     Name = models.CharField("School Name", db_column='Name', max_length = 50)
     GradorUndergrad = models.CharField("Graduate or Undergraduate", db_column='GradorUndergrad', max_length = 50)
-
 
 class Coursework(models.Model):
 
@@ -129,21 +195,6 @@ class Coursework(models.Model):
     Name = models.CharField("Coursework Name", db_column='Name', max_length = 50)
     Desc = models.CharField("Description", db_column='Desc', max_length = 50)
 
-
-class Person_to_course(models.Model):
-    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-
-class Person_to_School(models.Model):
-    GradDate = models.CharField("Grad Date", db_column = 'GradDate', max_length = 20)
-    GPA = models.CharField("GPA", db_column = 'GPA', max_length = 20)
-    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    SchoolID = models.ForeignKey(School, models.DO_NOTHING, db_column='SchoolID')
-    MajorID = models.ForeignKey(Major, models.DO_NOTHING, db_column='MajorID')
-
-
-##################### Certificate #####################
 class Certificate(models.Model):
 	def get_absolute_url(self):
 		return reverse('Certificate_detail', args=[str(self.id)])
@@ -159,7 +210,6 @@ class Certificate(models.Model):
 	Name = models.CharField("Name", db_column='Name', max_length=20)
 	Description = models.CharField("Description", db_column='Description', max_length=30)
 
-#################### Side Project ######################
 class SideProject(models.Model):
 	def get_absolute_url(self):
 	    return reverse('SideProject_detail', args=[str(self.id)])
@@ -175,7 +225,6 @@ class SideProject(models.Model):
 	ProjectName = models.CharField("Project Name", db_column='ProjectName', max_length=20)
 	ProjectDesc = models.CharField("Project Description", db_column='ProjectDesc', max_length=50)
 
-#################### Skills ############################
 class Skills(models.Model):
 	def get_absolute_url(self):
 		return reverse('Skills_detail', args=[str(self.id)])
@@ -190,7 +239,6 @@ class Skills(models.Model):
 
 	SkillsName = models.CharField("Skills Name", db_column='SkillsName', max_length=20)
 
-#################### Language Spoken ######################
 class LanguageSpoken(models.Model):
 	def get_absolute_url(self):
 		return reverse('LanguageSpoken_detail', args=[str(self.id)])
@@ -205,7 +253,6 @@ class LanguageSpoken(models.Model):
 
 	Language = models.CharField("Language", db_column='Language', max_length=20)
 
-#################### Clearence ######################
 class Clearence(models.Model):
 	def get_absolute_url(self):
 		return reverse('Clearence_detail', args=[str(self.id)])
@@ -220,37 +267,6 @@ class Clearence(models.Model):
 
 	ClearenceLevel = models.CharField("Clearence Level", db_column='ClearenceLevel', primary_key=True, max_length=30)
 
-#################### Person To Certificate ######################
-class Person_Certificate(models.Model):
-
-	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-	CertID = models.ForeignKey(Certificate, models.DO_NOTHING, db_column='CertID')
-
-#################### Person To Side #############################
-class Person_Side(models.Model):
-
-	SideID = models.ForeignKey(SideProject, models.DO_NOTHING, db_column='SideID')
-	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-
-#################### Person To Skills ###########################
-class Person_Skills(models.Model):
-
-	YearsOfExperience = models.CharField("Years Of Experience", db_column='YrsOfExp', max_length=3)
-	SkillsID = models.ForeignKey(Skills, models.DO_NOTHING, db_column='SkillsID')
-	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-
-#################### Person To Language #########################
-class Person_Language(models.Model):
-
-	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-	LangID = models.ForeignKey(LanguageSpoken, models.DO_NOTHING, db_column='LangID')
-
-#################### Person To Clearence ########################
-class Person_Clearence(models.Model):
-
-	PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-	ClearenceLevel = models.ForeignKey(Clearence, models.DO_NOTHING, db_column='ClearenceLevel')
-
 class Company(models.Model):
 	def get_absolute_url(self):
 		return reverse('Company_detail', args=[str(self.id)])
@@ -264,8 +280,6 @@ class Company(models.Model):
 			yield (field, value)
 
 	CompanyName = models.CharField("Company Name", max_length=100)
-
-
 
 class Awards(models.Model):
 
@@ -282,9 +296,6 @@ class Awards(models.Model):
 
 	AwardName = models.CharField("Award Name", max_length=100)
 	AwardDescriptioin = models.CharField("Award Description", max_length = 1000)
-
-
-
 
 class Clubs_Hobbies(models.Model):
 
@@ -305,7 +316,6 @@ class Clubs_Hobbies(models.Model):
 class Volunteering(models.Model):
 
 	def get_absolute_url(self):
-		from django.urls import reverse
 		return reverse('volunteering_detail', args=[str(self.id)])
 
 	def __str__(self):
@@ -316,33 +326,8 @@ class Volunteering(models.Model):
 			value = getattr(self, field.name, None)
 			yield (field, value)
 
-	VounName = models.CharField("Volunteering Name", max_length=100)
+	VolunName = models.CharField("Volunteering Name", max_length=100)
 	VolunDesc = models.CharField("Volunteering Description", max_length=1000)
-
-
-
-# INTERMEDIARY TABLES
-
-class Person_Company(models.Model):
-	PersonID = models.ForeignKey(Person)
-	CompanyName = models.ForeignKey(Company)
-	Title = models.CharField("Title", max_length = 100, default = None)
-	ExperienceOnJob = models.CharField("Experience on Job", max_length = 300, default = None)
-	StartDate = models.DateField("Start Date", default=datetime.now().day)
-	EndDate = models.DateField("End Date", default=datetime.now().day)
-
-class Person_Awards(models.Model):
-	PersonID = models.ForeignKey(Person)
-	AwardName = models.ForeignKey(Awards)
-
-class Person_Clubs_Hobbies(models.Model):
-	PersonID = models.ForeignKey(Person)
-	CHName = models.ForeignKey(Clubs_Hobbies)
-
-class Person_Volunteering(models.Model):
-	PersonID = models.ForeignKey(Person)
-	VolunName = models.ForeignKey(Volunteering)
-
 
 #tina pull request delete functions
 #@receiver(models.signals.post_delete, sender=Document)

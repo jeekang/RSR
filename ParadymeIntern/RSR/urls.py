@@ -35,7 +35,6 @@ urlpatterns = [
 
     #Search/Export Team
     url(r'^search/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
-    url(r'^search2/$', search_bar, name='search_bar'),
 
 
 ]
