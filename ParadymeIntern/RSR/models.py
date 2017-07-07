@@ -6,15 +6,31 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from datetime import date, datetime
-from django.dispatch import receiver
+from django.db.models.signals import post_delete
+
+
 import docx2txt
 
+import os
 
 
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
+    def __unicode__(self):
+        return u'%s' %self.docfile
+
+    def delete(self, *args, **kwargs):
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
+        super(Document, self).delete(*args, **kwargs)
+
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    type = models.CharField(max_length=128)
+
     wordstr = models.TextField()
 	
+
+
 class Person(models.Model):
     def get_absolute_url (self):
         return reverse('major_detail',  args=[str(self.id)])
@@ -38,7 +54,8 @@ class Person(models.Model):
     ZipCode = models.IntegerField()
     State = models.CharField("State", max_length = 25)
     PhoneNumber = models.CharField("Phone", max_length = 50)
-    Resume = models.FileField(upload_to = '\resumes')
+    Resume = models.FileField(upload_to = 'resumes')
+
     CreationDate = models.DateTimeField("Creation")
     LastUpdated = models.DateTimeField("Update",blank =True,null=True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -59,7 +76,9 @@ class OCR(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Resume = models.FileField(upload_to = '\PreOCR')
+    Resume = models.FileField(upload_to = 'PreOCR')
+
+
     CreationDate = models.DateTimeField("Creation")
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     NewPath = models.ForeignKey(Person,blank = True, null = True)

@@ -18,6 +18,7 @@ from django.contrib import admin
 from. import views
 from RSR.views import *
 
+
 urlpatterns = [
 
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
@@ -30,6 +31,8 @@ urlpatterns = [
     url(r'^user_access/$', user_acc_cont, name='user_access'),
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+    url(r'^logout/$', views.logout_page, name = 'logout'),
+
 
 
 
