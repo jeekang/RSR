@@ -16,6 +16,4 @@ class PersonFilter(django_filters.FilterSet):
 
     class Meta:
         model = Person
-        fields = ['school', 'school_level', 'graduation_year', 'graduation_month', 'major', 'gpa', 'skills',
-                  'language', 'certificate', 'awards', 'professional_development', 'prior_company', 'title',
-                  'year_of_experience', 'work_authorization','security_clearance']
+        fields = ['Name',]
