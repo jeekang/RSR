@@ -20,6 +20,9 @@ class Document(models.Model):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.docfile.name))
         super(Document, self).delete(*args, **kwargs)
 
+    firstname = models.CharField(max_length=128)
+    lastname = models.CharField(max_length=128)
+    type = models.CharField(max_length=128)
 
 class Person(models.Model):
     def get_absolute_url (self):
