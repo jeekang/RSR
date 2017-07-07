@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from. import views
+from . import views
 from RSR.views import *
 
 app_name = 'RSR'
@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
 
     #Search/Export Team
-    url(r'^search/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
+    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
 
 
 ]
