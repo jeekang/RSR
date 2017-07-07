@@ -33,10 +33,16 @@ def uploaddoc(request):
         if form.is_valid():
             temp_doc = Document(docfile=request.FILES['docfile'])
            
-            temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
-            temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
-            temp_doc.type = Document(docfile=request.POST.get('type'))
+            #temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
+            #temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
+            #temp_doc.type = Document(docfile=request.POST.get('type'))
+            temp_doc.firstname = request.POST['firstname']
+            temp_doc.lastname = request.POST['lastname']
+            temp_doc.type = request.POST['type']
+
             temp_doc.save()
+            print (temp_doc.firstname)
+
             if ".doc" in temp_doc.docfile.path:
                 temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
                 temp_doc.save(update_fields=['wordstr'])

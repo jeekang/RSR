@@ -10,7 +10,7 @@
             {% if documents %}
                <ul>
                   {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a>
+                    <li><a href="{{ document.docfile.url }}">{{ document.firstname }}</a>
                         <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="docfile" value="{{ document.pk }}" />
