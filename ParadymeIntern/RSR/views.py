@@ -34,6 +34,7 @@ def uploaddoc(request):
             temp_doc.save(commit=false)
 
             temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
+            temp_doc.save()
 
             return HttpResponseRedirect(reverse('uploaddoc'))
     else:
@@ -86,3 +87,4 @@ def listdelete(request, template_name='uploadlist.html'):
 def parse_word_file(filepath):
 	parsed_string = docx2txt.process(filepath)
 	return parsed_string
+
