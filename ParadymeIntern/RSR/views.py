@@ -1,5 +1,6 @@
-
+# -*- coding: utf-8 -*-
 from .models import *
+import docx2txt
 
 # Create your views here.
 #=======
@@ -9,7 +10,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
+from django.forms import ModelForm
 
 from RSR.models import Document
 from RSR.forms import DocumentForm
@@ -26,9 +27,15 @@ def uploaddoc(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
-
+            temp_doc = Document(docfile=request.FILES['docfile'])
+           
+            temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
+            temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
+            temp_doc.type = Document(docfile=request.POST.get('type'))
+            temp_doc.save()
+            if ".doc" in temp_doc.docfile.path:
+                temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
+                temp_doc.save(update_fields=['wordstr'])
             return HttpResponseRedirect(reverse('uploaddoc'))
     else:
         form = DocumentForm()
@@ -75,3 +82,9 @@ def listdelete(request, template_name='uploadlist.html'):
         return HttpResponseRedirect(reverse('uploadlist'))
 
     return render(request, template_name, {'object': documents})
+
+	
+def parse_word_file(filepath):
+	parsed_string = docx2txt.process(filepath)
+	return parsed_string
+
