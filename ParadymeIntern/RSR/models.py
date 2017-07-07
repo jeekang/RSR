@@ -40,11 +40,11 @@ class Person(models.Model):
     ZipCode = models.IntegerField()
     State = models.CharField("State", max_length = 25)
     PhoneNumber = models.CharField("Phone", max_length = 50)
-    Resume = models.FileField(upload_to = 'resumes')
+    Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
     CreationDate = models.DateTimeField("Creation")
     LastUpdated = models.DateTimeField("Update",blank =True,null=True)
-    CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
-    Linkden = models.CharField("Linkden", max_length = 70)
+    CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
+    Linkdin = models.CharField("Linkdin", max_length = 70, default = "None")
     GitHub = models.CharField("GitHub", max_length = 70, default = "None")
     TypeResume = models.CharField(max_length = 50,choices = EmpChoices,default = ProspectiveEmployee)
 
