@@ -173,21 +173,6 @@ class Coursework(models.Model):
         return self.Name
 
     def __iter__(self):
-        ''' Old code
-        	for field in self._meta.fields:
-            field_name = field.get_attname()
-            # In self._meta.fields for foreign key it returns field_name +"_id" so I just removed id so we get the value
-            # of the field instead of id.
-            if field_name.find('_id')!=-1:
-                field_name = field_name.replace('_id', '')
-            val = getattr(self, field_name)
-            # Removing underscore and capitalizing the first word for each field name
-            field_name = field_name.replace('_', ' ')
-            field_name = string.capwords(field_name)
-            if field_name == "Id":
-                continue
-            yield field_name + ": " + str(val)
-            '''
         for field in self._meta.get_fields(include_parents = True, inclue_hidden = False):
             value = getattr(self, field.name, None)
             yield (field, value)
