@@ -28,14 +28,14 @@ def uploaddoc(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             temp_doc = Document(docfile=request.FILES['docfile'])
+           
             temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
             temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
             temp_doc.type = Document(docfile=request.POST.get('type'))
-            temp_doc.save(commit=false)
-
-            temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
             temp_doc.save()
-
+            if ".doc" in temp_doc.docfile.path:
+                temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
+                temp_doc.save(update_fields=['wordstr'])
             return HttpResponseRedirect(reverse('uploaddoc'))
     else:
         form = DocumentForm()
