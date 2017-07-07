@@ -14,7 +14,7 @@
                         <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="docfile" value="{{ document.pk }}" />
-                        <input type="submit" value="Delete" />
+                        <input class = "button-style" type="submit" value="Delete" />
                         </form>
                     </li>
                     {% endfor %}
@@ -25,8 +25,8 @@
 
             <!--back btn-->
                <p></p>
-               <button> <a href="{% url 'uploaddoc' %}" type="button"> Go Back</a>
-               </button>
+               <a href="{% url 'uploaddoc' %}" class = "button-style" type="button"> Go Back</a>
+               
 
 
             </p>
