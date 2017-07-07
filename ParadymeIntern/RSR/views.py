@@ -15,7 +15,11 @@ from django.forms import ModelForm
 from RSR.models import Document
 from RSR.forms import DocumentForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import logout
 
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 @login_required
 def main(request):
