@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from datetime import date, datetime
 from django.dispatch import receiver
+import string
 
 
 class Document(models.Model):
@@ -20,9 +21,21 @@ class Person(models.Model):
         return self.Name
 
     def __iter__(self):
-        for field in self._meta.get_fields(include_parents=True, inclue_hidden=False):
+        '''for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
-            yield (field, value)
+            yield (field, value)'''
+        for field in self._meta.fields:
+            field_name = field.get_attname()
+            # In self._meta.fields for foreign key it returns field_name +"_id" so I just removed id so we get the value
+            # of the field instead of id.
+            if field_name == "id":
+                continue
+            if field_name.find('_id') != -1:
+                field_name = field_name.replace('_id', '')
+            val = getattr(self, field_name)
+            # Removing underscore and capitalizing the first word for each field name
+            field_name = string.capwords(field_name)
+            yield field_name + ": " + str(val)
 
     TYPERESUME_CHOICES = (
         ('Current Employee', 'Current Employee'),
