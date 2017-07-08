@@ -12,10 +12,6 @@ from django.dispatch import receiver
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
 
-
-#### Core Tables
-################################
-
 class Person(models.Model):
     def get_absolute_url(self):
         return reverse('person_detail', args=[str(self.id)])
@@ -28,9 +24,10 @@ class Person(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    CurrentEmployee = 'Employee'
-    ProspectiveEmployee = 'Prospective'
-    EmpChoices = ((CurrentEmployee, 'Current Employee'), (ProspectiveEmployee, 'Prospective Employee'))
+    TYPERESUME_CHOICES = (
+        ('Current Employee', 'Current Employee'),
+        ('Prospect', 'Prospect')
+    )
 
     Name = models.CharField("Name", max_length = 50)
     Email = models.CharField("Email", max_length = 50)
@@ -39,12 +36,12 @@ class Person(models.Model):
     State = models.CharField("State", max_length = 25)
     PhoneNumber = models.CharField("Phone", max_length = 50)
     Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
-    CreationDate = models.DateTimeField("Creation")
+    CreationDate = models.DateTimeField("Created On")
     LastUpdated = models.DateTimeField("Update", blank = True, null= True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
-    Linkdin = models.CharField("Linkdin", max_length = 70, default = "None")
+    Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
     GitHub = models.CharField("GitHub", max_length = 70, default = "None")
-    TypeResume = models.CharField(max_length = 50, choices = EmpChoices, default = ProspectiveEmployee)
+    TypeResume = models.CharField("Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Current Employee')
 
 
 class OCR(models.Model):
@@ -63,10 +60,6 @@ class OCR(models.Model):
     CreationDate = models.DateTimeField("Creation")
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     NewPath = models.ForeignKey(Person, blank=True, null=True)
-
-
-#### Outer Tables
-################################
 
 class Major(models.Model):
     def get_absolute_url(self):
@@ -97,8 +90,13 @@ class School(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
+    DEGREELEVEL_CHOICES = (
+        ('Undergraduate', 'Undergraduate'),
+        ('Graduate', 'Graduate')
+    )
+
     Name = models.CharField("School Name", db_column='Name', max_length=50)
-    GradorUndergrad = models.CharField("Graduate or Undergraduate", db_column='GradorUndergrad', max_length=50)
+    DegreeLevel = models.CharField("Degree Level", db_column='DegreeLevel', max_length=50, choices = DEGREELEVEL_CHOICES, default = 'Undergraduate')
 
 
 class Coursework(models.Model):
@@ -257,8 +255,7 @@ class Volunteering(models.Model):
     VolunDesc = models.CharField("Volunteering Description", max_length=1000)
 
 
-#### INTERMEDIARY TABLES (Inner Tables)
-################################
+######### INTERMEDIARY TABLES ##########
 
 class Person_Company(models.Model):
     PersonID = models.ForeignKey(Person)
@@ -316,6 +313,9 @@ class Person_Course(models.Model):
 
 
 class Person_School(models.Model):
+    def __str__(self):
+        return self.PersonID.Name + ' - ' + self.SchoolID.Name
+
     GradDate = models.CharField("Grad Date", db_column='GradDate', max_length=20)
     GPA = models.CharField("GPA", db_column='GPA', max_length=20)
     CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
