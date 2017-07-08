@@ -78,7 +78,7 @@ def search(request):
         for field in Person._meta.fields:
             field_name = field.get_attname()
             # I don't want the id of a field rather I want the value
-            if field_name == "id":
+            if field_name == "id" or field_name == "CreatedBy_id":
                 continue
             field_name_set.append(field_name)
         # Q() aka q objects are ways to filter more than 1 field at a time consecutively
@@ -101,8 +101,8 @@ def search(request):
         # a query set.
         query_set = query_set.filter(q_object)
     # The filtered query_set is then put through more filters from django
-    f = PersonFilter(request.GET, query_set)
-    return render(request, 'SearchExport/index.html', {'filter': f})
+    personFilter = PersonFilter(request.GET, query_set)
+    return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 
 class detail(generic.DetailView):
