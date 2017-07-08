@@ -37,6 +37,7 @@ class Person(models.Model):
             field_name = string.capwords(field_name)
             yield field_name + ": " + str(val)
 
+
     TYPERESUME_CHOICES = (
         ('Current Employee', 'Current Employee'),
         ('Prospect', 'Prospect')
