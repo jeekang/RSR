@@ -73,33 +73,7 @@ def search(request):
     query_set = Person.objects.all()
     query = request.GET.get("q")
     if query:
-        field_name_set = []
-        # Storing all fields of person into a list
-        for field in Person._meta.fields:
-            field_name = field.get_attname()
-            # I don't want the id of a field rather I want the value
-            if field_name == "id" or field_name == "CreatedBy_id":
-                continue
-            field_name_set.append(field_name)
-        # Q() aka q objects are ways to filter more than 1 field at a time consecutively
-        q_objects = []
-        # I will create a list of q objects
-        for name in field_name_set:
-            if name.find('_id') != -1:
-                # Foreign keys require me to define the field of the Person and the field of the Foreign key I'm trying
-                # to access
-                name = name.replace('_id', '')
-                q_objects.append(Q(**{name + '__' + name + '__icontains': query}))
-            else:
-                q_objects.append(Q(**{name + '__icontains': query}))
-        q_object = q_objects.pop()
-        # From the list I will create 1 huge q object containing Q(field1) or Q(field2) etc |= denotes equal or.
-        for name2 in q_objects:
-            q_object |= name2
-        # So q_object looks something lke this Q(field1__contains=text)|Q(field2__contains=text) and so on. It checks
-        # if each field contains the text if at least 1 field contains the text the person object will be returned in
-        # a query set.
-        query_set = query_set.filter(q_object)
+        query_set=query_set.filter(Name__icontains=query)
     # The filtered query_set is then put through more filters from django
     personFilter = PersonFilter(request.GET, query_set)
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
