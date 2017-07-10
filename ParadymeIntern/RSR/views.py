@@ -79,9 +79,32 @@ def search(request):
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 
-class detail(generic.DetailView):
-    model = Person
-    template_name = 'SearchExport/detail.html'
+def detail(request,pk):
+    # Get the current person object using pk or id
+    person = get_object_or_404(Person,pk=pk)
+    related_obj_list=[]
+    ModelNames = ['school', 'course', 'certificate', 'side', 'skills', 'language'
+        , 'clearence', 'company', 'awards', 'clubshobbies', 'volunteering']
+    ModelReferences = ['SchoolID', 'CourseID', 'CertID', 'SideID', 'SkillsID', 'LangID', 'ClearenceLevel',
+                       'CompanyName', 'AwardName', 'CHName', 'VolunName']
+    # Loops through every model
+    for model in ModelNames:
+        # Get the related set of each model
+        # The default related set is the name of intermediary table, lowercased + _set
+        # The related set is used to reverse foreign keys and you access it by currentmodel.related_set where
+        # the related_set is where the foreign key to current model stems from
+        string = 'personto'+model+'_set'
+        related_obj = eval('person.'+string)
+        # Related_obj cannot be iterated unless put in a query set so I put in a query set using all()
+        related_obj = related_obj.all()
+        # There should only be 1 object in this query set
+        for item in related_obj:
+            # I want to do something grab the exact field of the item so I use getattr
+            item=getattr(item,ModelReferences.pop(0))
+            # Finally I add the string I want to be displayed into related_obj_list which I will iterate through in
+            # details template
+            related_obj_list.append(model.capitalize()+': ' +str(item))
+    return render(request, 'SearchExport/detail.html', {'person':person, 'list':related_obj_list})
 
 
 def export(request):

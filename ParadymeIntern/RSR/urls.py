@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
 
     #Search/Export Team
-    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
+    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
 
 
 ]
