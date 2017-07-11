@@ -7,27 +7,32 @@
              <p>
 
                  <!-- LIST OF THE UPLOAD FILE-->
+            <table class="table table-bordered">
             {% if documents %}
-               <ul>
+               <thead>
+
                   {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.firstname }}</a>
-                        <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="hidden" name="docfile" value="{{ document.pk }}" />
-                        <input class = "button-style" type="submit" value="Delete" />
-                        </form>
-                    </li>
+                    <tr>
+                        <th>{{document.type}} </th>
+                        <th>{{ document.firstname }} &nbsp; {{document.lastname}}</th>
+                        <th><a href="{{ document.docfile.url }}">{{document.docfile}}</a></th>
+                        <th style="text-align: center" >
+                            <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="docfile" value="{{ document.pk }}" />
+                                <input class = "button-style" type="submit" value="Delete" />
+                            </form>
+                        </th>
+                    </tr>
                     {% endfor %}
-                </ul>
+                </thead>
                     {% else %}
                 <h3> No document saved in the database! </h3>
             {% endif %}
-
+            </table>
             <!--back btn-->
                <p></p>
                <a href="{% url 'uploaddoc' %}" class = "button-style" type="button"> Go Back</a>
-               
-
 
             </p>
            </div>
