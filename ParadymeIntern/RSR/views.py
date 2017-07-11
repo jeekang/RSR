@@ -32,6 +32,10 @@ def get_string(name):
     utf8_text = pytesseract.image_to_string(img)
     utf8_text = str(utf8_text.encode('ascii', 'ignore'))
     return utf8_text
+def print_whitespace():
+    print("")
+    print("")
+    print("")
 
 
 def uploaddoc(request):
@@ -45,7 +49,13 @@ def uploaddoc(request):
             img.save(filename='temp.jpg')
             utf8_text = get_string('temp.jpg')
             os.remove('temp.jpg')
+            print_whitespace()
+            print("******* EXTRACTED TEXT APPEARS BELOW ******")
+            print_whitespace()
             print(utf8_text)
+            print_whitespace()
+            print("******* THATS ALL FOLKS! ******")
+            print_whitespace()
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
