@@ -16,10 +16,22 @@ from .filters import PersonFilter
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 
+from PIL import Image
+from wand.image import Image as IMG
+import pytesseract
+import os
+
 
 # UI/INGEST TEAM
 def main(request):
     return render(request, 'main.html')
+
+#OCR Team
+def get_string(name):
+    img=Image.open(name)
+    utf8_text = pytesseract.image_to_string(img)
+    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
+    return utf8_text
 
 
 def uploaddoc(request):
@@ -29,13 +41,19 @@ def uploaddoc(request):
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
-
+            img=IMG(filename=newdoc.docfile.path,resolution=200)
+            img.save(filename='temp.jpg')
+            utf8_text = get_string('temp.jpg')
+            os.remove('temp.jpg')
+            print(utf8_text)
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
 
     documents = Document.objects.all()
     return render(request, 'index.html', {'documents': documents, 'form': form})
+
+
 
 
 def user_acc_cont(request):
