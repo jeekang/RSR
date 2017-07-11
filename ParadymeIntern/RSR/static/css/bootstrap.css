@@ -194,7 +194,7 @@ table {
   border-spacing: 0;
   text-align: center;
 }
-tr,th {
+tr,th,td {
   padding: 1;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
