@@ -37,7 +37,6 @@ class Person(models.Model):
             field_name = string.capwords(field_name)
             yield field_name + ": " + str(val)
 
-
     TYPERESUME_CHOICES = (
         ('Current Employee', 'Current Employee'),
         ('Prospect', 'Prospect')
@@ -271,7 +270,7 @@ class Volunteering(models.Model):
 
 ######### INTERMEDIARY TABLES ##########
 
-class Person_Company(models.Model):
+class PersonToCompany(models.Model):
     PersonID = models.ForeignKey(Person)
     CompanyName = models.ForeignKey(Company)
     Title = models.CharField("Title", max_length=100, default=None)
@@ -280,53 +279,53 @@ class Person_Company(models.Model):
     EndDate = models.DateField("End Date", default=datetime.now().day)
 
 
-class Person_Awards(models.Model):
+class PersonToAwards(models.Model):
     PersonID = models.ForeignKey(Person)
     AwardName = models.ForeignKey(Awards)
 
 
-class Person_Clubs_Hobbies(models.Model):
-    PersonID = models.ForeignKey(Person)
-    CHName = models.ForeignKey(Clubs_Hobbies)
+class PersonToClubs_Hobbies(models.Model):
+    PersonID = models.ForeignKey(Person, related_name='persontoclubshobbies_set')
+    CHName = models.ForeignKey(Clubs_Hobbies, related_name='persontoclubshobbies_set')
 
 
-class Person_Volunteering(models.Model):
+class PersonToVolunteering(models.Model):
     PersonID = models.ForeignKey(Person)
     VolunName = models.ForeignKey(Volunteering)
 
 
-class Person_Certificate(models.Model):
+class PersonToCertificate(models.Model):
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
     CertID = models.ForeignKey(Certificate, models.DO_NOTHING, db_column='CertID')
 
 
-class Person_Side(models.Model):
+class PersonToSide(models.Model):
     SideID = models.ForeignKey(SideProject, models.DO_NOTHING, db_column='SideID')
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
 
 
-class Person_Skills(models.Model):
+class PersonToSkills(models.Model):
     YearsOfExperience = models.CharField("Years Of Experience", db_column='YrsOfExp', max_length=3)
     SkillsID = models.ForeignKey(Skills, models.DO_NOTHING, db_column='SkillsID')
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
 
 
-class Person_Language(models.Model):
+class PersonToLanguage(models.Model):
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
     LangID = models.ForeignKey(LanguageSpoken, models.DO_NOTHING, db_column='LangID')
 
 
-class Person_Clearence(models.Model):
+class PersonToClearence(models.Model):
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
     ClearenceLevel = models.ForeignKey(Clearence, models.DO_NOTHING, db_column='ClearenceLevel')
 
 
-class Person_Course(models.Model):
+class PersonToCourse(models.Model):
     CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
 
 
-class Person_School(models.Model):
+class PersonToSchool(models.Model):
     def __str__(self):
         return self.PersonID.Name + ' - ' + self.SchoolID.Name
 
