@@ -110,7 +110,7 @@ class School(models.Model):
 
     Name = models.CharField("School Name", db_column='Name', max_length=50)
     DegreeLevel = models.CharField("Degree Level", db_column='DegreeLevel', max_length=50, choices = DEGREELEVEL_CHOICES, default = 'Undergraduate')
-
+    Students = models.ManyToManyField(Person, through='PersonToSchool')
 
 class Coursework(models.Model):
     def get_absolute_url(self):
