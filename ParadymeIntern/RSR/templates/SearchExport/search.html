@@ -46,20 +46,20 @@
             <div class="row">
               <!-- Filters -->
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ personFilter.form.TypeResume.label_tag }}
-                    {% render_field personFilter.form.TypeResume class="form-control" %}
+                    School Attend:
+                    {% render_field personFilter.form.SchoolAttend class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.school_level.label_tag }}
-                    {% render_field filter.form.school_level class="form-control" %}
+                    Graduation Date:
+                    {% render_field personFilter.form.GraduateDate class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.graduation_year.label_tag }}
-                    {% render_field filter.form.graduation_year class="form-control" %}
+                    Degree:
+                    {% render_field personFilter.form.DegreeLevel class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.graduation_month.label_tag }}
-                    {% render_field filter.form.graduation_month class="form-control" %}
+                    Major:
+                    {% render_field personFilter.form.Major class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
                     {{ filter.form.major.label_tag }}
