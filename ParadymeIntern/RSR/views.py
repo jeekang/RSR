@@ -59,7 +59,8 @@ def uploaddoc(request):
 
             temp_doc.save()
 
-            if ".doc" or ".txt" in temp_doc.docfile.path:
+            if ".doc" in temp_doc.docfile.path:
+                print (temp_doc.docfile.path)
                 temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
@@ -80,7 +81,7 @@ def uploaddoc(request):
 
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
-            return HttpResponseRedirect(reverse('uploaddoc'))
+            return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
 
@@ -168,7 +169,7 @@ def listdelete(request, template_name='uploadlist.html'):
     documents = get_object_or_404(Document, pk=docId)
     if request.method == 'POST':
         documents.delete()
-        return HttpResponseRedirect(reverse('uploadlist'))
+        return HttpResponseRedirect(reverse('RSR:uploadlist'))
 
     return render(request, template_name, {'object': documents})
 
