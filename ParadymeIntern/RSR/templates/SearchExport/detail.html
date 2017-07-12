@@ -1,22 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail</title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<style>
-    .navbar-default {
-        background-color: #e8ebef !important;
-        border-color: transparent;
-        font-size: 20px !important;
-    }
-    .jumbotron {
-        background-color: #e8ebef !important;
-    }
-</style>
-<body>
+{% extends 'navigation.html' %}
+
+{% block content %}
+
 <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -44,5 +29,4 @@
     {% endfor %}
 </div>
 
-</body>
-</html>
+{% endblock %}

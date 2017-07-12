@@ -1,48 +1,22 @@
-<head>
-    <title>Resume Filter</title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<style>
-    .navbar-default {
-        background-color: #e8ebef !important;
-        border-color: transparent;
-        font-size: 20px !important;
-    }
-    .jumbotron {
-        background-color: #e8ebef !important;
-    }
+{% extends 'navigation.html' %}
 
-    ul{
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;}
-</style>
-<body>
+{% block content %}
+
+
     {% load widget_tweaks %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{% url 'RSR:search' %}">New Search</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div id="about" class="jumbotron text-center">
+
         <h1>Resume Filter System</h1>
         <p>Select/type one or more the following fields</p>
-    </div>
 
     <form action="" method="Get">
 
-        <div class="well">
             <!-- Search Bar -->
             <div>
                 Search Bar:
                 <input type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
             </div>
+            <p>   </p>
             <div class="row">
               <!-- Filters -->
                 <div class="form-group col-sm-4 col-md-3">
@@ -110,7 +84,6 @@
                     {% render_field filter.form.security_clearance class="form-control" %}
                 </div>
 
-            </div>
             <div align="center">
             <button type="submit" class="btn btn-primary btn-lg">
                 <span class="glyphicon glyphicon-search"></span> Search
@@ -118,6 +91,7 @@
         </div>
         </div>
     </form>
+    <p>   </p>
     <div align="center">
         <h4 align="center">Name:</h4>
         {% for obj in personFilter.qs %}
@@ -128,4 +102,6 @@
             </ul>
         {% endfor %}
     </div>
-</body>
+
+{% endblock %}
+

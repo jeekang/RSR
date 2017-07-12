@@ -1,24 +1,7 @@
-<head>
-    <title>Resume Filter</title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<style>
-    .navbar-default {
-        background-color: #e8ebef !important;
-        border-color: transparent;
-        font-size: 20px !important;
-    }
-    .jumbotron {
-        background-color: #e8ebef !important;
-    }
+{% extends 'navigation.html' %}
 
-    ul{
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;}
-</style>
-<body>
+{% block content %}
+
     {% load widget_tweaks %}
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -125,8 +108,7 @@
             </ul>
         {% endfor %}
     </div>
-</body>
-
+{% endblock %}
 
 
 
