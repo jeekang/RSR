@@ -14,6 +14,32 @@
                      margin-left: auto ;
                      margin-right: auto ;
                    }
+                   .button-style{
+    
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 2px 0;
+  padding: 12px 25px;
+  background: none;
+  background-image: none;
+  background-color: #fdd200;
+  background-color: #ff7e00;
+  /* button color */
+  color: #ffffff;
+  vertical-align: middle;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: normal;
+  font-size: 13px;
+  font-family: Montserrat, 'Open Sans', Helvetica, Arial, sans-serif;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: 0px;
+    }
 
                    </style>
                    <head>
@@ -79,7 +105,7 @@
                     <a href="{% url 'RSR:user_access' %}">User Access</a>
                 </li>
                 <li>
-                    <a href="#">Log Out</a>
+                    <a href="{% url 'logout' %}">Log Out</a>
                 </li>
             </ul>
         </div>
