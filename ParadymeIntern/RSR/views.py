@@ -21,10 +21,10 @@ from .filters import *
 from django.db.models import Q
 
 ###TESTING OCR
-from PIL import Image
-from wand.image import Image as IMG
-import pytesseract
-import textract
+#from PIL import Image
+#from wand.image import Image as IMG
+#import pytesseract
+#import textract
 ### 
 
 def logout_page(request):
@@ -35,11 +35,11 @@ def logout_page(request):
 def main(request):
     return render(request, 'main.html')
 
-def get_string(name):
-    img=Image.open(name)
-    utf8_text = pytesseract.image_to_string(img)
-    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
-    return utf8_text
+#def get_string(name):
+#    img=Image.open(name)
+#    utf8_text = pytesseract.image_to_string(img)
+#    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
+#    return utf8_text
 
 
 @login_required
@@ -64,23 +64,23 @@ def uploaddoc(request):
                 temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
-            else:
+            #else:
 
-                temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
+            #    temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
                 
-                if len(temp_doc.docfile.wordstr) < 50:
-                    img=IMG(filename=temp_doc.docfile.path,resolution=200)
+            #    if len(temp_doc.docfile.wordstr) < 50:
+            #       img=IMG(filename=temp_doc.docfile.path,resolution=200)
                     
-                    img.save(filename='temp.jpg')
-                    utf8_text = get_string('temp.jpg')
-                    os.remove('temp.jpg')
+            #        img.save(filename='temp.jpg')
+            #        utf8_text = get_string('temp.jpg')
+            #        os.remove('temp.jpg')
                     
-                    print (utf8_text)
-                    temp_doc.docfile.wordstr = utf8_text
-                    temp_doc.save(update_fields=['wordstr'])
+            #        print (utf8_text)
+            #        temp_doc.docfile.wordstr = utf8_text
+            #        temp_doc.save(update_fields=['wordstr'])
 
-                print (temp_doc.docfile.wordstr)
-                temp_doc.save(update_fields=['wordstr'])
+            #    print (temp_doc.docfile.wordstr)
+            #    temp_doc.save(update_fields=['wordstr'])
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
