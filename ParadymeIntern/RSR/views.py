@@ -81,8 +81,9 @@ def linkanalysis(request):
 
 @login_required
 def uploadlist (request):
-    documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
-    documents = Document.objects.all()
+   # documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
+    documents = UploadListFilter(request.GET,queryset = Document.objects.all())
+    #documents = Document.objects.all()
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
 

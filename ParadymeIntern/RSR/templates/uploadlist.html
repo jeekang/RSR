@@ -2,6 +2,12 @@
 
 {% block content %}
 
+<form method="get">
+    {{documents.form.as_p}}
+      <button type="submit">Search</button>
+      </form>
+
+
            <div class="inner cover">
              <h2 class="cover-heading">list of your upload</h2>
              <p>
@@ -18,7 +24,7 @@
 					</tr>
                </thead>
 			   <tbody>
-                  {% for document in documents %}
+                  {% for document in documents.qs %}
                     <tr>
                         <td>{{document.type}} </td>
                         <td>{{ document.firstname }} &nbsp; {{document.lastname}}</td>
