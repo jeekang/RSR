@@ -20,9 +20,10 @@ from RSR.views import *
 
 app_name = 'RSR'
 
+
 urlpatterns = [
 
-    url(r'^uploaddoc/$', views.uploaddoc, name='uploaddoc'),
+    url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
     url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
     url(r'^listdelete/$', listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
@@ -32,9 +33,10 @@ urlpatterns = [
     url(r'^user_access/$', user_acc_cont, name='user_access'),
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+    url(r'^logout/$', views.logout_page, name = 'logout'),
 
     #Search/Export Team
-    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail.as_view(), name='detail'),
+    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
 
 
 ]

@@ -1,65 +1,39 @@
-<head>
-    <title>Resume Filter</title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<style>
-    .navbar-default {
-        background-color: #e8ebef !important;
-        border-color: transparent;
-        font-size: 20px !important;
-    }
-    .jumbotron {
-        background-color: #e8ebef !important;
-    }
+{% extends 'navigation.html' %}
 
-    ul{
-        width: 150px;
-        margin-left: auto;
-        margin-right: auto;}
-</style>
-<body>
+{% block content %}
+
+
     {% load widget_tweaks %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{% url 'RSR:search' %}">New Search</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <div id="about" class="jumbotron text-center">
+
         <h1>Resume Filter System</h1>
         <p>Select/type one or more the following fields</p>
-    </div>
 
     <form action="" method="Get">
 
-        <div class="well">
             <!-- Search Bar -->
             <div>
                 Search Bar:
-                <input type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
+                <input style="color: #000000;"type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
             </div>
+            <p>   </p>
             <div class="row">
               <!-- Filters -->
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ personFilter.form.TypeResume.label_tag }}
-                    {% render_field personFilter.form.TypeResume class="form-control" %}
+                    School Attend:
+                    {% render_field personFilter.form.SchoolAttend class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.school_level.label_tag }}
-                    {% render_field filter.form.school_level class="form-control" %}
+                    Graduation Date:
+                    {% render_field personFilter.form.GraduateDate class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.graduation_year.label_tag }}
-                    {% render_field filter.form.graduation_year class="form-control" %}
+                    Degree:
+                    {% render_field personFilter.form.DegreeLevel class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    {{ filter.form.graduation_month.label_tag }}
-                    {% render_field filter.form.graduation_month class="form-control" %}
+                    Major:
+                    {% render_field personFilter.form.Major class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
                     {{ filter.form.major.label_tag }}
@@ -110,22 +84,39 @@
                     {% render_field filter.form.security_clearance class="form-control" %}
                 </div>
 
-            </div>
-            <div align="center">
-            <button type="submit" class="btn btn-primary btn-lg">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </button>
-        </div>
+                <div align="center">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                  </button>
+                </div>
         </div>
     </form>
+    <p>   </p>
     <div align="center">
-        <h4 align="center">Name:</h4>
-        {% for obj in personFilter.qs %}
-            <ul>
-                <li>
-                <a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a>
-                </li>
-            </ul>
-        {% endfor %}
+  <table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Type</th>
+       <th>Name</th>
+       <th>Resume</th>
+       <th>E-Mail</th>
+     </tr>
+   </thead>
+   <tbody>
+     {% for obj in personFilter.qs %}
+       <tr>
+         <td>{{obj.TypeResume}}</td>
+         <td><a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
+         <td><a href="{{ obj.Resume.url }}">{{obj.Resume}}</a></td>
+         <td>{{ obj.Email }}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="5">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
     </div>
-</body>
+
+{% endblock %}
