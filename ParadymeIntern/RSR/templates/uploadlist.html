@@ -10,22 +10,29 @@
             <table class="table table-bordered">
             {% if documents %}
                <thead>
-
+					<tr>
+						<th>Type</th>
+						<th>Name</th>
+						<th>File</th>
+						<th>Action</th>
+					</tr>
+               </thead>
+			   <tbody>
                   {% for document in documents %}
                     <tr>
-                        <th>{{document.type}} </th>
-                        <th>{{ document.firstname }} &nbsp; {{document.lastname}}</th>
-                        <th><a href="{{ document.docfile.url }}">{{document.docfile}}</a></th>
-                        <th style="text-align: center" >
+                        <td>{{document.type}} </td>
+                        <td>{{ document.firstname }} &nbsp; {{document.lastname}}</td>
+                        <td><a href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
+                        <td style="text-align: center" >
                             <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="docfile" value="{{ document.pk }}" />
                                 <input class = "button-style" type="submit" value="Delete" />
                             </form>
-                        </th>
+                        </td>
                     </tr>
                     {% endfor %}
-                </thead>
+                </tbody>
                     {% else %}
                 <h3> No document saved in the database! </h3>
             {% endif %}
