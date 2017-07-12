@@ -53,10 +53,12 @@ class Person(models.Model):
             field_name = string.capwords(field_name)
             yield field_name + ": " + str(val)
 
-    TYPERESUME_CHOICES = (
-        ('Current Employee', 'Current Employee'),
-        ('Prospect', 'Prospect')
-    )
+    TYPERESUME_CHOICES = (('Employee', 'Employee'),
+    ('Intern', 'Intern'),
+    ('Prospective Employee', 'Prospective Employee'),
+    ('Prospective Intern', 'Prospective Intern'),
+
+)
 
     Name = models.CharField("Name", max_length = 50)
     Email = models.CharField("Email", max_length = 50)
@@ -70,7 +72,7 @@ class Person(models.Model):
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
     Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
     GitHub = models.CharField("GitHub", max_length = 70, default = "None")
-    TypeResume = models.CharField("Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Current Employee')
+    TypeResume = models.CharField("Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Employee')
 
 
 class OCR(models.Model):

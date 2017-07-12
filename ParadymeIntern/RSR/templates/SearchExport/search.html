@@ -14,7 +14,7 @@
             <!-- Search Bar -->
             <div>
                 Search Bar:
-                <input type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
+                <input style="color: #000000;"type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
             </div>
             <p>   </p>
             <div class="row">
@@ -93,15 +93,35 @@
     </form>
     <p>   </p>
     <div align="center">
-        <h4 align="center">Name:</h4>
-        {% for obj in personFilter.qs %}
-            <ul>
-                <li>
-                <a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a>
-                </li>
-            </ul>
-        {% endfor %}
+  <table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Type</th>
+       <th>Name</th>
+       <th>Resume</th>
+       <th>E-Mail</th>
+     </tr>
+   </thead>
+   <tbody>
+     {% for obj in personFilter.qs %}
+       <tr>
+         <td>{{obj.TypeResume}}</td>
+         <td><a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
+         <td><a href="{{ obj.Resume.url }}">{{obj.Resume}}</a></td>     
+         <td>{{ obj.Email }}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="5">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
     </div>
 
 {% endblock %}
+
+
+
+
 
