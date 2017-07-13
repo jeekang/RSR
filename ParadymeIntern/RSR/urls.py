@@ -23,8 +23,8 @@ app_name = 'RSR'
 urlpatterns = [
 
     url(r'^uploaddoc/$', views.uploaddoc, name='uploaddoc'),
-    url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
-    url(r'^listdelete/$', listdelete, name="listdelete"),
+    url(r'^uploadlist/$', views.uploadlist, name = 'uploadlist'),
+    url(r'^listdelete/$', views.listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
     url(r'^ocr/$', ocr, name='ocr'),
     url(r'^parsing/$', parsing, name='parsing'),

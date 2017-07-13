@@ -9,9 +9,11 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.template import loader
 
-from RSR.models import *
-from RSR.forms import DocumentForm
+from .models import *
+from .models import Document
+from .forms import DocumentForm
 from .filters import PersonFilter
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
@@ -59,7 +61,6 @@ def uploaddoc(request):
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
-
     documents = Document.objects.all()
     return render(request, 'index.html', {'documents': documents, 'form': form})
 
@@ -72,6 +73,7 @@ def user_acc_cont(request):
 
 def uploadlist(request):
     documents = Document.objects.all()
+
     context = {'documents': documents}
     return render(request, 'uploadlist.html', context)
 
