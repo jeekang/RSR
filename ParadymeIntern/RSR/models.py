@@ -42,12 +42,12 @@ class Person(models.Model):
         ('Prospect', 'Prospect')
     )
 
-    Name = models.CharField("Name", max_length = 50)
-    Email = models.CharField("Email", max_length = 50)
-    Address = models.CharField("Address", max_length = 50)
-    ZipCode = models.IntegerField()
-    State = models.CharField("State", max_length = 25)
-    PhoneNumber = models.CharField("Phone", max_length = 50)
+    Name = models.CharField("Name", max_length = 50,default = "None")
+    Email = models.CharField("Email", max_length = 50,default = "None")
+    Address = models.CharField("Address", max_length = 50,default = "None")
+    ZipCode = models.IntegerField("Zip Code", default = "None")
+    State = models.CharField("State", max_length = 25,default = "None")
+    PhoneNumber = models.CharField("Phone", max_length = 50,default = "None")
     Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
     CreationDate = models.DateTimeField("Created On")
     LastUpdated = models.DateTimeField("Update", blank = True, null= True)
@@ -86,9 +86,9 @@ class Major(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Name = models.CharField("Name", db_column='Name', max_length=50)
-    Dept = models.CharField("Department Name", db_column='Dept', max_length=50)
-    MajorMinor = models.CharField("Major/Minor", db_column='Major/Minor', max_length=50)
+    Name = models.CharField("Major", max_length=50,default = "None")
+    Dept = models.CharField("Department", max_length=50,default = "None")
+    MajorMinor = models.CharField("Major/Minor", max_length=50,default = "None")
 
 
 class School(models.Model):
@@ -108,8 +108,8 @@ class School(models.Model):
         ('Graduate', 'Graduate')
     )
 
-    Name = models.CharField("School Name", db_column='Name', max_length=50)
-    DegreeLevel = models.CharField("Degree Level", db_column='DegreeLevel', max_length=50, choices = DEGREELEVEL_CHOICES, default = 'Undergraduate')
+    Name = models.CharField("School", max_length=50,default = "None")
+    DegreeLevel = models.CharField("Degree Level", max_length=50, choices = DEGREELEVEL_CHOICES, default = 'Undergraduate')
     Students = models.ManyToManyField(Person, through='PersonToSchool')
 
 class Coursework(models.Model):
@@ -124,8 +124,7 @@ class Coursework(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Name = models.CharField("Coursework Name", db_column='Name', max_length=50)
-    Desc = models.CharField("Description", db_column='Desc', max_length=50)
+    Name = models.CharField("Coursework", max_length=50)
 
 
 class ProfessionalDevelopment(models.Model):
@@ -140,23 +139,22 @@ class ProfessionalDevelopment(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Name = models.CharField("Name", db_column='Name', max_length=20)
-    Description = models.CharField("Description", db_column='Description', max_length=30)
+    Name = models.CharField("Professional Development", max_length=20,default = "None")
 
 class SideProject(models.Model):
     def get_absolute_url(self):
         return reverse('SideProject_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.ProjectName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    ProjectName = models.CharField("Project Name", db_column='ProjectName', max_length=20)
-    ProjectDesc = models.CharField("Project Description", db_column='ProjectDesc', max_length=50)
+    Name = models.CharField("Project", max_length=20,default = "None")
+
 
 
 class Skills(models.Model):
@@ -164,14 +162,14 @@ class Skills(models.Model):
         return reverse('Skills_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.SkillsName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    SkillsName = models.CharField("Skills Name", db_column='SkillsName', max_length=20)
+    Name = models.CharField("Skills", max_length=20,default = "None")
 
 
 class LanguageSpoken(models.Model):
@@ -186,22 +184,22 @@ class LanguageSpoken(models.Model):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    Language = models.CharField("Language", db_column='Language', max_length=20)
+    Language = models.CharField("Language", max_length=20,default = "None")
 
 
-class Clearence(models.Model):
+class Clearance(models.Model):
     def get_absolute_url(self):
-        return reverse('Clearence_detail', args=[str(self.id)])
+        return reverse('Clearance_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.ClearenceLevel
+        return self.ClearanceLevel
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    ClearenceLevel = models.CharField("Clearence Level", db_column='ClearenceLevel', primary_key=True, max_length=30)
+    ClearanceLevel = models.CharField("Clearance Level", primary_key=True, max_length=30,default = "None")
 
 
 class Company(models.Model):
@@ -209,14 +207,14 @@ class Company(models.Model):
         return reverse('Company_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.CompanyName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    CompanyName = models.CharField("Company Name", max_length=100)
+    Name = models.CharField("Company Name", max_length=100,default = "None")
 
 
 class Awards(models.Model):
@@ -224,15 +222,14 @@ class Awards(models.Model):
         return reverse('award_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.AwardName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    AwardName = models.CharField("Award Name", max_length=100)
-    AwardDescriptioin = models.CharField("Award Description", max_length=1000)
+    Name = models.CharField("Award Name", max_length=100,default = "None")
 
 
 class Clubs_Hobbies(models.Model):
@@ -240,15 +237,14 @@ class Clubs_Hobbies(models.Model):
         return reverse('clubs_hobbies_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.CHName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    CHName = models.CharField("Club and Hobby Name", max_length=100)
-    CHDesc = models.CharField("Club and Hobby Description", max_length=100)
+    Name = models.CharField("Club and Hobby Name", max_length=100,default = "None")
 
 
 class Volunteering(models.Model):
@@ -256,94 +252,101 @@ class Volunteering(models.Model):
         return reverse('volunteering_detail', args=[str(self.id)])
 
     def __str__(self):
-        return self.VolunName
+        return self.Name
 
     def __iter__(self):
         for field in self._meta.get_fields(include_parents=True, include_hidden=False):
             value = getattr(self, field.name, None)
             yield (field, value)
 
-    VolunName = models.CharField("Volunteering Name", max_length=100)
-    VolunDesc = models.CharField("Volunteering Description", max_length=1000)
+    Name = models.CharField("Volunteering Name", max_length=100,default = "None")
+
 
 
 ######### INTERMEDIARY TABLES ##########
 
 class PersonToCompany(models.Model):
-    PersonID = models.ForeignKey(Person)
-    CompanyName = models.ForeignKey(Company)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    CompanyID = models.ForeignKey(Company,  on_delete=models.CASCADE)
     Title = models.CharField("Title", max_length=100, default=None)
     ExperienceOnJob = models.CharField("Experience on Job", max_length=300, default=None)
     StartDate = models.DateField("Start Date", default=datetime.now().day)
     EndDate = models.DateField("End Date", default=datetime.now().day)
+    Desc = models.CharField("Company Description", max_length=1000, default="None")
 
 
 class PersonToAwards(models.Model):
 
-    PersonID = models.ForeignKey(Person)
-    AwardName = models.ForeignKey(Awards)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    AwardID = models.ForeignKey(Awards,  on_delete=models.CASCADE)
+    Desc = models.CharField("Award Description", max_length=1000, default="None")
 
 
 class PersonToClubs_Hobbies(models.Model):
     PersonID = models.ForeignKey(Person, related_name='persontoclubshobbies_set')
-    CHName = models.ForeignKey(Clubs_Hobbies, related_name='persontoclubshobbies_set')
+    CHID = models.ForeignKey(Clubs_Hobbies, related_name='persontoclubshobbies_set')
+    Desc = models.CharField("Club and Hobby Description", max_length=100, default="None")
 
 
 class PersonToVolunteering(models.Model):
-    PersonID = models.ForeignKey(Person)
-    VolunName = models.ForeignKey(Volunteering)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    VolunID = models.ForeignKey(Volunteering,  on_delete=models.CASCADE)
+    Desc = models.CharField("Volunteering Description", max_length=1000, default="None")
 
 
 class PersonToProfessionalDevelopment(models.Model):
     def __str__(self):
         return self.PersonID.Name + ' - ' + self.ProfID.Name
 
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    ProfID = models.ForeignKey(ProfessionalDevelopment, models.DO_NOTHING, db_column='CertID')
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    ProfID = models.ForeignKey(ProfessionalDevelopment,  on_delete=models.CASCADE)
+    Desc = models.CharField("Professional Development Description", max_length=30, default="None")
 
 
 class PersonToSide(models.Model):
-    SideID = models.ForeignKey(SideProject, models.DO_NOTHING, db_column='SideID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+    SideID = models.ForeignKey(SideProject, on_delete=models.CASCADE)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    Desc = models.CharField("Project Description", max_length=50, default="None")
 
 
 class PersonToSkills(models.Model):
 
     def __str__(self):
-        return self.PersonID.Name + ' - ' + self.SkillsID.SkillsName
-    YearsOfExperience = models.CharField("Years Of Experience", db_column='YrsOfExp', max_length=3)
-    SkillsID = models.ForeignKey(Skills, models.DO_NOTHING, db_column='SkillsID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+        return self.PersonID.Name + ' - ' + self.SkillsID.Name
+    YearsOfExperience = models.CharField("Years Of Experience", max_length=3)
+    SkillsID = models.ForeignKey(Skills,  on_delete=models.CASCADE)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
 
 
 class PersonToLanguage(models.Model):
     def __str__(self):
         return self.PersonID.Name + ' - ' + self.LangID.Language
 
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    LangID = models.ForeignKey(LanguageSpoken, models.DO_NOTHING, db_column='LangID')
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    LangID = models.ForeignKey(LanguageSpoken,  on_delete=models.CASCADE)
 
 
-class PersonToClearence(models.Model):
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    ClearenceLevel = models.ForeignKey(Clearence, models.DO_NOTHING, db_column='ClearenceLevel')
+class PersonToClearance(models.Model):
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    ClearanceLevel = models.ForeignKey(Clearance,  on_delete=models.CASCADE)
 
 
 class PersonToCourse(models.Model):
-    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
+    CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
+    Desc = models.CharField("Coursework Description", max_length=50,default = "None")
+    PersonID = models.ForeignKey(Person, on_delete=models.CASCADE)
 
 
 class PersonToSchool(models.Model):
     def __str__(self):
         return self.PersonID.Name + ' - ' + self.SchoolID.Name
 
-    GradDate = models.CharField("Grad Date", db_column='GradDate', max_length=20)
-    GPA = models.CharField("GPA", db_column='GPA', max_length=20)
-    CourseID = models.ForeignKey(Coursework, models.DO_NOTHING, db_column='CourseID')
-    PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    SchoolID = models.ForeignKey(School, models.DO_NOTHING, db_column='SchoolID')
-    MajorID = models.ForeignKey(Major, models.DO_NOTHING, db_column='MajorID')
+    SchoolID = models.ForeignKey(School,  on_delete=models.CASCADE)
+    GradDate = models.CharField("Graduation Date", max_length=20,default = "None")
+    GPA = models.CharField("GPA", max_length=20,default = "None")
+    CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
+    PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
+    MajorID = models.ForeignKey(Major,  on_delete=models.CASCADE)
 
 
 

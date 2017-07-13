@@ -22,14 +22,14 @@ class PersonFilter(django_filters.FilterSet):
     YearOfExperienceForSkill = django_filters.ModelChoiceFilter(name='persontoskills__YearsOfExperience',
                                                                 queryset=PersonToSkills.objects.values_list('YearsOfExperience',flat=True).distinct(),
                                                                 to_field_name='YearsOfExperience')
-    ProfessionalDevelopment = django_filters.ModelChoiceFilter(name='PersonToProfessionalDevelopment__ProfID',
+    ProfessionalDevelopment = django_filters.ModelChoiceFilter(name='persontoprofessionaldevelopment__ProfID',
                                                                queryset=ProfessionalDevelopment.objects.all())
-    Award = django_filters.ModelChoiceFilter(name='persontoawards__AwardName', queryset=Awards.objects.all())
-    CompanyWorked = django_filters.ModelChoiceFilter(name='persontocompany__CompanyName', queryset=Company.objects.all())
+    Award = django_filters.ModelChoiceFilter(name='persontoawards__AwardID', queryset=Awards.objects.all())
+    CompanyWorked = django_filters.ModelChoiceFilter(name='persontocompany__CompanyID', queryset=Company.objects.all())
     Title = django_filters.ModelChoiceFilter(name='persontocompany__Title',
                                              queryset=PersonToCompany.objects.values_list('Title',flat=True).distinct(),
                                              to_field_name='Title')
-    SecurityClearance = django_filters.ModelChoiceFilter(name='persontoclearence__ClearenceLevel', queryset=Clearence.objects.all())
+    SecurityClearance = django_filters.ModelChoiceFilter(name='persontoclearance__ClearanceLevel', queryset=Clearance.objects.all())
 
 
     # skills = django_filters.CharFilter(name='skills', lookup_expr='icontains')
