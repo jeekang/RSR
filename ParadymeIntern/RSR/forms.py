@@ -8,3 +8,4 @@ class DocumentForm(forms.Form):
 		dataconfig="".join(line.rstrip() for line in myfile)
     
 	docfile = forms.FileField(widget=forms.FileInput(attrs={'accept':dataconfig}),label='Select a file:')
+

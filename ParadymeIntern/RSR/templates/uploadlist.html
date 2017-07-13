@@ -19,7 +19,8 @@
 					<tr>
 						<th>Type</th>
 						<th>Name</th>
-						<th>File</th>
+						<th>Operator</th>
+                        <th>File</th>
 						<th>Action</th>
 					</tr>
                </thead>
@@ -28,6 +29,7 @@
                     <tr>
                         <td>{{document.type}} </td>
                         <td>{{ document.firstname }} &nbsp; {{document.lastname}}</td>
+                        <td>{{document.operator}}</td>
                         <td><a href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
                         <td style="text-align: center" >
                             <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
