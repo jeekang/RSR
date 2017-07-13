@@ -24,7 +24,7 @@ from django.db.models import Q
 from PIL import Image
 from wand.image import Image as IMG
 import pytesseract
-import textract
+# import textract
 ###
 
 def logout_page(request):
@@ -66,18 +66,19 @@ def uploaddoc(request):
                 temp_doc.save(update_fields=['wordstr'])
             else:
 
-                temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
+                # temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
 
-                if len(temp_doc.docfile.wordstr) < 50:
-                    img=IMG(filename=temp_doc.docfile.path,resolution=200)
+                # if len(temp_doc.docfile.wordstr) < 50:
+                img=IMG(filename=temp_doc.docfile.path,resolution=200)
 
-                    img.save(filename='temp.jpg')
-                    utf8_text = get_string('temp.jpg')
-                    os.remove('temp.jpg')
+                img.save(filename='temp.jpg')
+                utf8_text = get_string('temp.jpg')
+                os.remove('temp.jpg')
 
-                    print (utf8_text)
-                    temp_doc.docfile.wordstr = utf8_text
-                    temp_doc.save(update_fields=['wordstr'])
+                print (utf8_text)
+                temp_doc.docfile.wordstr = utf8_text
+                temp_doc.save(update_fields=['wordstr'])
+                #endif - do not uncomment
 
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
