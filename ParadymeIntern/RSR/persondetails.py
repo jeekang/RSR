@@ -19,14 +19,18 @@ def Detail(person):
         currPos=0
         for info in schoolInfo:
             itemInfo=eval('item.'+info)
-            related_obj_list.append(schoolNames[currPos]+str(itemInfo))
+            try:
+                related_obj_list.append(schoolNames[currPos]+str(itemInfo))
+            except:
+                related_obj_list.append(schoolNames[currPos]+'N/A')
             currPos+=1
+        currPos=0
 
     # This is the related_set names, I add the personto and _set part to it later on for preference purposes only
-    relatedNames = ['course', 'certificate', 'side', 'skills', 'language'
+    relatedNames = ['course', 'professionaldevelopment', 'side', 'skills', 'language'
         , 'clearence', 'company', 'awards', 'clubshobbies', 'volunteering']
     # This is the foreign key reference to the models
-    modelReferences = ['CourseID', 'CertID', 'SideID', 'SkillsID', 'LangID', 'ClearenceLevel',
+    modelReferences = ['CourseID', 'ProfID', 'SideID', 'SkillsID', 'LangID', 'ClearenceLevel',
                        'CompanyName', 'AwardName', 'CHName', 'VolunName']
     # Loops through every model
     position=0
@@ -39,12 +43,15 @@ def Detail(person):
         related_obj = eval('person.'+string)
         # Related_obj cannot be iterated unless put in a query set so I put in a query set using all()
         related_obj = related_obj.all()
+        # Default value if there's no value should be N/A
+        value='N/A'
         # There should only be 1 object in this query set
         for item in related_obj:
             # I want to do something grab the exact field of the item so I use getattr
             item=getattr(item,modelReferences[position])
             # Finally I add the string I want to be displayed into related_obj_list which I will iterate through in
             # details template
-            related_obj_list.append(related.capitalize()+': ' +str(item))
+            value=str(item)
+        related_obj_list.append(related.capitalize()+': ' +value)
         position+=1
     return related_obj_list

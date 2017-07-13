@@ -128,9 +128,9 @@ class Coursework(models.Model):
     Desc = models.CharField("Description", db_column='Desc', max_length=50)
 
 
-class Certificate(models.Model):
+class ProfessionalDevelopment(models.Model):
     def get_absolute_url(self):
-        return reverse('Certificate_detail', args=[str(self.id)])
+        return reverse('ProfessionalDevelopment_detail', args=[str(self.id)])
 
     def __str__(self):
         return self.Name
@@ -142,7 +142,6 @@ class Certificate(models.Model):
 
     Name = models.CharField("Name", db_column='Name', max_length=20)
     Description = models.CharField("Description", db_column='Description', max_length=30)
-
 
 class SideProject(models.Model):
     def get_absolute_url(self):
@@ -280,6 +279,7 @@ class PersonToCompany(models.Model):
 
 
 class PersonToAwards(models.Model):
+
     PersonID = models.ForeignKey(Person)
     AwardName = models.ForeignKey(Awards)
 
@@ -294,9 +294,12 @@ class PersonToVolunteering(models.Model):
     VolunName = models.ForeignKey(Volunteering)
 
 
-class PersonToCertificate(models.Model):
+class PersonToProfessionalDevelopment(models.Model):
+    def __str__(self):
+        return self.PersonID.Name + ' - ' + self.ProfID.Name
+
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    CertID = models.ForeignKey(Certificate, models.DO_NOTHING, db_column='CertID')
+    ProfID = models.ForeignKey(ProfessionalDevelopment, models.DO_NOTHING, db_column='ProfID')
 
 
 class PersonToSide(models.Model):
@@ -305,12 +308,18 @@ class PersonToSide(models.Model):
 
 
 class PersonToSkills(models.Model):
+
+    def __str__(self):
+        return self.PersonID.Name + ' - ' + self.SkillsID.SkillsName
     YearsOfExperience = models.CharField("Years Of Experience", db_column='YrsOfExp', max_length=3)
     SkillsID = models.ForeignKey(Skills, models.DO_NOTHING, db_column='SkillsID')
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
 
 
 class PersonToLanguage(models.Model):
+    def __str__(self):
+        return self.PersonID.Name + ' - ' + self.LangID.Language
+
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
     LangID = models.ForeignKey(LanguageSpoken, models.DO_NOTHING, db_column='LangID')
 
