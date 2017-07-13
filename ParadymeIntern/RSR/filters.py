@@ -11,5 +11,5 @@ class UploadListFilter(django_filters.FilterSet):
 	type = django_filters.ChoiceFilter(choices=TYPERESUME_CHOICES)
 	class Meta:
 	    model = Document
-	    fields = ['firstname','lastname','type']
+	    fields = ['firstname','lastname','type','operator']
 	    order_by = ['pk']
