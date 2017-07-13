@@ -1,0 +1,19 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+
+
+<h1>
+    {{person.Name}}
+</h1>
+
+<div align="center">
+    {% for field in person %}
+    {{field}}<br>
+    {% endfor %}
+    {% for item in list %}
+    {{item}}<br>
+    {% endfor %}
+</div>
+
+{% endblock %}

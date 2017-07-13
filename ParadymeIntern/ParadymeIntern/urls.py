@@ -19,13 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.contrib.auth import views
-from RSR.views import *
-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^RSR/', include('RSR.urls')),
-    url(r'^$', RedirectView.as_view(url='RSR/uploaddoc/', permanent=True)),
+    url(r'^$', RedirectView.as_view(url='RSR/main/', permanent=True)),
     url(r'^accounts/login/$', views.login, name ='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
     url('^accounts/', include('django.contrib.auth.urls'))

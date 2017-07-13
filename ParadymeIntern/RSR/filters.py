@@ -1,16 +1,32 @@
 import django_filters
-from .models import Person
+from .models import *
 from django import forms
 
-TYPERESUME_CHOICES = (
-    ('Current Employee', 'Current Employee'),
-    ('Prospect', 'Prospect')
+class UploadListFilter(django_filters.FilterSet):
+
+	TYPERESUME_CHOICES = (('Employee', 'Employee'),
+	('Intern', 'Intern'),
+	('Prospective Employee', 'Prospective Employee'),
+	('Prospective Intern', 'Prospective Intern'),
+
 )
+	type = django_filters.ChoiceFilter(choices=TYPERESUME_CHOICES)
+	class Meta:
+	    model = Document
+	    fields = ['firstname','lastname','type']
+	    order_by = ['pk']
+
 
 class PersonFilter(django_filters.FilterSet):
-
-    TypeResume = django_filters.ChoiceFilter(choices=TYPERESUME_CHOICES)
-    # language = django_filters.CharFilter(name='language',lookup_expr='icontains')
+    SchoolAttend = django_filters.ModelChoiceFilter(name='persontoschool__SchoolID', queryset=School.objects.all(),
+                                                    to_field_name='id')
+    GraduateDate = django_filters.ModelChoiceFilter(name='persontoschool__GradDate',
+                                                    queryset=PersonToSchool.objects.values_list('GradDate',flat=True).distinct(),
+                                                    to_field_name='GradDate')
+    Major = django_filters.ModelChoiceFilter(name='persontoschool__MajorID', queryset=Major.objects.all())
+    DegreeLevel = django_filters.ModelChoiceFilter(name='school__DegreeLevel',
+                                                   queryset=School.objects.values_list('DegreeLevel',flat=True).distinct(),
+                                                   to_field_name='DegreeLevel')
     # skills = django_filters.CharFilter(name='skills', lookup_expr='icontains')
     # certificate = django_filters.CharFilter(name='certificate', lookup_expr='icontains')
     # awards = django_filters.CharFilter(name='awards', lookup_expr='icontains')
@@ -22,4 +38,4 @@ class PersonFilter(django_filters.FilterSet):
 
     class Meta:
         model = Person
-        fields = ['TypeResume',]
+        fields = ['SchoolAttend','GraduateDate','Major','DegreeLevel']
