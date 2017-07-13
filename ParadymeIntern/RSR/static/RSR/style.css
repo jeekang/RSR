@@ -1,0 +1,11 @@
+body{
+    background: white url("images/background.png");
+    tex: green;
+}
+h1{
+background-color: #52FF3
+}
+input[type=text]{
+background-color: #52FF3;
+color: green;
+}
