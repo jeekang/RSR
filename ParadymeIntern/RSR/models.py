@@ -299,7 +299,7 @@ class PersonToProfessionalDevelopment(models.Model):
         return self.PersonID.Name + ' - ' + self.ProfID.Name
 
     PersonID = models.ForeignKey(Person, models.DO_NOTHING, db_column='PersonID')
-    ProfID = models.ForeignKey(ProfessionalDevelopment, models.DO_NOTHING, db_column='CertID')
+    ProfID = models.ForeignKey(ProfessionalDevelopment, models.DO_NOTHING, db_column='ProfID')
 
 
 class PersonToSide(models.Model):
