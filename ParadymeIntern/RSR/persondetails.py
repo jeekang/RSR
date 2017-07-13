@@ -9,49 +9,46 @@ import os
 
 # Returns a list of strings that contains related informtion about person
 def Detail(person):
+    # related_obj_list will be the list I will iterate through to print out each detail
     related_obj_list=[]
-
-    # I'm listing all information related to school separate from restof code since its a special case where I need
-    # to access more than one field of a PersonToModel table
-    schoolNames=['School: ', 'Degree Level: ', 'Major: ', 'Graduation Date: ', 'GPA: ']
-    schoolInfo=['SchoolID', 'SchoolID.DegreeLevel','MajorID', 'GradDate', 'GPA']
-    for item in person.persontoschool_set.all():
-        currPos=0
-        for info in schoolInfo:
-            itemInfo=eval('item.'+info)
-            try:
-                related_obj_list.append(schoolNames[currPos]+str(itemInfo))
-            except:
-                related_obj_list.append(schoolNames[currPos]+'N/A')
-            currPos+=1
-        currPos=0
-
-    # This is the related_set names, I add the personto and _set part to it later on for preference purposes only
-    relatedNames = ['course', 'professionaldevelopment', 'side', 'skills', 'language'
-        , 'clearence', 'company', 'awards', 'clubshobbies', 'volunteering']
-    # This is the foreign key reference to the models
-    modelReferences = ['CourseID', 'ProfID', 'SideID', 'SkillsID', 'LangID', 'ClearenceLevel',
-                       'CompanyName', 'AwardName', 'CHName', 'VolunName']
-    # Loops through every model
-    position=0
-    for related in relatedNames:
-        # Get the related set of each model
-        # The default related set is the name of intermediary table, lowercased + _set
-        # The related set is used to reverse foreign keys and you access it by currentmodel.related_set where
-        # the related_set is where the foreign key to current model stems from
-        string = 'personto'+related+'_set'
-        related_obj = eval('person.'+string)
-        # Related_obj cannot be iterated unless put in a query set so I put in a query set using all()
-        related_obj = related_obj.all()
-        # Default value if there's no value should be N/A
-        value='N/A'
-        # There should only be 1 object in this query set
+    # List of related sets
+    model_Names=['PersonToSchool', 'PersonToCourse', 'PersonToProfessionalDevelopment', 'PersonToSide',
+                  'PersonToSkills', 'PersonToLanguage' , 'PersonToClearance', 'PersonToCompany', 'PersonToAwards',
+                  'PersonToClubs_Hobbies', 'PersonToVolunteering']
+    for model in model_Names:
+        # Adjusting the model_Names to appriorate syntax for related_name reference
+        # Related_names are a way to reverse foreign key
+        related_name=model.lower().replace('_','')+'_set'
+        related_obj=eval('person.'+related_name)
+        related_obj=related_obj.all()
+        # .all() for a related_obj creates a query set
         for item in related_obj:
-            # I want to do something grab the exact field of the item so I use getattr
-            item=getattr(item,modelReferences[position])
-            # Finally I add the string I want to be displayed into related_obj_list which I will iterate through in
-            # details template
-            value=str(item)
-        related_obj_list.append(related.capitalize()+': ' +value)
-        position+=1
+            # Each item is a related_obj meaning persontoschool, persontocourse, etc. It's one of the intermediate
+            # table objects.
+            related_fields=item._meta.fields
+            # I want to iterate through all fields of the intermediate table
+            for field in related_fields:
+                field_name=field.get_attname()
+                # I don't want the id nor foreign key of PersonID
+                if field_name =='id' or field_name =='PersonID_id':
+                    continue
+                # So if there's a _id for one of the fields it means its a foreign key. So I want to go to the foreign
+                # key.
+                if field_name.find('_id') != -1:
+                    field_name=field_name.replace('_id','')
+                    # modelObj is the actual object of the foreign key like school or course etc.
+                    modelObj=getattr(item, field_name)
+                    # I want to iterate through all fields of foreign key
+                    for x in modelObj._meta.fields:
+                        if x.verbose_name=='ID':
+                            continue
+                        x_name=x.get_attname()
+                        x_value=getattr(modelObj,x_name)
+                        related_obj_list.append(x.verbose_name+': '+str(x_value))
+                # If it's not a foreign key then I don't need to iterate through anything and I can just give you
+                # the value of the field
+                else:
+                    value=getattr(item,field_name)
+                    ver_name=field.verbose_name
+                    related_obj_list.append(ver_name+': '+str(value))
     return related_obj_list
