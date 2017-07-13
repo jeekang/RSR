@@ -67,17 +67,17 @@ def uploaddoc(request):
             else:
 
                 # temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
-
+                path = os.path.join(settings.MEDIA_ROOT, temp_doc.docfile.name)
                 # if len(temp_doc.docfile.wordstr) < 50:
-                img=IMG(filename=temp_doc.docfile.path,resolution=200)
+                img=IMG(filename=path,resolution=200)
+                # save in temp folder
+                temp_path = os.path.join(settings.MEDIA_ROOT,'temp/temp.jpg')
+                img.save(filename=temp_path)
+                utf8_text = get_string(os.path.normpath(temp_path))
+                # delete from temp folder
+                os.remove(temp_path)
 
-                img.save(filename='temp.jpg')
-                utf8_text = get_string('temp.jpg')
-                os.remove('temp.jpg')
-
-                print (utf8_text)
                 temp_doc.docfile.wordstr = utf8_text
-                temp_doc.save(update_fields=['wordstr'])
                 #endif - do not uncomment
 
                 print (temp_doc.docfile.wordstr)
