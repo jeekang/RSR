@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .models import *
-import docx2txt
+#import docx2txt
 
 # Create your views here.
 #=======
@@ -10,7 +10,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
+
 from django.template import loader
 
 from .models import *
@@ -18,12 +18,12 @@ from .models import Document
 from .forms import DocumentForm
 from .filters import PersonFilter
 from django.db.models import Q
-=======
+
 from django.forms import ModelForm
 
-from RSR.models import *
-from RSR.forms import DocumentForm
->>>>>>> ccba3aa16644157cdde372f38d19c9acb9174905
+from .models import *
+from .forms import DocumentForm
+
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import logout
 from .filters import *
@@ -81,11 +81,20 @@ def uploaddoc(request):
                 # if len(temp_doc.docfile.wordstr) < 50:
                 img=IMG(filename=path,resolution=200)
                 # save in temp folder
-                temp_path = os.path.join(settings.MEDIA_ROOT,'temp/temp.jpg')
-                img.save(filename=temp_path)
-                utf8_text = get_string(os.path.normpath(temp_path))
-                # delete from temp folder
-                os.remove(temp_path)
+                temp_path = os.path.join(settings.MEDIA_ROOT,'temp/temp')
+                images=img.sequence
+                for i in range(len(images)):
+                    IMG(images[i]).save(filename=temp_path+str(i)+".jpg")
+                for i in range(len(images)):
+                    if i==0:
+                        utf8_text = get_string(os.path.normpath(temp_path+str(i)+'.jpg'))
+                        # delete from temp folder
+                        os.remove(temp_path + str(i) + '.jpg')
+                    else:
+                        utf8_text+="\n\n"
+                        utf8_text+=get_string(os.path.normpath(temp_path+str(i)+'.jpg'))
+                        # delete from temp folder
+                        os.remove(temp_path+str(i)+'.jpg')
 
                 temp_doc.docfile.wordstr = utf8_text
                 #endif - do not uncomment
@@ -99,7 +108,7 @@ def uploaddoc(request):
     return render(request,'index.html',{'documents': documents, 'form': form})
 
 
-<<<<<<< HEAD
+
 def user_acc_cont(request):
     return render(request, 'acc_cont.html')
 
@@ -122,11 +131,10 @@ def listdelete(request, template_name='uploadlist.html'):
 
 
 # OCR TEAM
-def ocr(request):
-=======
+
 @login_required
 def ocr (request):
->>>>>>> ccba3aa16644157cdde372f38d19c9acb9174905
+
     return render(request, 'ocr.html')
 
 @login_required
