@@ -10,7 +10,7 @@ from datetime import date, datetime
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 
-import docx2txt
+#import docx2txt
 import string
 
 
