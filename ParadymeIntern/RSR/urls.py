@@ -17,6 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from. import views
 from RSR.views import *
+from django.conf.urls import url
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
 
 
 urlpatterns = [
@@ -30,6 +34,7 @@ urlpatterns = [
     url(r'^user_access/$', user_acc_cont, name='user_access'),
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+    url(r'^login/$', auth_views.login, name='login')
 
 
 
