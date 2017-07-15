@@ -1,0 +1,59 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+
+<form method="get">
+    {{documents.form.as_p}}
+      <button type="submit">Search</button>
+      </form>
+
+
+           <div class="inner cover">
+             <h2 class="cover-heading">list of your upload</h2>
+             <p>
+
+                 <!-- LIST OF THE UPLOAD FILE-->
+            <table class="table table-bordered">
+            {% if documents %}
+               <thead>
+					<tr>
+						<th>Type</th>
+						<th>Name</th>
+						<th>File</th>
+						<th>Action</th>
+					</tr>
+               </thead>
+			   <tbody>
+                  {% for document in documents.qs %}
+                    <tr>
+                        <td>{{document.type}} </td>
+                        <td>{{ document.firstname }} &nbsp; {{document.lastname}}</td>
+                        <td><a href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
+                        <td style="text-align: center" >
+                            <form action="{% url 'RSR:listdelete' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="docfile" value="{{ document.pk }}" />
+                                <input class = "button-style" type="submit" value="Delete" />
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                    {% else %}
+                <h3> No document saved in the database! </h3>
+            {% endif %}
+            </table>
+            <!--back btn-->
+               <p></p>
+               <a href="{% url 'RSR:uploadlist' %}" class = "button-style" type="button"> Go Back</a>
+
+            </p>
+           </div>
+
+            <script>
+            function goBack() {
+                window.history.back();
+            }
+            </script>
+
+  {% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'navigation.html' %}
+
+{% block content %}
+
+
+    {% load widget_tweaks %}
+
+
+        <h1>Resume Filter System</h1>
+        <p>Select/type one or more the following fields</p>
+
+    <form action="" method="Get">
+
+            <!-- Search Bar -->
+            <div>
+                Search Bar:
+                <input style="color: #000000;"type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
+            </div>
+            <p>   </p>
+            <div class="row">
+              <!-- Filters -->
+                <div class="form-group col-sm-4 col-md-3">
+                    School Attend:
+                    {% render_field personFilter.form.SchoolAttend class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Graduation Date:
+                    {% render_field personFilter.form.GraduateDate class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Degree:
+                    {% render_field personFilter.form.DegreeLevel class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Major:
+                    {% render_field personFilter.form.Major class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.major.label_tag }}
+                    {% render_field filter.form.major class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.gpa_gt.label_tag }}
+                    {% render_field filter.form.gpa_gt class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.skills.label_tag }}
+                    {% render_field filter.form.skills class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.language.label_tag }}
+                    {% render_field filter.form.language class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.certificate.label_tag }}
+                    {% render_field filter.form.certificate class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.awards.label_tag }}
+                    {% render_field filter.form.awards class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.professional_development.label_tag }}
+                    {% render_field filter.form.professional_development class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.prior_company.label_tag }}
+                    {% render_field filter.form.prior_company class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.title.label_tag }}
+                    {% render_field filter.form.title class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.year_of_experience_gt.label_tag }}
+                    {% render_field filter.form.year_of_experience_gt class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.work_authorization.label_tag }}
+                    {% render_field filter.form.work_authorization class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    {{ filter.form.security_clearance.label_tag }}
+                    {% render_field filter.form.security_clearance class="form-control" %}
+                </div>
+
+                <div align="center">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                  </button>
+                </div>
+        </div>
+    </form>
+    <p>   </p>
+    <div align="center">
+  <table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Type</th>
+       <th>Name</th>
+       <th>Resume</th>
+       <th>E-Mail</th>
+     </tr>
+   </thead>
+   <tbody>
+     {% for obj in personFilter.qs %}
+       <tr>
+         <td>{{obj.TypeResume}}</td>
+         <td><a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
+         <td><a href="{{ obj.Resume.url }}">{{obj.Resume}}</a></td>
+         <td>{{ obj.Email }}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="5">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+    </div>
+
+{% endblock %}

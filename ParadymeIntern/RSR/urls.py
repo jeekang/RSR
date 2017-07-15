@@ -15,11 +15,34 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from. import views
-from RSR.views import uploaddoc
+from . import views
+from .views import *
+
+app_name = 'RSR'
+
 
 urlpatterns = [
+
+
+    url(r'^uploaddoc/$', views.uploaddoc, name='uploaddoc'),
+    url(r'^uploadlist/$', views.uploadlist, name = 'uploadlist'),
+    url(r'^listdelete/$', views.listdelete, name="listdelete"),
+
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
-    #url(r'^uploadfile/', views.uploadfile, name='uploadfile'),
-    #url(r'^$', views.index, name="index"),
+    url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
+    url(r'^listdelete/$', listdelete, name="listdelete"),
+
+    url(r'^main/$', main, name = 'main'),
+    url(r'^ocr/$', ocr, name='ocr'),
+    url(r'^parsing/$', parsing, name='parsing'),
+    url(r'^search/$', search, name='search'),
+    url(r'^user_access/$', user_acc_cont, name='user_access'),
+    url(r'^export/$', export, name='export'),
+    url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+    url(r'^logout/$', views.logout_page, name = 'logout'),
+
+    #Search/Export Team
+    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+
+
 ]
