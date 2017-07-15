@@ -17,6 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from. import views
 from RSR.views import *
+from django.conf.urls import url
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
+
 
 
 urlpatterns = [
