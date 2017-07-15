@@ -27,6 +27,7 @@ urlpatterns = [
 
     url(r'^uploaddoc/$', uploaddoc, name='uploaddoc'),
     url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
+    url(r'^listdelete/$', listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
     url(r'^ocr/$', ocr, name='ocr'),
     url(r'^parsing/$', parsing, name='parsing'),
@@ -34,7 +35,8 @@ urlpatterns = [
     url(r'^user_access/$', user_acc_cont, name='user_access'),
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
-    url(r'^login/$', auth_views.login, name='login')
+    url(r'^logout/$', views.logout_page, name = 'logout'),
+
 
 
 

@@ -28,7 +28,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^myapp/', include('RSR.urls')),
-    url(r'^$', RedirectView.as_view(url='myapp/uploaddoc/', permanent=True)),
+    url(r'^$', RedirectView.as_view(url='myapp/main/', permanent=True)),
     url(r'^accounts/login/$', views.login, name ='login'),
     url(r'^accounts/logout/$', views.logout, name='logout', kwargs={'next_page': '/'}),
     url('^accounts/', include('django.contrib.auth.urls'))

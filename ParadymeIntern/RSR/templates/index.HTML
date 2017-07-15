@@ -11,12 +11,23 @@
                 <p>{{ form.non_field_errors }}</p>
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
                 <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
-                <input type="submit" value="Upload"/>
+                First name:
+                <input style="color: #000000;" type="text" name="firstname">
+
+                Last name:
+                <input style="color: #000000;" type="text" name="lastname">
+                <br><br>
+  
+                <input type="radio" name="type" value="Prospective Intern"> Prospective Intern<br>
+                <input type="radio" name="type" value="Prospective Employee"> Prospective Employee<br>
+                <input type="radio" name="type" value="Intern">Intern<br>
+                <input type="radio" name="type" value="Employee"> Employee<br><br>
+                <input class = "button-style" type="submit" value="Upload"/>
             </form>
 
             <p>
             <form action="{% url 'uploadlist' %}">
-                 <input type="submit" value="Check the uplaod list" />
+                 <input class = "button-style" type="submit" value="Check the upload list" />
              </form>
             </p>
 
