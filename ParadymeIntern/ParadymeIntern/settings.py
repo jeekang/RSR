@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'RSR'
+    'RSR',
+    'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+] 
 
 
 # Internationalization
