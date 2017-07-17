@@ -1,38 +1,43 @@
 {% extends 'navigation.html' %}
 
 {% block content %}
- 
+
            <div class="inner cover">
              <h1 class="cover-heading">Upload your resume</h1>
 
 
-             <form action="{% url 'uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
+             <form action="{% url 'RSR:uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
+                         <div align="center">
+
              {% csrf_token %}
                 <p>{{ form.non_field_errors }}</p>
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
                 <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
+                </div>
                 First name:
                 <input style="color: #000000;" type="text" name="firstname">
 
                 Last name:
                 <input style="color: #000000;" type="text" name="lastname">
                 <br><br>
-  
+                <p>   </p>
                 <input type="radio" name="type" value="Prospective Intern"> Prospective Intern<br>
                 <input type="radio" name="type" value="Prospective Employee"> Prospective Employee<br>
                 <input type="radio" name="type" value="Intern">Intern<br>
                 <input type="radio" name="type" value="Employee"> Employee<br><br>
+                <p>   </p>
                 <input class = "button-style" type="submit" value="Upload"/>
             </form>
 
             <p>
-            <form action="{% url 'uploadlist' %}">
-                 <input class = "button-style" type="submit" value="Check the upload list" />
+
+            <form action="{% url 'RSR:uploadlist' %}">
+                                  <input class = "button-style" type="submit" value="Check the upload list" />
              </form>
             </p>
 
            </div>
 
 
-      
+
   {% endblock %}

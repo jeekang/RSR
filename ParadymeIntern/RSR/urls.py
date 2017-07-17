@@ -17,10 +17,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from. import views
 from RSR.views import *
-from django.conf.urls import url
-from django.contrib import admin
-from django.contrib.auth import views as auth_views
 
+app_name = 'RSR'
 
 
 urlpatterns = [
@@ -37,7 +35,9 @@ urlpatterns = [
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
     url(r'^logout/$', views.logout_page, name = 'logout'),
 
-
+    #Search/Export Team
+    url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
 
 
 ]
+

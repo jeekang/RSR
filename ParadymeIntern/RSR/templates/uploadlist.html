@@ -30,7 +30,7 @@
                         <td>{{ document.firstname }} &nbsp; {{document.lastname}}</td>
                         <td><a href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
                         <td style="text-align: center" >
-                            <form action="{% url 'listdelete' %}" method="post" enctype="multipart/form-data">
+                            <form action="{% url 'RSR:listdelete' %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="docfile" value="{{ document.pk }}" />
                                 <input class = "button-style" type="submit" value="Delete" />
@@ -45,7 +45,7 @@
             </table>
             <!--back btn-->
                <p></p>
-               <a href="{% url 'uploaddoc' %}" class = "button-style" type="button"> Go Back</a>
+               <a href="{% url 'RSR:uploadlist' %}" class = "button-style" type="button"> Go Back</a>
 
             </p>
            </div>
