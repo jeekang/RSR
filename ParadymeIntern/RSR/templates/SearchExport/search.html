@@ -93,22 +93,23 @@
     </form>
     <p>   </p>
     <div align="center">
-  <table class="table table-bordered">
+    <div class = "body">
+  <table class = "table-fill">
    <thead>
      <tr>
-       <th>Type</th>
-       <th>Name</th>
-       <th>Resume</th>
-       <th>E-Mail</th>
+       <th style = "padding:14px;"class = "text-left">Type</th>
+       <th style = "padding:14px;"class = "text-left">Name</th>
+       <th style = "padding:14px;"class = "text-left">Resume</th>
+       <th style = "padding:14px;"class = "text-left">E-Mail</th>
      </tr>
    </thead>
-   <tbody>
+   <tbody class="table-hover">
      {% for obj in personFilter.qs %}
        <tr>
-         <td>{{obj.TypeResume}}</td>
-         <td><a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
-         <td><a href="{{ obj.Resume.url }}">{{obj.Resume}}</a></td>     
-         <td>{{ obj.Email }}</td>
+         <td style = "padding:14px;"class = "text-left">{{obj.TypeResume}}</td>
+         <td style = "padding:14px;"class = "text-left"> <a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
+         <td style = "padding:14px;"class = "text-left"><a href="{{ obj.Resume.url }}">{{obj.Resume}}</a></td>     
+         <td style = "padding:14px;"class = "text-left">{{ obj.Email }}</td>
        </tr>
      {% empty %}
        <tr>
@@ -117,6 +118,7 @@
      {% endfor %}
    </tbody>
  </table>
+    </div>
     </div>
 
 {% endblock %}

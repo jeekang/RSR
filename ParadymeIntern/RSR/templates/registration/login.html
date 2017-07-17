@@ -8,7 +8,6 @@
 <div class = "form">
 
 
-
  <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <div style="color:#000000">
@@ -18,7 +17,8 @@
 
 
         {{ form.username }}
-
+        <br />
+        <br />
         {{ form.password.label_tag }}
         &nbsp;
 
@@ -26,7 +26,7 @@
 
 
     <br><br>
-        <button>Login</button>
+        <button class = "button-style">Login</button>
         <input type="hidden" name="next" value="{{ next }}" />
         </div>
     </form>
