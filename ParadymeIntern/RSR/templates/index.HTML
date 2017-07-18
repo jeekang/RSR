@@ -18,9 +18,7 @@
                 <input style="color: #000000;" type="text" name="lastname">
                  <br><br>
 
-                Operator name:
-                <input style="color: #000000;" type="text" name="operator">
-                 <br><br>
+
 
                  <input type="radio" name="type" value="Prospective Intern"> Prospective Intern<br>
                 <input type="radio" name="type" value="Prospective Employee"> Prospective Employee<br>
@@ -28,7 +26,7 @@
                 <input type="radio" name="type" value="Employee"> Employee<br><br>
                 <input class = "button-style" type="submit" value="Upload"/>
             </form>
-
+               {{ username }}
             <p>
             <form action="{% url 'uploadlist' %}">
                  <input class = "button-style" type="submit" value="Check the upload list" />

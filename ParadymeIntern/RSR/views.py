@@ -7,11 +7,11 @@ import docx2txt
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
-
+from . import loader
 from RSR.models import Document
 from RSR.forms import DocumentForm
 from django.shortcuts import get_object_or_404
@@ -45,10 +45,12 @@ def uploaddoc(request):
             temp_doc.save()
             print (temp_doc.firstname)
 
+            ##########
             if ".doc" in temp_doc.docfile.path:
                 temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
                 temp_doc.save(update_fields=['wordstr'])
             return HttpResponseRedirect(reverse('uploaddoc'))
+            ################
     else:
         form = DocumentForm()
 
@@ -102,3 +104,9 @@ def parse_word_file(filepath):
 	parsed_string = docx2txt.process(filepath)
 	return parsed_string
 
+def currentuser(request):
+    template = loader.get_template('someview.html')
+    context = {
+        'username': request.user.username,
+    }
+    return HttpResponse(template.render(context, request))
