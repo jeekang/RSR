@@ -15,19 +15,22 @@
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
                 <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
                 </div>
-                First name:
-                <input style="color: #000000;" type="text" name="firstname">
+                <label for="firstname">
+                        First Name
+                    </label>
+                    <input type="text" class="form-control" id="firstname" style="width: 300px; margin-left: 425px;"/>
 
-                Last name:
-                <input style="color: #000000;" type="text" name="lastname">
-                <br><br>
-                <p>   </p>
-                <input type="radio" name="type" value="Prospective Intern"> Prospective Intern<br>
-                <input type="radio" name="type" value="Prospective Employee"> Prospective Employee<br>
-                <input type="radio" name="type" value="Intern">Intern<br>
-                <input type="radio" name="type" value="Employee"> Employee<br><br>
-                <p>   </p>
-                <input class = "button-style" type="submit" value="Upload"/>
+                    <label for="lastname">
+                        Last Name
+                    </label>
+                    <input type="text" class="form-control" id="lastname" style="width: 300px; margin-left: 425px;"/>
+                    <br/><br/>
+                    <input type="radio" name="type" id="pi" value="Prospective Intern" style="margin-left: 12px;">Prospective Intern</input><br/>
+                    <input type="radio" name="type" id="pe" value="Prospective Employee" style="margin-left: 34px;">Prospective Employee</input><br/>
+                    <input type="radio" name="type" id="i" value="Intern" style="margin-left: -69px;">Intern</input><br/>
+                    <input type="radio" name="type" id="e" value="Employee" style="margin-left: -46px;">Employee</input><br/>
+                    <br/><br/>
+                    <input class = "button-style" type="submit" value="Upload"/>
             </form>
 
             <p>
