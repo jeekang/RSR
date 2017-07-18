@@ -3,6 +3,58 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                   .background{
+  background: linear-gradient(to bottom, #000046, #1cb5e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                   }
+                   /* upload button*/
+                   .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+
+                   /* LOGIN INFO */
+                    .form {
+                      border-radius: 25px;
+                        font-family: "Roboto", helvetica, arial, sans-serif;
+
+                           position: relative;
+                           top: 30%;
+                           z-index: 1;
+                           background: #e3e3e3;
+                           max-width: 360px;
+                           margin: auto;
+ 
+                           padding: 45px;
+                           text-align: center;
+                           box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                           }
+                     .form button {
+                      font-family: "Roboto", helvetica, arial, sans-serif;
+
+                       width: 75%;
+                       height: 50%;
+                       border: 0;
+                       padding: 15px;
+                       cursor: pointer;
+                     }
+ 
                    /* table css */
                    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
@@ -11,10 +63,6 @@
   font-size: 16px;
   font-weight: 400;
   text-rendering: optimizeLegibility;
-}
-.normalize {
-  font-family: "Roboto", helvetica, arial, sans-serif;
-
 }
 
 div.table-title {
@@ -39,16 +87,14 @@ div.table-title {
 /*** Table Styles **/
 
 .table-fill {
-  background: white;
   border-radius:3px;
   border-collapse: collapse;
   margin: auto;
-  max-width: 100%;
-  padding:5px;
+  padding:50px;
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
-}
+  border-spacing: 0 50px;}
  
 th {
   color:#D5DDE5;;
@@ -163,30 +209,30 @@ td.text-right {
                    }
                    .button-style{
     
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  display: inline-block;
-  margin: 2px 0;
-  padding: 12px 25px;
-  background: none;
-  background-image: none;
-  background-color: #fdd200;
-  background-color: #ff7e00;
-  /* button color */
-  color: #ffffff;
-  vertical-align: middle;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: normal;
-  font-size: 13px;
-  font-family: Montserrat, 'Open Sans', Helvetica, Arial, sans-serif;
-  line-height: 20px;
-  cursor: pointer;
-  -webkit-appearance: none;
-  border: 0px;
-    }
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    border-radius: 4px;
+                    display: inline-block;
+                    margin: 2px 0;
+                    padding: 12px 25px;
+                    background: none;
+                    background-image: none;
+                    background-color: #fdd200;
+                    background-color: #ff7e00;
+                    /* button color */
+                    color: #ffffff;
+                    vertical-align: middle;
+                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: normal;
+                    font-size: 13px;
+                    font-family: Montserrat, 'Open Sans', Helvetica, Arial, sans-serif;
+                    line-height: 20px;
+                    cursor: pointer;
+                    -webkit-appearance: none;
+                    border: 0px;
+                    }
 
                    </style>
                    <head>
@@ -218,7 +264,7 @@ td.text-right {
                        <![endif]-->
 
                    </head>
-
+<div class = "background">
 <!-- Navigation -->
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -261,7 +307,7 @@ td.text-right {
     <!-- /.container -->
 </nav>
 
-<section id="about" class="container content-section text-center">
+<section style = "font-family: Roboto, helvetica, arial, sans-serif;" id="about" class="container content-section text-center">
 {% block content %}
 {% endblock %}
 </section>
@@ -289,5 +335,5 @@ td.text-right {
 <script src="{% static 'js/grayscale.min.js' %}"></script>
 
 </body>
-
+</div>
 </html>

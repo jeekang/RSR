@@ -3,6 +3,11 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                   /*EDIT THIS FOR BACKGROUND CHANGE*/
+                   .background{
+  background: linear-gradient(to top, #141e30, #243b55); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                   }
+                   /* upload button*/
                    .btn-file {
     position: relative;
     overflow: hidden;
@@ -261,7 +266,7 @@ td.text-right {
                        <![endif]-->
 
                    </head>
-
+<div class = "background">
 <!-- Navigation -->
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -304,7 +309,7 @@ td.text-right {
     <!-- /.container -->
 </nav>
 
-<section id="about" class="container content-section text-center">
+<section style = "font-family: Roboto, helvetica, arial, sans-serif;" id="about" class="container content-section text-center">
 {% block content %}
 {% endblock %}
 </section>
@@ -332,5 +337,5 @@ td.text-right {
 <script src="{% static 'js/grayscale.min.js' %}"></script>
 
 </body>
-
+</div>
 </html>
