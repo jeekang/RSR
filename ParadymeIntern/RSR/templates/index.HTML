@@ -6,6 +6,9 @@
            <div class="inner cover">
              <h1 class="cover-heading">Upload your resume</h1>
 
+             <br/>
+
+
 
              <form action="{% url 'RSR:uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
                          <div align="center">
@@ -16,10 +19,12 @@
                 <input type="file">
                 {{ form.non_field_errors }}
                 {{ form.docfile.errors }}{{ form.docfile }}
-                
                 </span>
-<p></p>
-                
+
+             <br/>
+
+             <br/>
+            <p></p>
                 </div>
 
 
@@ -38,16 +43,16 @@
                     <input type="radio" name="type" id="pe" value="Prospective Employee" style="margin-left: 34px;margin-right: 10px">Prospective Employee</input><br/>
                     <input type="radio" name="type" id="i" value="Intern" style="margin-left: -69px;margin-right: 10px">Intern</input><br/>
                     <input type="radio" name="type" id="e" value="Employee" style="margin-left: -46px;margin-right: 10px">Employee</input><br/>
-                    <br/><br/>
+                    <br/>
+            <p></p>
                     <input class = "button-style" type="submit" value="Upload"/>
             </form>
+            <p></p>
 
-            <p>
 
             <form action="{% url 'RSR:uploadlist' %}">
                                   <input class = "button-style" type="submit" value="Check the upload list" />
              </form>
-            </p>
 
            </div>
 </body>
