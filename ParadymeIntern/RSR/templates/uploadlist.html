@@ -31,7 +31,7 @@
                     <tr>
                         <td style = "padding:14px;"class="text-left">{{document.type}} </td>
                         <td style = "padding:14px;"class="text-left">{{ document.firstname }} {{document.lastname}}</td>
-                        <td style = "padding:14px;"class="text-left"><a href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
+                        <td style = "padding:14px;"class="text-left"><a style = "color:#ff7e00;" href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
                         <td style="text-align: center" >
                             <form action="{% url 'RSR:listdelete' %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
