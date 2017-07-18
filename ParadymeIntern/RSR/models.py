@@ -140,6 +140,7 @@ class ProfessionalDevelopment(models.Model):
             yield (field, value)
 
     Name = models.CharField("Professional Development", max_length=20,default = "None")
+    ProfessionalExperience = models.ManyToManyField(Person, through='PersonToProfessionalDevelopment')
 
 class SideProject(models.Model):
     def get_absolute_url(self):
@@ -268,8 +269,8 @@ class Volunteering(models.Model):
 class PersonToCompany(models.Model):
     PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
     CompanyID = models.ForeignKey(Company,  on_delete=models.CASCADE)
-    Title = models.CharField("Title", max_length=100, default=None)
-    ExperienceOnJob = models.CharField("Experience on Job", max_length=300, default=None)
+    Title = models.CharField("Title", max_length=100, default="None")
+    ExperienceOnJob = models.CharField("Experience on Job", max_length=300, default="None")
     StartDate = models.DateField("Start Date", default=datetime.now().day)
     EndDate = models.DateField("End Date", default=datetime.now().day)
     Desc = models.CharField("Company Description", max_length=1000, default="None")
@@ -343,7 +344,7 @@ class PersonToSchool(models.Model):
 
     SchoolID = models.ForeignKey(School,  on_delete=models.CASCADE)
     GradDate = models.CharField("Graduation Date", max_length=20,default = "None")
-    GPA = models.CharField("GPA", max_length=20,default = "None")
+    GPA = models.FloatField("GPA", max_length=20,default = "None")
     CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
     PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
     MajorID = models.ForeignKey(Major,  on_delete=models.CASCADE)
