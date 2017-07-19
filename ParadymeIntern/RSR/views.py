@@ -57,6 +57,7 @@ def uploaddoc(request):
             temp_doc.firstname = request.POST['firstname']
             temp_doc.lastname = request.POST['lastname']
             temp_doc.type = request.POST['type']
+            temp_doc.uploaduser = request.user.username
 
             temp_doc.save()
 

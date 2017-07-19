@@ -26,7 +26,7 @@ class Document(models.Model):
     firstname = models.CharField(max_length=128)
     lastname = models.CharField(max_length=128)
     type = models.CharField(max_length=128)
-
+    uploaduser = models.CharField(max_length=128)
     wordstr = models.TextField()
 
 class Person(models.Model):
