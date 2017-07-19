@@ -62,8 +62,12 @@
                     {% render_field personFilter.form.Major class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    GPA:
-                    {% render_field personFilter.form.GPA class="form-control" %}
+                    GPA lower bound:
+                    {% render_field personFilter.form.GPAlb class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    GPA upper bound:
+                    {% render_field personFilter.form.GPAub class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
                     Language Spoken:
