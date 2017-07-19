@@ -8,12 +8,16 @@
 </h1>
 
 <div align="center">
+    <section><b> Person details</b><br>
     {% for field in person %}
     {{field}}<br>
-    {% endfor %}
+    {% endfor %}<br>
+    </section>
     {% for item in list %}
-    {{item}}<br>
+    {{item|safe}}
     {% endfor %}
 </div>
+
+
 
 {% endblock %}
