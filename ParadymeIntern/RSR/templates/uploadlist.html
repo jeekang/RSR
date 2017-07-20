@@ -22,6 +22,7 @@
 					<tr>
 						<th style = "padding:14px;" class="text-left">Type</th>
 						<th style = "padding:14px;" class="text-left">Name</th>
+                        <th style = "padding:14px;" class="text-left">Upload User</th>
 						<th style = "padding:14px;" class="text-left">File</th>
 						<th style = "padding:14px;" class="text-left">Action</th>
 					</tr>
@@ -31,6 +32,7 @@
                     <tr>
                         <td style = "padding:14px;"class="text-left">{{document.type}} </td>
                         <td style = "padding:14px;"class="text-left">{{ document.firstname }} {{document.lastname}}</td>
+                        <td style = "padding:14px;"class="text-left">{{document.uploaduser}} </td>
                         <td style = "padding:14px;"class="text-left"><a style = "color:#ff7e00;" href="{{ document.docfile.url }}">{{document.docfile}}</a></td>
                         <td style="text-align: center" >
                             <form action="{% url 'RSR:listdelete' %}" method="post" enctype="multipart/form-data">
