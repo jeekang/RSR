@@ -10,19 +10,26 @@
 
  <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
+
     <div style="color:#000000">
 
-
+        <h3>Login</h3>
+        <div class ="left">
         {{ form.username.label_tag }}
+        </div>
 
-
+         <div class ="right">
         {{ form.username }}
+         </div>
         <br />
         <br />
+         <div class ="left">
         {{ form.password.label_tag }}
-        &nbsp;
+         </div>
 
+         <div class ="right">
         {{ form.password }}
+         </div>
 
 
     <br><br>
