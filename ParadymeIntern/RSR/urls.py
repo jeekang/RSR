@@ -35,6 +35,8 @@ urlpatterns = [
 
     #Search/Export Team
     url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+    #url(r'^search/ProfessionalDevelopment-autocomplete/$', ProfessionalDevelopmentAutocomplete.as_view(),
+    #    name='ProfessionalDevelopment-autocomplete',)
 
 
 ]
