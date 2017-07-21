@@ -30,6 +30,7 @@ class Document(models.Model):
     wordstr = models.TextField()
 
 class Person(models.Model):
+
     def get_absolute_url(self):
         return reverse('person_detail', args=[str(self.id)])
 
@@ -62,11 +63,11 @@ class Person(models.Model):
     Name = models.CharField("Name", max_length = 50,default = "None")
     Email = models.CharField("Email", max_length = 50,default = "None")
     Address = models.CharField("Address", max_length = 50,default = "None")
-    ZipCode = models.IntegerField("Zip Code", default = "None")
+    ZipCode = models.IntegerField("Zip Code", default = 0)
     State = models.CharField("State", max_length = 25,default = "None")
-    PhoneNumber = models.CharField("Phone", max_length = 50,default = "None")
+    PhoneNumber = models.CharField("Phone", max_length = 50,default = 0)
     Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
-    CreationDate = models.DateTimeField("Created On")
+    CreationDate = models.DateTimeField("Created On", auto_now_add=True, blank=True)
     LastUpdated = models.DateTimeField("Update", blank = True, null= True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
     Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
@@ -331,7 +332,7 @@ class PersonToSkills(models.Model):
 
     def __str__(self):
         return self.PersonID.Name + ' - ' + self.SkillsID.Name
-    YearsOfExperience = models.CharField("Years Of Experience", max_length=3)
+    YearsOfExperience = models.CharField("Years Of Experience", max_length=3,default = 1)
     SkillsID = models.ForeignKey(Skills,  on_delete=models.CASCADE)
     PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
 
