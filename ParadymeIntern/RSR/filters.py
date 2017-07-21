@@ -39,9 +39,9 @@ class PersonFilter(django_filters.FilterSet):
     #                                                           queryset=ProfessionalDevelopment.objects.values_list('Name', flat=True),
     #                                                          to_field_name='Name', lookup_expr='icontains',
     #                                                          widget=forms.TextInput)
-    #ProfessionalDevelopment = django_filters.CharFilter(name='professionaldevelopment__Name', lookup_expr='icontains',
-                                                        #widget=autocomplete.ModelSelect2(url='RSR:ProfessionalDevelopment-autocomplete'))
-    ProfessionalDevelopment = django_filters.CharFilter(name='professionaldevelopment__Name', lookup_expr='icontains')
+    ProfessionalDevelopment = django_filters.CharFilter(name='professionaldevelopment__Name', lookup_expr='icontains',
+                                                        widget=autocomplete.ModelSelect2(url='RSR:ProfessionalDevelopment-autocomplete'))
+    #ProfessionalDevelopment = django_filters.CharFilter(name='professionaldevelopment__Name', lookup_expr='icontains')
     Award = django_filters.ModelChoiceFilter(name='persontoawards__AwardID',
                                              queryset=Awards.objects.all().order_by('Name'))
     CompanyWorked = django_filters.ModelChoiceFilter(name='persontocompany__CompanyID',
