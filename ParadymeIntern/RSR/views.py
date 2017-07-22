@@ -16,6 +16,7 @@ from .filters import PersonFilter
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from RSR.persondetails import Detail
+from dal import autocomplete
 
 
 # UI/INGEST TEAM
@@ -78,6 +79,14 @@ def search(request):
     # The filtered query_set is then put through more filters from django
     personFilter = PersonFilter(request.GET, query_set)
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
+
+class ProfessionalDevelopmentAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = ProfessionalDevelopment.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+        return qs
 
 
 def detail(request,pk):
