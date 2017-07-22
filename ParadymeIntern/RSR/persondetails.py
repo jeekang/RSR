@@ -1,12 +1,3 @@
-from django.db import models
-from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
-from datetime import date, datetime
-from django.dispatch import receiver
-import string
-import os
-import html
 # Returns a list of strings that contains related informtion about person
 def Detail(person):
     # related_obj_list will be the list I will iterate through to print out each detail
