@@ -2,21 +2,377 @@
 
 {% block content %}
 
-
+<!-- Personal info block, left hand side -->
 <h1 style = "font-family: Raleway, Arial">
     {{person.Name}}
 </h1>
+<div style = "float:left; width:40%;margin-left:-50px">
+	<section><b> Personal Info</b><br>
+	<table class = "table-fill">
+   
+   <tbody class="table-hover">
+     {% for field in person %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{field.0}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{field.1}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
 
-<div align="center">
-    <section><b> Person details</b><br>
-    {% for field in person %}
-    {{field}}<br>
-    {% endfor %}<br>
     </section>
-    {% for item in list %}
-    {{item|safe}}
-    {% endfor %}
 </div>
+
+<!--Right hand side all tables -->
+
+
+<div style = "float:right; width:60%;">
+	<section><b> Skills</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Skill</th>
+       <th style = "padding:14px;"class = "text-left">Years Of Experience</th>
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in skills %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SkillsID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.YearsOfExperience}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+ </section>
+</div>
+
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Company</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Company Name</th>
+        <th style = "padding:14px;"class = "text-left">Title</th>
+        <th style = "padding:14px;"class = "text-left">Experience</th>
+        <th style = "padding:14px;"class = "text-left">Start Date</th>
+        <th style = "padding:14px;"class = "text-left">End Date</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in company %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CompanyID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Title}}</td>
+         <td style = "padding:14px;"class = "text-left">{{obj.ExperienceOnJob}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.StartDate}}</td>
+         <td style = "padding:14px;"class = "text-left">{{obj.EndDate}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+
+
+
+ <div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Academics</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">University</th>
+        <th style = "padding:14px;"class = "text-left">Type</th>
+
+       <th style = "padding:14px;"class = "text-left">Matriculation</th>
+       <th style = "padding:14px;"class = "text-left">Major</th>
+
+       <th style = "padding:14px;"class = "text-left">GPA</th>
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in school %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SchoolID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.SchoolID.DegreeLevel}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.SchoolID.GradDate}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Major}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Courses</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Course</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in course %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CourseID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+	
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Clearance</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Clearance Level</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in clearance %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.ClearanceLevel}}</td>
+ 
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Languages</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Language</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in language %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Side Projects</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Project</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in side %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SideID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Awards</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Award</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in award %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.AwardID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Clubs & Hobbies</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Name</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in club %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CHID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Volunteering</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Name</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in volunteering %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.VolunID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+<div style = "float:right; width:60%;padding-top:30px;">
+	<section><b> Professional Developement</b><br>
+
+	<table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Name</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in professional %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.ProfID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+	
+    </section>
+</div>
+<!-- todo Awards, Clubs, Volunteering, Professional Dev -->
+
+
+
+
+
 
 
 
