@@ -8,10 +8,17 @@
     <div class = body>
         <h1 style = "font-family: Raleway, Arial">Resume Filter System</h1>
     
-        <p>Select/type one or more the following fields</p>
 
-          <form action="" method="Get">
-          <br/>
+          <form action="" method="Get" class = "searchform cf">
+
+            <br/>
+            <!--  Hide Show filters -->
+            <a href="#search-div" class="btn btn-default" data-toggle="collapse">Advanced Search</a>
+            <div id = "search-div" class = "collapse">
+            <br/>
+            <br/>
+            <p>Select/type one or more the following fields</p>
+
             <!-- Search Bar -->
             <div>
                 Search Bar:
@@ -19,67 +26,98 @@
             </div>
             <p></p>
             <div class="row">
+            <fieldset>
+                <legend style="color:#FFF">Academia</legend>
               <!-- Filters -->
-                <div class="form-group col-sm-4 col-md-3">
-                    School Attend:
+                <div class="form-group col-sm-2 col-md-2">
+                    School Attended:
                     {% render_field personFilter.form.SchoolAttend class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-2 col-md-2">
                     Graduation Date:
                     {% render_field personFilter.form.GraduateDate class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-2 col-md-2">
                     Degree Level:
                     {% render_field personFilter.form.DegreeLevel class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-2 col-md-2">
                     Major:
                     {% render_field personFilter.form.Major class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-2 col-md-2">
                     GPA lower bound:
                     {% render_field personFilter.form.GPAlb class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-2 col-md-2">
                     GPA upper bound:
                     {% render_field personFilter.form.GPAub class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
-                    Language Spoken:
-                    {% render_field personFilter.form.Language class="form-control" %}
+                </fieldset>
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <br/>
+
+                <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Skills/Awards</legend>
+
+
+                <div class="form-group col-sm-3 col-md-3">
                     Skill:
                     {% render_field personFilter.form.Skills class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+
+                <div class="form-group col-sm-3 col-md-3">
                     Year of experience for skill:
                     {% render_field personFilter.form.YearOfExperienceForSkill class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+
+                <div class="form-group col-sm-3 col-md-3">
+                    Language Spoken:
+                    {% render_field personFilter.form.Language class="form-control" %}
+                </div>
+                
+                <div class="form-group col-sm-3 col-md-3">
                     Awards:
                     {% render_field personFilter.form.Award class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                </fieldset>
+                </div>
+
+                <br/>
+                <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Professional Experience</legend>
+                <div class="form-group col-sm-4 col-md-4">
                     Company worked at:
                     {% render_field personFilter.form.CompanyWorked class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-4 col-md-4">
                     Title:
                     {% render_field personFilter.form.Title class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                <div class="form-group col-sm-4 col-md-4">
                     Professional Development:
                     {% render_field personFilter.form.ProfessionalDevelopment class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-3">
+                </fieldset>
+                </div>
+                <br/>
+                <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Clearance</legend>
+
+                <!--<div class="form-group col-sm-4 col-md-4">
                     Work Authorization:
                     {% render_field personFilter.form.year_of_experience_gt class="form-control" %}
-                </div>
-                <div class="form-group col-sm-4 col-md-3">
+                </div>-->
+
+                <div class="form-group col-sm-4 col-md-4">
                     Security Clearance:
                     {% render_field personFilter.form.SecurityClearance class="form-control" %}
+                
                 </div>
+                </fieldset>
 
             </div>
             <p></p>
@@ -89,7 +127,11 @@
             </button>
         </div>
         <br/>
+        </div>
+
+
     </form>
+
     <p>   </p>
     <div align="center">
     <div class = "body">

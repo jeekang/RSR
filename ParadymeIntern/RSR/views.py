@@ -21,12 +21,18 @@ from .filters import *
 from django.db.models import Q
 from RSR.persondetails import Detail
 
+
+### json Parsing ##
+import json
+
 ###TESTING OCR
 #from PIL import Image
 #from wand.image import Image as IMG
 #import pytesseract
 #import textract
 ### 
+
+
 
 def logout_page(request):
     logout(request)
@@ -84,6 +90,56 @@ def uploaddoc(request):
 
             #    print (temp_doc.docfile.wordstr)
             #    temp_doc.save(update_fields=['wordstr'])
+
+
+            #json testing#
+            #check for json file, wont be needed as parsing will return json#
+            if ".json" in temp_doc.docfile.path:
+                #either load json, or recieve json file
+                js = json.load(open(temp_doc.docfile.path))
+                #iterate through json file
+                person = Person(Name="temp")
+                for label in js:
+                    
+                    #Checking Labels to see which table to create
+                    if label == "person":
+                        for key in js[label]:
+                            if key == "name":
+                                person.Name = js[label][key]
+                            elif key == "email":
+                                person.Email = js[label][key]
+                            elif key == "address":
+                                person.Address = js[label][key]
+                            elif key == "zipcode":
+                                person.ZipCode = js[label][key]
+                            elif key == "state":
+                                person.State = js[label][key]
+                            elif key == "phone":
+                                person.PhoneNumber = js[label][key]
+                            elif key == "linkedin":
+                                person.Linkedin = js[label][key]
+                            elif key == "github":
+                                person.GitHub = js[label][key]
+                        person.Resume = temp_doc.docfile
+                        person.save()
+
+                    if label == "skills":
+                        for key in js[label]:
+                            #check to see if skill exists
+                            query_set=Skills.objects.all()
+                            query_set=query_set.filter(Name__icontains=js[label][key])
+                            #if skill does not exist create skill
+                            if not query_set:
+                                query_set = Skills(Name = js[label][key])
+                                query_set.save()
+                            #if skill does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            skill_to_person = PersonToSkills(SkillsID = query_set, PersonID = person)
+                            skill_to_person.save()
+
+
+
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
     else:
         form = DocumentForm()
@@ -143,6 +199,8 @@ def listdelete(request, template_name='uploadlist.html'):
     docId = request.POST.get('docfile', None)
     documents = get_object_or_404(Document, pk=docId)
     if request.method == 'POST':
+
+
         documents.delete()
         return HttpResponseRedirect(reverse('RSR:uploadlist'))
 
