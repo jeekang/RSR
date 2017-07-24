@@ -20,6 +20,10 @@ from .filters import *
 ###Search #
 from django.db.models import Q
 from RSR.persondetails import Detail
+from RSR.persondetails2 import Detail2
+
+
+
 
 
 ### json Parsing ##
@@ -98,6 +102,8 @@ def uploaddoc(request):
                 #either load json, or recieve json file
                 js = json.load(open(temp_doc.docfile.path))
                 #iterate through json file
+
+                #initialize person out side of for loop/if statements so we can use it later
                 person = Person(Name="temp")
                 for label in js:
                     
@@ -169,9 +175,38 @@ def search(request):
 @login_required
 def detail(request,pk):
        # Get the current person object using pk or id
-    person = get_object_or_404(Person,pk=pk)
+    person = get_object_or_404(Person, pk=pk)
     related_obj_list=Detail(person)
-    return render(request, 'SearchExport/detail.html', {'person':person, 'list':related_obj_list})
+
+    detail_dic = Detail2(person)
+    School = detail_dic['PersonToSchool']
+    Course = detail_dic['PersonToCourse']
+    Pro = detail_dic['PersonToProfessionalDevelopment']
+    Side = detail_dic['PersonToSide']
+    Skills = detail_dic['PersonToSkills']
+    Language = detail_dic['PersonToLanguage']
+    Clearance = detail_dic['PersonToClearance']
+    Company = detail_dic['PersonToCompany']
+    Clubs = detail_dic['PersonToClubs_Hobbies']
+    Volunteer = detail_dic['PersonToVolunteering']
+    context = { 
+                'person':person,
+                'list': related_obj_list,
+                'school':School,
+                'course':Course,
+                'pro':Pro,
+                'side':Side,
+                'skills':Skills,
+                'language':Language,
+                'clearance':Clearance,
+                'company':Company,
+                'clubs':Clubs,
+                'volunteer':Volunteer,
+                }
+
+    return render(request, 'SearchExport/detail.html', context)
+
+
 
 
 
