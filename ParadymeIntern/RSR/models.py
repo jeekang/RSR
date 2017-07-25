@@ -52,7 +52,7 @@ class Person(models.Model):
             val = getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
             field_name = string.capwords(field_name)
-            yield field_name + ": " + str(val)
+            yield [field_name,str(val)]
 
     TYPERESUME_CHOICES = (('Employee', 'Employee'),
     ('Intern', 'Intern'),
