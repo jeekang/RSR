@@ -1,11 +1,12 @@
 
 {% extends 'navigation.html'%}
+{% load widget_tweaks %}
+
 {% block content %}
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
 
-<div class = "form">
 
 
  <form method="post" action="{% url 'login' %}">
@@ -13,23 +14,13 @@
 
     <div style="color:#000000">
 
-        <h3>Welcome</h3>
-        <div class ="left">
-        {{ form.username.label_tag }}
-        </div>
-
-         <div class ="right">
-        {{ form.username }}
-         </div>
+        <h2 style = "color: #FFF">Welcome</h2>
+        <br/>
+       
+        {% render_field form.username class="form-control" style=" width: 300px; margin:auto;" placeholder="Username" %}
         <br />
-        <br />
-         <div class ="left">
-        {{ form.password.label_tag }}
-         </div>
-
-         <div class ="right">
-        {{ form.password }}
-         </div>
+       
+         {% render_field form.password class="form-control" style=" width: 300px; margin:auto;" placeholder="Password" %}
 
 
     <br><br>
@@ -37,10 +28,10 @@
         <input type="hidden" name="next" value="{{ next }}" />
         </div>
     </form>
-</div>
+    <br/>
+    <br/>
+    <br/>
 
     {% endblock %}
 
-</body>
 
-</html>

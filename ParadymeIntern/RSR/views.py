@@ -125,7 +125,7 @@ def uploaddoc(request):
                         person.Resume = temp_doc.docfile
                         person.save()
 
-                    if label == "skills":
+                    elif label == "skills":
                         for key in js[label]:
                             #check to see if skill exists
                             query_set=Skills.objects.all()
@@ -139,6 +139,27 @@ def uploaddoc(request):
                                 query_set = query_set[0]
                             skill_to_person = PersonToSkills(SkillsID = query_set, PersonID = person,YearsOfExperience = key["YearsOfExperience"])
                             skill_to_person.save()
+
+                    elif label == "work":
+                        for key in js[label]:
+                            #check to see if company exists
+                            query_set=Company.objects.all()
+                            query_set=query_set.filter(Name__icontains=key["company"])
+                            #if company does not exist create skill
+                            if not query_set:
+                                query_set = Company(Name = key["company"])
+                                query_set.save()
+                            #if company does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            #intermediary table stuff
+                            company_to_person = PersonToCompany(CompanyID = query_set, PersonID = person,
+                                Title = key["title"],
+                                ExperienceOnJob = key["experience"],
+                                StartDate = key["startDate"],
+                                EndDate = key["endDate"],
+                                Desc = key["summary"])
+                            company_to_person.save()
 
 
 
