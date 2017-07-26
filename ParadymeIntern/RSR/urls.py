@@ -35,8 +35,16 @@ urlpatterns = [
 
     #Search/Export Team
     url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+
+        #url for autocomplete function for ProfessionalDevelopment class
     url(r'^search/ProfessionalDevelopment-autocomplete/$', ProfessionalDevelopmentAutocomplete.as_view(),
-        name='ProfessionalDevelopment-autocomplete',)
+        name='ProfessionalDevelopment-autocomplete',),
+        #url for autocomplete function for skills class
+    url(r'^search/Skills-autocomplete/$', Skillsutocomplete.as_view(),
+        name='Skills-autocomplete',),
+        #url for autocomplete function for Volunteering class
+    url(r'^search/Volunteering-autocomplete/$', Volunteeringautocomplete.as_view(),
+        name='Volunteering-autocomplete',)
 
 
 ]

@@ -81,11 +81,30 @@ def search(request):
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 class ProfessionalDevelopmentAutocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for ProfessionalDevelopment class
     def get_queryset(self):
         qs = ProfessionalDevelopment.objects.all()
 
         if self.q:
-            qs = qs.filter(name__istartswith=self.q)
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class Skillsutocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Skills class
+    def get_queryset(self):
+        qs = Skills.objects.all()
+
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class Volunteeringautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Skills class
+    def get_queryset(self):
+        qs = Volunteering.objects.all()
+
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
         return qs
 
 
