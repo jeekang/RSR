@@ -129,15 +129,15 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if skill exists
                             query_set=Skills.objects.all()
-                            query_set=query_set.filter(Name__icontains=js[label][key])
+                            query_set=query_set.filter(Name__icontains=js[label][key]["skill"])
                             #if skill does not exist create skill
                             if not query_set:
-                                query_set = Skills(Name = js[label][key])
+                                query_set = Skills(Name = js[label][key]["skill"])
                                 query_set.save()
                             #if skill does exist, grab first match from queryset
                             else:
                                 query_set = query_set[0]
-                            skill_to_person = PersonToSkills(SkillsID = query_set, PersonID = person)
+                            skill_to_person = PersonToSkills(SkillsID = query_set, PersonID = person,YearsOfExperience = js[label][key]["YearsOfExperience"])
                             skill_to_person.save()
 
 
