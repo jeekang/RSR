@@ -1,12 +1,29 @@
 {% extends 'navigation.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
     <div class = "body">
              <h2 class="cover-heading" style = "font-family: Raleway, Arial">Filter Files</h2>
              <p></p>
 <form method="get">
-    {{documents.form.as_p}}
-      <button type="submit">Search</button>
+<div style = "color:#000" class = "row">
+    <div class="form-group col-sm-4 col-md-4">
+
+    {% render_field documents.form.firstname class="form-control" style=" width: 300px; margin:auto;" placeholder="First Name"%} 
+    </div>
+  <div class="form-group col-sm-4 col-md-4">
+
+    {% render_field documents.form.lastname class="form-control" style=" width: 300px; margin:auto;" placeholder="Last Name"%} 
+</div>
+
+<div class="form-group col-sm-4 col-md-4">
+
+    {% render_field documents.form.type style=" width: 300px; margin:auto;" class="form-control"%} 
+    </div>
+    </div>
+    <br/>
+<div style = "align: center"
+      <button type="submit" class = "button-style">Search</button>
+      </div>
       </form>
       <p></p>
 

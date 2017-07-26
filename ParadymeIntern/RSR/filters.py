@@ -1,21 +1,26 @@
 import django_filters
 from .models import *
 from django import forms
+from django.forms import TextInput
 
 class UploadListFilter(django_filters.FilterSet):
 
-	TYPERESUME_CHOICES = (('Employee', 'Employee'),
-	('Intern', 'Intern'),
-	('Prospective Employee', 'Prospective Employee'),
-	('Prospective Intern', 'Prospective Intern'),
+  TYPERESUME_CHOICES = (('Employee', 'Employee'),
+  ('Intern', 'Intern'),
+  ('Prospective Employee', 'Prospective Employee'),
+  ('Prospective Intern', 'Prospective Intern'),
 
 )
 
-	type = django_filters.ChoiceFilter(choices=TYPERESUME_CHOICES)
-	class Meta:
-	    model = Document
-	    fields = ['firstname','lastname','type']
-	    order_by = ['pk']
+  type = django_filters.ChoiceFilter(choices=TYPERESUME_CHOICES)
+  class Meta:
+      model = Document
+      fields = ['firstname','lastname','type']
+      widgets = { 'firstname':TextInput(attrs = {'class':'form-control','placeholder': 'First Name','style':'color:#000'})
+
+      }
+      order_by = ['pk']
+
 
 
 class PersonFilter(django_filters.FilterSet):
