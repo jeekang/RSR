@@ -93,6 +93,9 @@ class OCR(models.Model):
     NewPath = models.ForeignKey(Person, blank=True, null=True)
 
 class Major(models.Model):
+    Major_Choices = (('Major', 'Major'),
+    ('Minor', 'Minor')
+)
     def get_absolute_url(self):
         return reverse('major_detail', args=[str(self.id)])
 
@@ -106,7 +109,7 @@ class Major(models.Model):
 
     Name = models.CharField("Major", max_length=50,default = "None")
     Dept = models.CharField("Department", max_length=50,default = "None")
-    MajorMinor = models.CharField("Major/Minor", max_length=50,default = "None")
+    MajorMinor = models.CharField("Major/Minor", max_length=50,choices = Major_Choices, default = "Major")
 
 
 class School(models.Model):
@@ -363,6 +366,6 @@ class PersonToSchool(models.Model):
     SchoolID = models.ForeignKey(School,  on_delete=models.CASCADE)
     GradDate = models.CharField("Graduation Date", max_length=20,default = "None")
     GPA = models.FloatField("GPA", max_length=20,default = "None")
-    CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
+    #CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
     PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
     MajorID = models.ForeignKey(Major,  on_delete=models.CASCADE)
