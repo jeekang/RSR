@@ -171,6 +171,7 @@ class Skills(models.Model):
             yield (field, value)
 
     Name = models.CharField("Skills", max_length=20,default = "None")
+    #skill = models.ManyToManyField(Person, through='PersonToSkills')
 
 
 class LanguageSpoken(models.Model):
