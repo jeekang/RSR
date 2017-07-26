@@ -140,6 +140,19 @@ def uploaddoc(request):
                             skill_to_person = PersonToSkills(SkillsID = query_set, PersonID = person)
                             skill_to_person.save()
 
+                    if label == "school":
+                        for key in js[label]:
+                            query_set=School.objects.all()
+                            query_set=query_set.filter(Name_icontains=js[label][key])
+                            if not query_set:
+                                query_set  = School(Name = js[label][key])
+                                query_set.save()
+                            else:
+                                query_set=query_set[0]
+                            school_to_person = PersonToSchool(SchoolID =query_set,PersonID = person )
+
+
+
 
 
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
