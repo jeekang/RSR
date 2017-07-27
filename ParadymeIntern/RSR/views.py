@@ -217,7 +217,8 @@ def person_edit(request, person_id):
 		return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
 	context = {
 		'form' : form,
-		'pk' : person_id
+		'pk' : person_id,
+		'person':instance
 	}
 
     

@@ -2,9 +2,19 @@
 {% load widget_tweaks %}
 {% block content %}
 <div style="color:#000">
-
+	<h3 style = "color:#FFF"> Editing {{person.Name}}'s Personal Info</h3>
+	<br/>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+	    {% render_field form.Name class="form-control" style=" width: 300px; margin:auto;" placeholder="Name"%} 
+	    {% render_field form.Email class="form-control" style=" width: 300px; margin:auto;" placeholder="Email"%} 
+	    {% render_field form.Address class="form-control" style=" width: 300px; margin:auto;" placeholder="Address"%} 
+	    {% render_field form.State class="form-control" style=" width: 300px; margin:auto;" placeholder="State"%} 
+	    {% render_field form.ZipCode class="form-control" style=" width: 300px; margin:auto;" placeholder="Zip Code"%} 
+	    {% render_field form.PhoneNumber class="form-control" style=" width: 300px; margin:auto;" placeholder="Phone Number"%} 
+	    {% render_field form.Linkedin class="form-control" style=" width: 300px; margin:auto;" placeholder="LinkedIn"%} 
+	    {% render_field form.GitHub class="form-control" style=" width: 300px; margin:auto;" placeholder="GitHub"%} 
+	    {% render_field form.TypeResume class="form-control" style=" width: 300px; margin:auto;"%} 
+		<br/>
         <button type="submit" class="save btn btn-default">Save</button>
 
 
