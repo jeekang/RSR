@@ -52,12 +52,12 @@
     <form action="" method="Get">
 
         <div class="well">
-            <!-- Search Bar -->
-            <div>
-                Search Bar:
-                <input type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
-            </div>
             <div class="row">
+                <!-- Search Bar -->
+                <div class="form-group col-sm-4 col-md-3">
+                Search Bar:
+                {% render_field personFilter.form.Name class="form-control" %}
+                </div>
               <!-- Filters -->
                 <div class="form-group col-sm-4 col-md-3">
                     School Attend:
@@ -127,7 +127,6 @@
                     Work Authorization:
                     {% render_field personFilter.form.year_of_experience_gt class="form-control" %}
                 </div>
-
             </div>
             <div align="center">
             <button type="submit" class="btn btn-primary btn-lg">

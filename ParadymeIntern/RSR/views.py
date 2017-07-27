@@ -72,11 +72,7 @@ def parsing(request):
 
 # SEARCH/EXPORT TEAM
 def search(request):
-    query_set = Person.objects.all()
-    query = request.GET.get("q")
-    if query:
-        query_set=query_set.filter(Name__icontains=query)
-    # The filtered query_set is then put through more filters from django
+    query_set = Person.objects.order_by('Name')
     personFilter = PersonFilter(request.GET, query_set)
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
@@ -99,14 +95,20 @@ class Skillsutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 class Volunteeringautocomplete(autocomplete.Select2QuerySetView):
-    # autocomplete function for Skills class
+    # autocomplete function for Volunteering class
     def get_queryset(self):
         qs = Volunteering.objects.all()
-
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
         return qs
 
+class SearchBarautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Search Bar that sorts by Person Names
+    def get_queryset(self):
+        qs = Person.objects.order_by('Name')
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
 
 def detail(request,pk):
     # Get the current person object using pk or id

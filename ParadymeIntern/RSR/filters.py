@@ -23,9 +23,9 @@ class PersonFilter(django_filters.FilterSet):
     GPAub = django_filters.NumberFilter(name='persontoschool__GPA',lookup_expr='lt')
     Language = django_filters.ModelChoiceFilter(name='persontolanguage__LangID',
                                                 queryset=LanguageSpoken.objects.all().order_by('Language'))
-    Skills = django_filters.ModelChoiceFilter(name='persontoskills__SkillsID',
+    Skills = django_filters.ModelMultipleChoiceFilter(name='persontoskills__SkillsID',
                                               queryset=Skills.objects.all().order_by('Name').distinct(),
-                                              widget=autocomplete.ModelSelect2(url='RSR:Skills-autocomplete'))
+                                              widget=autocomplete.ModelSelect2Multiple(url='RSR:Skills-autocomplete'))
     YearOfExperienceForSkill = django_filters.ModelChoiceFilter(name='persontoskills__YearsOfExperience',
                                                                 queryset=PersonToSkills.objects.values_list('YearsOfExperience',flat=True).
                                                                 distinct().order_by('YearsOfExperience'),to_field_name='YearsOfExperience')
@@ -54,11 +54,13 @@ class PersonFilter(django_filters.FilterSet):
                                                   queryset=Clubs_Hobbies.objects.all().distinct().order_by('Name'))
     SecurityClearance = django_filters.ModelChoiceFilter(name='persontoclearance__ClearanceLevel',
                                                          queryset=Clearance.objects.all().order_by('ClearanceLevel'))
-
+    Name=django_filters.ModelChoiceFilter(name='Name',
+                                          queryset=Person.objects.all().order_by('Name'),
+                                          widget=autocomplete.ModelSelect2(url='RSR:SearchBar-autocomplete'))
 
 
     class Meta:
         model = Person
         fields = ['SchoolAttend', 'GraduateDate', 'Major', 'DegreeLevel', 'GPAlb', 'GPAub','Language', 'Skills',
                   'YearOfExperienceForSkill', 'ProfessionalDevelopment', 'Award', 'CompanyWorked', 'Title',
-                  'SecurityClearance', 'Volunteering', 'Club_Hobby']
+                  'SecurityClearance', 'Volunteering', 'Club_Hobby', 'Name']
