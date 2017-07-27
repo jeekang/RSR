@@ -126,6 +126,7 @@ def uploaddoc(request):
                         person.TypeResume = temp_doc.type
                         person.save()
 
+
                     elif label == "skills":
                         for key in js[label]:
                             #check to see if skill exists
@@ -191,6 +192,113 @@ def uploaddoc(request):
                                 GradDate = key["gradDate"])
                             ed_to_person.save()
 
+
+                    elif label == "sideprojects":
+                        for key in js[label]:
+                            #check to see if project exists
+                            query_set=SideProject.objects.all()
+                            query_set=query_set.filter(Name__icontains=key["name"])
+                            #if project does not exist create project
+                            if not query_set:
+                                query_set = SideProject(Name = key["name"])
+                                query_set.save()
+                            #if project does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            #intermediary table stuff
+                            project_to_person = PersonToSide(SideID = query_set, PersonID = person, Desc = key["description"])
+                            project_to_person.save()
+
+                    elif label == "Award":
+                        for key in js[label]:
+                            # check to see if project exists
+                            query_set = Awards.objects.all()
+                            query_set = query_set.filter(Name__icontains=key["name"])
+                            # if project does not exist create project
+                            if not query_set:
+                                query_set = Awards(Name=key["name"])
+                                query_set.save()
+                            # if project does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            # intermediary table stuff
+                            awards_to_person = PersonToAwards(AwardID=query_set, PersonID=person, Desc=key["description"])
+                            awards_to_person.save()
+
+                    elif label == "clearance":
+                        query_set = Clearance.objects.all()
+                        query_set = query_set.filter(ClearanceLevel = js[label]["level"])
+                        if not query_set:
+                            query_set = Clearance(ClearanceLevel=js[label]["level"])
+                            query_set.save()
+                        else:
+                            query_set = query_set[0]
+                        cl_to_person = PersonToClearance(PersonID=person, ClearanceLevel = query_set)
+                        cl_to_person.save()
+
+                    elif label == "language":
+                        for key in js[label]:
+                            # check to see if language exists
+                            query_set = LanguageSpoken.objects.all()
+                            query_set = query_set.filter(Language__icontains=key["language"])
+                            # if language does not exist create language
+                            if not query_set:
+                                query_set = LanguageSpoken(Language=key["language"])
+                                query_set.save()
+                            # if language does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            # intermediary table stuff
+                            language_to_person = PersonToLanguage(LangID=query_set, PersonID=person)
+                            language_to_person.save()
+
+                    elif label == "clubs":
+                        for key in js[label]:
+                            # check to see if club exists
+                            query_set = Clubs_Hobbies.objects.all()
+                            query_set = query_set.filter(Name__icontains=key["name"])
+                            # if club does not exist create club
+                            if not query_set:
+                                query_set = Clubs_Hobbies(Name=key["name"])
+                                query_set.save()
+                            # if club does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            # intermediary table stuff
+                            club_to_person = PersonToClubs_Hobbies(CHID=query_set, PersonID=person, Desc=key["description"])
+                            club_to_person.save()
+
+                    elif label == "volunteering":
+                        for key in js[label]:
+                            # check to see if volunteer exists
+                            query_set = Volunteering.objects.all()
+                            query_set = query_set.filter(Name__icontains=key["name"])
+                            # if volunteer does not exist create volunteer
+                            if not query_set:
+                                query_set = Volunteering(Name=key["name"])
+                                query_set.save()
+                            # if volunteer does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            # intermediary table stuff
+                            volunteer_to_person = PersonToVolunteering(VolunID=query_set, PersonID=person, Desc=key["description"])
+                            volunteer_to_person.save()
+
+                    elif label == "course":
+                        for key in js[label]:
+                            # check to see if course exists
+                            query_set = Coursework.objects.all()
+                            query_set = query_set.filter(Name__icontains=key["name"])
+                            # if course does not exist create course
+                            if not query_set:
+                                query_set = Coursework(Name=key["name"])
+                                query_set.save()
+                            # if course does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+                            # intermediary table stuff
+                            course_to_person = PersonToCourse(CourseID=query_set, PersonID=person,Desc=key["description"])
+                            course_to_person.save()
 
 
             return HttpResponseRedirect(reverse('RSR:uploaddoc'))
