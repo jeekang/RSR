@@ -123,6 +123,7 @@ def uploaddoc(request):
                             elif key == "github":
                                 person.GitHub = js[label][key]
                         person.Resume = temp_doc.docfile
+                        person.TypeResume = temp_doc.type
                         person.save()
 
                     elif label == "skills":
@@ -160,6 +161,35 @@ def uploaddoc(request):
                                 EndDate = key["endDate"],
                                 Desc = key["summary"])
                             company_to_person.save()
+
+                    elif label == "education":
+                        for key in js[label]:
+                            #check to see if School exists
+                            query_set=School.objects.all()
+                            query_set=query_set.filter(Name__icontains=key["school"]["name"]).filter(DegreeLevel = key["school"]["degreeLevel"])
+                            #if School does not exist create skill
+                            if not query_set:
+                                query_set = School(Name = key["school"]["name"], DegreeLevel = key["school"]["degreeLevel"])
+                                query_set.save()
+                            #if School does exist, grab first match from queryset
+                            else:
+                                query_set = query_set[0]
+
+                            # NOW DO MAJOR
+                            query_set_1=Major.objects.all()
+                            query_set_1=query_set_1.filter(Name__icontains=key["major"]["major"]).filter(Dept__icontains = key["major"]["dept"]).filter(MajorMinor__icontains = key["major"]["major/minor"])
+                            if not query_set_1:
+                                query_set_1 = Major(Name = key["major"]["major"], Dept = key["major"]["dept"], MajorMinor = key["major"]["major/minor"])
+                                query_set_1.save()
+                            #if School does exist, grab first match from queryset
+                            else:
+                                query_set_1 = query_set_1[0]
+
+                            #intermediary table stuff
+                            ed_to_person = PersonToSchool(SchoolID = query_set, PersonID = person, MajorID = query_set_1,
+                                GPA = key["GPA"],
+                                GradDate = key["gradDate"])
+                            ed_to_person.save()
 
 
 
