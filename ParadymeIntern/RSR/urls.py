@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^user_access/$', user_acc_cont, name='user_access'),
     url(r'^export/$', export, name='export'),
     url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
+    url(r'^edit/(?P<person_id>\d+)/$', views.person_edit, name='person-edit'),
+
     url(r'^logout/$', views.logout_page, name = 'logout'),
 
     #Search/Export Team

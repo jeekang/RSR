@@ -68,7 +68,7 @@ class Person(models.Model):
     PhoneNumber = models.CharField("Phone", max_length = 50,default = 0)
     Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
     CreationDate = models.DateTimeField("Created On", auto_now_add=True, blank=True)
-    LastUpdated = models.DateTimeField("Update", blank = True, null= True)
+    LastUpdated = models.DateTimeField("Update", blank = True, auto_now=True, null = True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
     Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
     GitHub = models.CharField("GitHub", max_length = 70, default = "None")

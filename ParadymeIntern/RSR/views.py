@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .models import *
 import docx2txt
+from django.utils import timezone
 
 # Create your views here.
 #=======
@@ -13,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
 
 from RSR.models import *
-from RSR.forms import DocumentForm
+from RSR.forms import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import logout
 from .filters import *
@@ -21,6 +22,8 @@ from .filters import *
 from django.db.models import Q
 from RSR.persondetails import Detail
 from RSR.persondetails2 import Detail2
+from django.views.generic.edit import UpdateView
+
 
 ### json Parsing ##
 import json
@@ -170,10 +173,13 @@ def uploaddoc(request):
                             #if School does not exist create skill
                             if not query_set:
                                 query_set = School(Name = key["school"]["name"], DegreeLevel = key["school"]["degreeLevel"])
+                                query_set.Students.add(person)
                                 query_set.save()
                             #if School does exist, grab first match from queryset
                             else:
                                 query_set = query_set[0]
+                                query_set.Students.add(person)
+                                query_set.save(update_fields=['Students'])
 
                             # NOW DO MAJOR
                             query_set_1=Major.objects.all()
@@ -199,6 +205,25 @@ def uploaddoc(request):
 
     documents = Document.objects.all()
     return render(request,'index.html',{'documents': documents, 'form': form})
+
+def person_edit(request, person_id):
+	instance = get_object_or_404(Person, id=person_id)
+	form = PersonForm(request.POST or None, instance=instance)
+   
+
+	if form.is_valid():
+		form.save()
+		
+		return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
+	context = {
+		'form' : form,
+		'pk' : person_id
+	}
+
+    
+	return render(request, 'person_update_form.html', context)
+
+
 
 
 @login_required
