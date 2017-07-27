@@ -173,13 +173,10 @@ def uploaddoc(request):
                             #if School does not exist create skill
                             if not query_set:
                                 query_set = School(Name = key["school"]["name"], DegreeLevel = key["school"]["degreeLevel"])
-                                query_set.Students.add(person)
                                 query_set.save()
                             #if School does exist, grab first match from queryset
                             else:
                                 query_set = query_set[0]
-                                query_set.Students.add(person)
-                                query_set.save(update_fields=['Students'])
 
                             # NOW DO MAJOR
                             query_set_1=Major.objects.all()

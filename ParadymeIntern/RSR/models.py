@@ -282,6 +282,7 @@ class Volunteering(models.Model):
             yield (field, value)
 
     Name = models.CharField("Volunteering Name", max_length=100,default = "None")
+    Volunteer = models.ManyToManyField(Person, through='PersonToVolunteering')
 
 
 

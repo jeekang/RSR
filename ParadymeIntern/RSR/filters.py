@@ -67,6 +67,9 @@ class PersonFilter(django_filters.FilterSet):
                                              queryset=PersonToCompany.objects.values_list('Title',flat=True).
                                              distinct().order_by('Title'),
                                              to_field_name='Title')
+    Volunteering = django_filters.CharFilter(name='volunteering__Name',lookup_expr='icontains')
+    Club_Hobby = django_filters.ModelChoiceFilter(name='persontoclubshobbies_set__CHID',
+                                                   queryset=Clubs_Hobbies.objects.all().distinct().order_by('Name'))
     SecurityClearance = django_filters.ModelChoiceFilter(name='persontoclearance__ClearanceLevel',
                                                          queryset=Clearance.objects.all().order_by('ClearanceLevel'))
 
@@ -74,4 +77,5 @@ class PersonFilter(django_filters.FilterSet):
     class Meta:
         model = Person
         fields = ['SchoolAttend', 'GraduateDate', 'Major', 'DegreeLevel', 'GPAlb', 'GPAub','Language', 'Skills',
-                  'YearOfExperienceForSkill', 'ProfessionalDevelopment', 'Award', 'CompanyWorked', 'Title']
+                   'YearOfExperienceForSkill', 'ProfessionalDevelopment', 'Award', 'CompanyWorked', 'Title',
+                   'SecurityClearance', 'Volunteering', 'Club_Hobby']

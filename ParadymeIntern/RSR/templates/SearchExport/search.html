@@ -107,17 +107,29 @@
                 <fieldset>
                 <legend style="color:#FFF">Clearance</legend>
 
-                <!--<div class="form-group col-sm-4 col-md-4">
-                    Work Authorization:
-                    {% render_field personFilter.form.year_of_experience_gt class="form-control" %}
-                </div>-->
+       
 
-                <div class="form-group col-sm-4 col-md-4">
+                <div class="form-group col-sm-12 col-md-12">
                     Security Clearance:
-                    {% render_field personFilter.form.SecurityClearance class="form-control" %}
+                    {% render_field personFilter.form.SecurityClearance class="form-control" style=" width: 300px; margin:auto;"%}
                 
                 </div>
                 </fieldset>
+				</div>
+				
+				 <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Extracurricular</legend>
+				 <div class="form-group col-sm-6 col-md-6">
+					Volunteering:
+                    {% render_field personFilter.form.Volunteering class="form-control" style=" width: 300px; margin:auto;"%}
+                 </div>
+                 <div class="form-group col-sm-6 col-md-6">
+                     Club:
+                     {% render_field personFilter.form.Club_Hobby class="form-control" style=" width: 300px; margin:auto;"%}
+                  </div>	
+				  </fieldset>
+				  </div>
 
             </div>
             <p></p>
