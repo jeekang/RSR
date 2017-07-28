@@ -45,8 +45,15 @@ urlpatterns = [
         #url for autocomplete function for Volunteering class
     url(r'^search/Volunteering-autocomplete/$', Volunteeringautocomplete.as_view(),
         name='Volunteering-autocomplete',),
+        #url for autocomplete function for search bar
     url(r'^search/SearchBar-autocomplete/$', SearchBarautocomplete.as_view(),
-        name='SearchBar-autocomplete',)
+        name='SearchBar-autocomplete',),
+        #url for autocomplete function for LanguageSpoken class
+    url(r'^search/Language-autocomplete/$', Languageautocomplete.as_view(),
+        name='LanguageSpoken-autocomplete',),
+        #url for autocomplete function for Company class
+    url(r'^search/Company-autocomplete/$', Companyautocomplete.as_view(),
+        name='Company-autocomplete',)
 
 
 ]
