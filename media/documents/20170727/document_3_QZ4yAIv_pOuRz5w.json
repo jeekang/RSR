@@ -69,16 +69,7 @@
   {
     "language":"English"
   }],
-
-  "award":[{
-    "name":"Presidential Scholarship",
-    "description":"Description"
-  },
-  {
-    "name":"Dean's List",
-    "description":"Description2"
-  }],
-
+  
   "sideprojects":[{
     "name":"AppName",
     "description":"Description"
@@ -87,7 +78,7 @@
     "name":"AppName2",
     "description":"Description2"
   }],
-
+  
   "volunteering":[{
     "name":"Volunteer",
     "description":"Description"
@@ -106,6 +97,13 @@
     "description":"Description2"
   }],
   
-
+  "Award":[{
+    "name":"Presidential Scholarship",
+    "description":"Description"
+  },
+  {
+    "name":"Dean's List",
+    "description":"Description2"
+  }]
   
 }

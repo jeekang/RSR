@@ -367,6 +367,7 @@ def detail(request,pk):
     Company = detail_dic['PersonToCompany']
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
+    Award = detail_dic['PersonToAwards']
     context = { 
                 'person':person,
                 'list': related_obj_list,
@@ -380,6 +381,7 @@ def detail(request,pk):
                 'company':Company,
                 'clubs':Clubs,
                 'volunteer':Volunteer,
+                'award':Award,
                 }
 
     return render(request, 'SearchExport/detail.html', context)
