@@ -209,20 +209,20 @@ def uploaddoc(request):
                             project_to_person = PersonToSide(SideID = query_set, PersonID = person, Desc = key["description"])
                             project_to_person.save()
 
-                    elif label == "Award":
+                    elif label == "award":
                         for key in js[label]:
-                            # check to see if project exists
-                            query_set = Awards.objects.all()
-                            query_set = query_set.filter(Name__icontains=key["name"])
-                            # if project does not exist create project
+                            #check to see if Award exists
+                            query_set=Awards.objects.all()
+                            query_set=query_set.filter(Name__icontains=key["name"])
+                            #if Award does not exist create Award
                             if not query_set:
-                                query_set = Awards(Name=key["name"])
+                                query_set = Awards(Name = key["name"])
                                 query_set.save()
-                            # if project does exist, grab first match from queryset
+                            #if Award does exist, grab first match from queryset
                             else:
                                 query_set = query_set[0]
-                            # intermediary table stuff
-                            awards_to_person = PersonToAwards(AwardID=query_set, PersonID=person, Desc=key["description"])
+                            #intermediary table stuff
+                            awards_to_person = PersonToAwards(AwardID = query_set, PersonID = person, Desc = key["description"])
                             awards_to_person.save()
 
                     elif label == "clearance":
@@ -236,7 +236,7 @@ def uploaddoc(request):
                         cl_to_person = PersonToClearance(PersonID=person, ClearanceLevel = query_set)
                         cl_to_person.save()
 
-                    elif label == "language":
+                    elif label == "languages":
                         for key in js[label]:
                             # check to see if language exists
                             query_set = LanguageSpoken.objects.all()
