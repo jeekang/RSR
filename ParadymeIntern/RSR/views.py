@@ -110,6 +110,22 @@ class SearchBarautocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(Name__istartswith=self.q)
         return qs
 
+class Languageautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for LanguageSpoken class
+    def get_queryset(self):
+        qs = LanguageSpoken.objects.order_by('Language')
+        if self.q:
+            qs = qs.filter(Language__istartswith=self.q)
+        return qs
+
+class Companyautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Company class
+    def get_queryset(self):
+        qs = Company.objects.order_by('Name')
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
 def detail(request,pk):
     # Get the current person object using pk or id
     person = get_object_or_404(Person,pk=pk)

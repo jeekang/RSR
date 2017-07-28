@@ -42,6 +42,12 @@ class Person(models.Model):
         ('Prospect', 'Prospect')
     )
 
+    WORKAUTHORIZATION_CHOICES = (
+        ('Citizenship', 'Citizenship'),
+        ('Permanent Resident', 'Permanent Resident'),
+        ('Visa', 'Visa')
+    )
+
     Name = models.CharField("Name", max_length = 50,default = "None")
     Email = models.CharField("Email", max_length = 50,default = "None")
     Address = models.CharField("Address", max_length = 50,default = "None")
@@ -55,6 +61,7 @@ class Person(models.Model):
     Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
     GitHub = models.CharField("GitHub", max_length = 70, default = "None")
     TypeResume = models.CharField("Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Current Employee')
+    WorkAuthorization = models.CharField("Work Authorization", max_length=20, choices=WORKAUTHORIZATION_CHOICES, default ='Citizenship')
 
 
 class OCR(models.Model):
@@ -125,6 +132,7 @@ class Coursework(models.Model):
             yield (field, value)
 
     Name = models.CharField("Coursework", max_length=50)
+    Coursetake = models.ManyToManyField(Person, through='PersonToCourse')
 
 
 class ProfessionalDevelopment(models.Model):
@@ -171,7 +179,7 @@ class Skills(models.Model):
             yield (field, value)
 
     Name = models.CharField("Skills", max_length=20,default = "None")
-    #skill = models.ManyToManyField(Person, through='PersonToSkills')
+   #skill = models.ManyToManyField(Person, through='PersonToSkills')
 
 
 class LanguageSpoken(models.Model):
