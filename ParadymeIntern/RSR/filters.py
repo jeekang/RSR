@@ -4,6 +4,11 @@ from .models import *
 from django import forms
 from dal import autocomplete
 
+WORKAUTHORIZATION_CHOICES = (
+        ('Citizenship', 'Citizenship'),
+        ('Permanent Resident', 'Permanent Resident'),
+        ('Visa', 'Visa')
+    )
 
 class PersonFilter(django_filters.FilterSet):
     SchoolAttend = django_filters.ModelChoiceFilter(name='persontoschool__SchoolID', queryset=School.objects.all().order_by('Name'),
@@ -21,8 +26,12 @@ class PersonFilter(django_filters.FilterSet):
                                                    to_field_name='DegreeLevel')
     GPAlb = django_filters.NumberFilter(name='persontoschool__GPA',lookup_expr='gte')
     GPAub = django_filters.NumberFilter(name='persontoschool__GPA',lookup_expr='lt')
-    Language = django_filters.ModelChoiceFilter(name='persontolanguage__LangID',
-                                                queryset=LanguageSpoken.objects.all().order_by('Language'))
+    Coursework = django_filters.ModelChoiceFilter(name='persontocourse__Desc',
+                                                  queryset=PersonToCourse.objects.values_list('Desc', flat=True).distinct().order_by('Desc'),
+                                                  to_field_name='Desc')
+    Language = django_filters.ModelMultipleChoiceFilter(name='persontolanguage__LangID',
+                                                queryset=LanguageSpoken.objects.all().order_by('Language').distinct(),
+                                                widget=autocomplete.ModelSelect2Multiple(url='RSR:LanguageSpoken-autocomplete'))
     Skills = django_filters.ModelMultipleChoiceFilter(name='persontoskills__SkillsID',
                                               queryset=Skills.objects.all().order_by('Name').distinct(),
                                               widget=autocomplete.ModelSelect2Multiple(url='RSR:Skills-autocomplete'))
@@ -41,7 +50,8 @@ class PersonFilter(django_filters.FilterSet):
     Award = django_filters.ModelChoiceFilter(name='persontoawards__AwardID',
                                              queryset=Awards.objects.all().order_by('Name'))
     CompanyWorked = django_filters.ModelChoiceFilter(name='persontocompany__CompanyID',
-                                                     queryset=Company.objects.all().order_by('Name'))
+                                                     queryset=Company.objects.all().order_by('Name').distinct(),
+                                                     widget=autocomplete.ModelSelect2(url='RSR:Company-autocomplete'))
     Title = django_filters.ModelChoiceFilter(name='persontocompany__Title',
                                              queryset=PersonToCompany.objects.values_list('Title',flat=True).
                                              distinct().order_by('Title'),
@@ -54,6 +64,7 @@ class PersonFilter(django_filters.FilterSet):
                                                   queryset=Clubs_Hobbies.objects.all().distinct().order_by('Name'))
     SecurityClearance = django_filters.ModelChoiceFilter(name='persontoclearance__ClearanceLevel',
                                                          queryset=Clearance.objects.all().order_by('ClearanceLevel'))
+    WorkAuthorization = django_filters.ChoiceFilter(name='WorkAuthorization', choices=WORKAUTHORIZATION_CHOICES)
     Name=django_filters.ModelChoiceFilter(name='Name',
                                           queryset=Person.objects.all().order_by('Name'),
                                           widget=autocomplete.ModelSelect2(url='RSR:SearchBar-autocomplete'))
@@ -63,4 +74,4 @@ class PersonFilter(django_filters.FilterSet):
         model = Person
         fields = ['SchoolAttend', 'GraduateDate', 'Major', 'DegreeLevel', 'GPAlb', 'GPAub','Language', 'Skills',
                   'YearOfExperienceForSkill', 'ProfessionalDevelopment', 'Award', 'CompanyWorked', 'Title',
-                  'SecurityClearance', 'Volunteering', 'Club_Hobby', 'Name']
+                  'SecurityClearance', 'Volunteering', 'Club_Hobby', 'Name','WorkAuthorization', 'Coursework']
