@@ -85,11 +85,15 @@
                     {% render_field personFilter.form.GPAub class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
+                    Coursework:
+                    {% render_field personFilter.form.Coursework class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
                     Language Spoken:
                     {% render_field personFilter.form.Language class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
-                    Skill:
+                    Skills:
                     {% render_field personFilter.form.Skills class="form-control" %}
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
@@ -126,7 +130,7 @@
                 </div>
                 <div class="form-group col-sm-4 col-md-3">
                     Work Authorization:
-                    {% render_field personFilter.form.year_of_experience_gt class="form-control" %}
+                    {% render_field personFilter.form.WorkAuthorization class="form-control" %}
                 </div>
             </div>
             <div align="center">
@@ -142,7 +146,7 @@
         {% for obj in personFilter.qs %}
             <ul>
                 <li>
-                <a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a>
+                    <a href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a>
                 </li>
             </ul>
         {% endfor %}
