@@ -1,0 +1,15 @@
+Django==1.11.3
+django-filter==1.0.4
+django-filters==0.2.1
+django-widget-tweaks==1.4.1
+doc2text==0.2.4
+docx2txt==0.6
+future==0.16.0
+mime==0.1.0
+numpy==1.13.1
+olefile==0.44
+Pillow==4.2.1
+PyPDF2==1.26.0
+pytesseract==0.1.7
+pytz==2017.2
+scipy==0.19.1
