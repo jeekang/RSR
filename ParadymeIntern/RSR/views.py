@@ -33,9 +33,14 @@ import json
 #from wand.image import Image as IMG
 #import pytesseract
 #import textract
-### 
+
+### Limit group###
+
+from django.contrib.auth.decorators import user_passes_test  
 
 
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 
 def logout_page(request):
     logout(request)
@@ -53,6 +58,7 @@ def main(request):
 
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploaddoc(request):
     # Handle file upload
     if request.method == 'POST':
@@ -311,6 +317,7 @@ def uploaddoc(request):
     documents = Document.objects.all()
     return render(request,'index.html',{'documents': documents, 'form': form})
 
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def person_edit(request, person_id):
 	instance = get_object_or_404(Person, id=person_id)
 	form = PersonForm(request.POST or None, instance=instance)
@@ -331,16 +338,8 @@ def person_edit(request, person_id):
 
 
 
-
 @login_required
-def ocr (request):
-    return render(request, 'ocr.html')
-
-@login_required
-def parsing(request):
-    return render(request, 'parsing.html')
-
-@login_required
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def search(request):
     query_set = Person.objects.all()
     query = request.GET.get("q")
@@ -351,6 +350,7 @@ def search(request):
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def detail(request,pk):
        # Get the current person object using pk or id
     person = get_object_or_404(Person, pk=pk)
@@ -368,7 +368,18 @@ def detail(request,pk):
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
     Award = detail_dic['PersonToAwards']
+
+    form = CommentsForm(request.POST or None, instance=person)
+   
+
+    if form.is_valid():
+        form.save()
+        
+        return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+ 
+
     context = { 
+                'form' : form,
                 'person':person,
                 'list': related_obj_list,
                 'school':School,
@@ -390,19 +401,11 @@ def detail(request,pk):
 
 
 
-@login_required
-def user_acc_cont (request):
-    return render(request, 'acc_cont.html')
+
+
 
 @login_required
-def export(request):
-    return render (request, 'export.html')
-
-@login_required
-def linkanalysis(request):
-    return render(request, 'linkanalysis.html')
-
-@login_required
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploadlist (request):
    # documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
     documents = UploadListFilter(request.GET,queryset = Document.objects.all())
@@ -410,6 +413,7 @@ def uploadlist (request):
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
 
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def listdelete(request, template_name='uploadlist.html'):
     docId = request.POST.get('docfile', None)
     documents = get_object_or_404(Document, pk=docId)
@@ -421,7 +425,7 @@ def listdelete(request, template_name='uploadlist.html'):
 
     return render(request, template_name, {'object': documents})
 
-	
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def parse_word_file(filepath):
 	parsed_string = docx2txt.process(filepath)
 	return parsed_string

@@ -9,7 +9,13 @@ class PersonForm(forms.ModelForm):
 
         model = Person
         fields = '__all__'
-		
+
+class CommentsForm(forms.ModelForm):
+	Comments = forms.CharField( widget=forms.Textarea )
+	class Meta:
+		model = Person
+		fields =('Comments',)
+
 class DocumentForm(forms.Form):
 	pwd = os.path.dirname(__file__)
 	with open(pwd+"/static/config/config.txt") as myfile:
