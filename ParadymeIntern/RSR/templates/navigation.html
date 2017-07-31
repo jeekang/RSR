@@ -3,11 +3,34 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                   
+                    .personal {  
+                      float:left; 
+                      width:40%;
+                      margin-left:-50px
+
+                    }
+                    .skills{  
+                        float:right; width:60%;
+                    }
+                    .content{position:relative; top:-75px;}
+
+                    @media screen and (max-width: 1200px) {
+                    .personal {width: 100%; margin-left: 0px; padding-bottom: 30px;}
+                    .skills   {width: 100%; margin-left: 0px;}
+                    }
+                    @media screen and (max-width: 765px ) {
+                      .content  {top : 0px;  }
+                    
+                    }
+
+
+
                    .divider{
-    width:5px;
-    height:auto;
-    float:left;
-}
+                    width:5px;
+                    height:auto;
+                    float:left;
+                    }
                    @import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
 
                    /* box */
@@ -337,12 +360,7 @@ td.text-right {
                 <li>
                     <a href="{% url 'RSR:search' %}">Search</a>
                 </li>
-                <li>
-                    <a href="{% url 'RSR:linkanalysis' %}">Link Analysis</a>
-                </li>
-                <li>
-                    <a href="{% url 'RSR:user_access' %}">User Access</a>
-                </li>
+  
                 <li>
                     <a href="{% url 'logout' %}">Log Out</a>
                 </li>
@@ -354,7 +372,7 @@ td.text-right {
 </nav>
 
 <section style = "font-family: Raleway, Roboto, helvetica, arial, sans-serif;" id="about" class="container content-section text-center">
-<div style="position:relative; top:-75px;">
+<div class = "content">
 {% block content %}
 {% endblock %}
 </div>

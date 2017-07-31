@@ -1,4 +1,5 @@
 {% extends 'navigation.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
@@ -6,16 +7,18 @@
 <h1 style = "font-family: Raleway, Arial">
     {{person.Name}}
 </h1>
-
-<div style = "float:left; width:40%;margin-left:-50px">
+<br/>
+<div class = "personal" >
 	<section><b> Personal Info</b><br>
-	<table class = "table-fill">
+	<table class = "table-fill" style="max-width:100px;">
    
    <tbody class="table-hover">
      {% for field in person %}
        <tr>
-         <td style = "padding:14px;"class = "text-left">{{field.0}}</td>
-         <td style = "padding:14px;"class = "text-left"> {{field.1}}</td>
+         <td style = "padding:14px; max-width: 300px; 
+word-wrap:break-word;" class = "text-left">{{field.0}}</td>
+         <td style = "padding:14px; max-width: 300px; 
+word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
        </tr>
      {% empty %}
        <tr>
@@ -25,7 +28,18 @@
    </tbody>
  </table>
 	<br/>
+  
+
 	<a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
+  <br/>
+  <br/>
+  <p></p>
+  <br/>
+    <form method="POST" class="post-form">{% csrf_token %}
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+<br/>
+      <button type="submit" class = "button-style">Add Comment</button>
+      </form>
     </section>
 </div>
 
@@ -33,8 +47,7 @@
 <!--Right hand side all tables -->
 
 
-
-<div style = "float:right; width:60%;">
+<div class = "skills">
 	<section><b> Skills</b><br>
 
 	<table class = "table-fill">
@@ -60,9 +73,8 @@
    </tbody>
  </table>
  </section>
-</div>
 
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Company</b><br>
 
 	<table class = "table-fill">
@@ -102,7 +114,7 @@
 
 
 
- <div style = "float:right; width:60%;padding-top:30px;">
+ <div style = "padding-top:30px;">
 	<section><b> Academics</b><br>
 
 	<table class = "table-fill">
@@ -139,7 +151,7 @@
     </section>
 </div>
 
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Courses</b><br>
 
 	<table class = "table-fill">
@@ -169,7 +181,7 @@
     </section>
 </div>
 	
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Clearance</b><br>
 
 	<table class = "table-fill">
@@ -197,7 +209,7 @@
     </section>
 </div>
 
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Languages</b><br>
 
 	<table class = "table-fill">
@@ -225,7 +237,7 @@
     </section>
 </div>
 
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Side Projects</b><br>
 
 	<table class = "table-fill">
@@ -254,7 +266,7 @@
 	
     </section>
 </div>
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Awards</b><br>
 
 	<table class = "table-fill">
@@ -284,7 +296,7 @@
     </section>
 </div>
 
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Clubs & Hobbies</b><br>
 
 	<table class = "table-fill">
@@ -313,7 +325,7 @@
 	
     </section>
 </div>
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Volunteering</b><br>
 
 	<table class = "table-fill">
@@ -342,7 +354,7 @@
 	
     </section>
 </div>
-<div style = "float:right; width:60%;padding-top:30px;">
+<div style = "padding-top:30px;">
 	<section><b> Professional Developement</b><br>
 
 	<table class = "table-fill">
@@ -371,7 +383,9 @@
 	
     </section>
 </div>
-<!-- todo Awards, Clubs, Volunteering, Professional Dev -->
+</div>
+<!-- t
+odo Awards, Clubs, Volunteering, Professional Dev -->
 
 
 

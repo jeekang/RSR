@@ -27,12 +27,7 @@ urlpatterns = [
     url(r'^uploadlist/$', uploadlist, name = 'uploadlist'),
     url(r'^listdelete/$', listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
-    url(r'^ocr/$', ocr, name='ocr'),
-    url(r'^parsing/$', parsing, name='parsing'),
     url(r'^search/$', search, name='search'),
-    url(r'^user_access/$', user_acc_cont, name='user_access'),
-    url(r'^export/$', export, name='export'),
-    url(r'^linkanalysis/$', linkanalysis, name='linkanalysis'),
     url(r'^edit/(?P<person_id>\d+)/$', views.person_edit, name='person-edit'),
 
     url(r'^logout/$', views.logout_page, name = 'logout'),

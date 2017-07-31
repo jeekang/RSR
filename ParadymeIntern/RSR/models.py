@@ -43,6 +43,7 @@ class Person(models.Model):
             yield (field, value)'''
         for field in self._meta.fields:
             field_name = field.get_attname()
+            field_name_1 = field.verbose_name
             # In self._meta.fields for foreign key it returns field_name +"_id" so I just removed id so we get the value
             # of the field instead of id.
             if field_name == "id":
@@ -52,7 +53,7 @@ class Person(models.Model):
             val = getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
             field_name = string.capwords(field_name)
-            yield [field_name,str(val)]
+            yield [field_name_1,str(val)]
 
     TYPERESUME_CHOICES = (('Employee', 'Employee'),
     ('Intern', 'Intern'),
@@ -60,19 +61,20 @@ class Person(models.Model):
     ('Prospective Intern', 'Prospective Intern'),
 )
 
-    Name = models.CharField("Name", max_length = 50,default = "None")
-    Email = models.CharField("Email", max_length = 50,default = "None")
-    Address = models.CharField("Address", max_length = 50,default = "None")
-    ZipCode = models.IntegerField("Zip Code", default = 0)
-    State = models.CharField("State", max_length = 25,default = "None")
-    PhoneNumber = models.CharField("Phone", max_length = 50,default = 0)
+    Name = models.CharField(verbose_name = "Name", max_length = 50,default = "None")
+    Email = models.CharField(verbose_name = "Email", max_length = 50,default = "None")
+    Address = models.CharField( verbose_name = "Address", max_length = 50,default = "None")
+    ZipCode = models.IntegerField(verbose_name = "Zip Code", default = 0)
+    State = models.CharField(verbose_name ="State", max_length = 25,default = "None")
+    PhoneNumber = models.CharField(verbose_name ="Phone", max_length = 50,default = 0)
     Resume = models.FileField(upload_to = 'resumes', null = True) # null = True for testing purposes
-    CreationDate = models.DateTimeField("Created On", auto_now_add=True, blank=True)
-    LastUpdated = models.DateTimeField("Update", blank = True, auto_now=True, null = True)
+    CreationDate = models.DateTimeField(verbose_name ="Created On", auto_now_add=True, blank=True)
+    LastUpdated = models.DateTimeField(verbose_name ="Last Updated", blank = True, auto_now=True, null = True)
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL, null = True) # null = True for testing purposes
-    Linkedin = models.CharField("LinkedIn", max_length = 70, default = "None")
-    GitHub = models.CharField("GitHub", max_length = 70, default = "None")
-    TypeResume = models.CharField("Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Current Employee')
+    Linkedin = models.CharField(verbose_name ="LinkedIn", max_length = 70, default = "None")
+    GitHub = models.CharField(verbose_name ="GitHub", max_length = 70, default = "None")
+    TypeResume = models.CharField(verbose_name = "Resume Type",max_length = 50, choices = TYPERESUME_CHOICES, default = 'Current Employee')
+    Comments = models.CharField(max_length = 500, default = "Add Comment...")
 
 
 class OCR(models.Model):
