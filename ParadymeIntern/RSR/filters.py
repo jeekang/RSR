@@ -16,9 +16,7 @@ class UploadListFilter(django_filters.FilterSet):
   class Meta:
       model = Document
       fields = ['firstname','lastname','type']
-      widgets = { 'firstname':TextInput(attrs = {'class':'form-control','placeholder': 'First Name','style':'color:#000'})
-
-      }
+     
       order_by = ['pk']
 
 

@@ -8,7 +8,9 @@ class PersonForm(forms.ModelForm):
     class Meta:
 
         model = Person
+        exclude=('Resume',)
         fields = '__all__'
+    	
 
 class PersontoSkillForm(forms.ModelForm):
 
