@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/'
 # Application definition
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'RSR',
     'django_filters',
     'widget_tweaks',
+    'crispy_forms',
     
 ]
 

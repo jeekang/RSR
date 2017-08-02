@@ -1,31 +1,36 @@
 {% extends 'navigation.html' %}
 {% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
 {% block content %}
     <div class = "body">
              <h2 class="cover-heading" style = "font-family: Raleway, Arial">Filter Files</h2>
              <p></p>
              <br />
-<form method="get">
-<div style = "color:#000" class = "row">
-    <div class="form-group col-sm-4 col-md-4">
 
-    {% render_field documents.form.firstname class="form-control" style=" width: 300px; margin:auto;" placeholder="First Name"%} 
-    </div>
-  <div class="form-group col-sm-4 col-md-4">
-
-    {% render_field documents.form.lastname class="form-control" style=" width: 300px; margin:auto;" placeholder="Last Name"%} 
-</div>
-
-<div class="form-group col-sm-4 col-md-4">
-
-    {% render_field documents.form.type style=" width: 300px; margin:auto;" class="form-control"%} 
-    </div>
-    </div>
-    <br/>
-<div style = "align: center"
-      <button type="submit" class = "button-style">Search</button>
+  <form method="get">
+    <div class="well">
+      <div class="row" style = "color:#000">
+        <div class="form-group col-sm-4 col-md-4">
+          {% render_field documents.form.firstname class="form-control" placeholder="First Name" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-4">
+          {% render_field documents.form.lastname class="form-control" placeholder="Last Name" %}
+        </div>
+        <div class="form-group col-sm-4 col-md-4">
+          {% render_field documents.form.type class="form-control" %}
+        </div>
       </div>
-      </form>
+      <button type="submit" class="button-style">
+        <span class="glyphicon glyphicon-search"></span> Search
+      </button>
+    </div>
+  </form>
+
+
+
+
+
       <p></p>
       <br />
       <br />

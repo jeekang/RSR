@@ -55,7 +55,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Skill</th>
        <th style = "padding:14px;"class = "text-left">Years Of Experience</th>
-
+       <th style = "padding:14px;"class = "text-left">Action</th>
      </tr>
 
    </thead>
@@ -70,6 +70,19 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td>
+        {% render_field skillform.Name class="form-control" placeholder="Add Skill"%} 
+       </td>
+       <td>
+        {% render_field persontoskill.YearsOfExperience class="form-control" placeholder="Years Of Experience"%} 
+       </td>
+      <td style = "text-align:center;"class = "text-left"><button type="submit" style = "margin:auto" class = "button-style">Add</button>
+        </td>
+      </form>
+      </tr>
+
    </tbody>
  </table>
  </section>

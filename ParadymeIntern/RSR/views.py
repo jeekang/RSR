@@ -140,7 +140,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if skill exists
                             query_set=Skills.objects.all()
-                            query_set=query_set.filter(Name__icontains=key["skill"])
+                            query_set=query_set.filter(Name=key["skill"])
                             #if skill does not exist create skill
                             if not query_set:
                                 query_set = Skills(Name = key["skill"])
@@ -155,7 +155,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if company exists
                             query_set=Company.objects.all()
-                            query_set=query_set.filter(Name__icontains=key["company"])
+                            query_set=query_set.filter(Name=key["company"])
                             #if company does not exist create skill
                             if not query_set:
                                 query_set = Company(Name = key["company"])
@@ -176,7 +176,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if School exists
                             query_set=School.objects.all()
-                            query_set=query_set.filter(Name__icontains=key["school"]["name"]).filter(DegreeLevel = key["school"]["degreeLevel"])
+                            query_set=query_set.filter(Name=key["school"]["name"]).filter(DegreeLevel = key["school"]["degreeLevel"])
                             #if School does not exist create skill
                             if not query_set:
                                 query_set = School(Name = key["school"]["name"], DegreeLevel = key["school"]["degreeLevel"])
@@ -187,7 +187,7 @@ def uploaddoc(request):
 
                             # NOW DO MAJOR
                             query_set_1=Major.objects.all()
-                            query_set_1=query_set_1.filter(Name__icontains=key["major"]["major"]).filter(Dept__icontains = key["major"]["dept"]).filter(MajorMinor__icontains = key["major"]["major/minor"])
+                            query_set_1=query_set_1.filter(Name=key["major"]["major"]).filter(Dept__icontains = key["major"]["dept"]).filter(MajorMinor__icontains = key["major"]["major/minor"])
                             if not query_set_1:
                                 query_set_1 = Major(Name = key["major"]["major"], Dept = key["major"]["dept"], MajorMinor = key["major"]["major/minor"])
                                 query_set_1.save()
@@ -206,7 +206,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if project exists
                             query_set=SideProject.objects.all()
-                            query_set=query_set.filter(Name__icontains=key["name"])
+                            query_set=query_set.filter(Name=key["name"])
                             #if project does not exist create project
                             if not query_set:
                                 query_set = SideProject(Name = key["name"])
@@ -222,7 +222,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             #check to see if Award exists
                             query_set=Awards.objects.all()
-                            query_set=query_set.filter(Name__icontains=key["name"])
+                            query_set=query_set.filter(Name=key["name"])
                             #if Award does not exist create Award
                             if not query_set:
                                 query_set = Awards(Name = key["name"])
@@ -249,7 +249,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             # check to see if language exists
                             query_set = LanguageSpoken.objects.all()
-                            query_set = query_set.filter(Language__icontains=key["language"])
+                            query_set = query_set.filter(Language=key["language"])
                             # if language does not exist create language
                             if not query_set:
                                 query_set = LanguageSpoken(Language=key["language"])
@@ -265,7 +265,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             # check to see if club exists
                             query_set = Clubs_Hobbies.objects.all()
-                            query_set = query_set.filter(Name__icontains=key["name"])
+                            query_set = query_set.filter(Name=key["name"])
                             # if club does not exist create club
                             if not query_set:
                                 query_set = Clubs_Hobbies(Name=key["name"])
@@ -281,7 +281,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             # check to see if volunteer exists
                             query_set = Volunteering.objects.all()
-                            query_set = query_set.filter(Name__icontains=key["name"])
+                            query_set = query_set.filter(Name=key["name"])
                             # if volunteer does not exist create volunteer
                             if not query_set:
                                 query_set = Volunteering(Name=key["name"])
@@ -297,7 +297,7 @@ def uploaddoc(request):
                         for key in js[label]:
                             # check to see if course exists
                             query_set = Coursework.objects.all()
-                            query_set = query_set.filter(Name__icontains=key["name"])
+                            query_set = query_set.filter(Name=key["name"])
                             # if course does not exist create course
                             if not query_set:
                                 query_set = Coursework(Name=key["name"])
@@ -361,32 +361,59 @@ def detail(request,pk):
     Course = detail_dic['PersonToCourse']
     Pro = detail_dic['PersonToProfessionalDevelopment']
     Side = detail_dic['PersonToSide']
-    Skills = detail_dic['PersonToSkills']
+    Skills_Detail = detail_dic['PersonToSkills']
     Language = detail_dic['PersonToLanguage']
     Clearance = detail_dic['PersonToClearance']
     Company = detail_dic['PersonToCompany']
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
     Award = detail_dic['PersonToAwards']
-
+    
     form = CommentsForm(request.POST or None, instance=person)
    
-
+    
     if form.is_valid():
         form.save()
         
         return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
- 
+    
 
+    #add Skill
+    skillform = SkillForm(request.POST)
+    persontoskill = PersontoSkillForm(request.POST)
+    if skillform.is_valid():
+        skillform.save(commit=False)
+        query_set = Skills.objects.all()
+        
+        
+        if not query_set.filter(Name=skillform.cleaned_data['Name']):
+            skillform.save()
+            query_set = query_set.filter(Name=skillform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=skillform.cleaned_data['Name'])[0]
+        if persontoskill.is_valid():
+            print(persontoskill.cleaned_data['YearsOfExperience'])
+            persontoskill_temp = persontoskill.save(commit=False)
+            persontoskill_temp.SkillsID = query_set
+            
+            persontoskill_temp.PersonID = person
+            
+            persontoskill_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add skill
+    
     context = { 
                 'form' : form,
+                'skillform': skillform,
+                'persontoskill':persontoskill,
                 'person':person,
                 'list': related_obj_list,
                 'school':School,
                 'course':Course,
                 'pro':Pro,
                 'side':Side,
-                'skills':Skills,
+                'skills':Skills_Detail,
                 'language':Language,
                 'clearance':Clearance,
                 'company':Company,
@@ -408,8 +435,9 @@ def detail(request,pk):
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploadlist (request):
    # documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
-    documents = UploadListFilter(request.GET,queryset = Document.objects.all())
-    #documents = Document.objects.all()
+    document = Document.objects.all()
+    documents = UploadListFilter(request.GET,queryset = document)
+    
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
 
