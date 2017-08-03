@@ -19,6 +19,51 @@ class PersontoSkillForm(forms.ModelForm):
      	exclude = ('PersonID',)
      	fields = ('YearsOfExperience',)
 
+class PersontoCompanyForm(forms.ModelForm):
+	class Meta:
+		model = PersonToCompany
+		fields = '__all__'
+
+class PersontoAwardForm(forms.ModelForm):
+	class Meta:
+		model = PersonToAwards
+		fields = '__all__'
+
+class PersontoClubForm(forms.ModelForm):
+	class Meta:
+		model = PersonToClubs_Hobbies
+		fields = '__all__'
+
+class PersontoVolunteeringForm(forms.ModelForm):
+	class Meta:
+		model = PersonToVolunteering
+		fields = '__all__'
+class PersontoProfessionalForm(forms.ModelForm):
+	class Meta:
+		model = PersonToProfessionalDevelopment
+		fields = '__all__'
+class PersontoSideForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSide
+		fields = '__all__'
+class PersontoLanguageForm(forms.ModelForm):
+	class Meta:
+		model = PersonToLanguage
+		fields = '__all__'
+class PersontoClearanceForm(forms.ModelForm):
+	class Meta:
+		model = PersonToClearance
+		fields = '__all__'
+class PersontoCourseForm(forms.ModelForm):
+	class Meta:
+		model = PersonToCourse
+		fields = '__all__'
+class PersontoShoolForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSchool
+		fields = '__all__'
+
+
 
 class CommentsForm(forms.ModelForm):
 	Comments = forms.CharField( widget=forms.Textarea )
@@ -38,3 +83,47 @@ class SkillForm(forms.ModelForm):
 		model = Skills
 		fields = '__all__'
 		
+
+class CompanyForm(forms.ModelForm):
+	class Meta:
+		model = Company
+		fields = '__all__'
+
+class AwardForm(forms.ModelForm):
+	class Meta:
+		model = Awards
+		fields = '__all__'
+
+class ClubForm(forms.ModelForm):
+	class Meta:
+		model = Clubs_Hobbies
+		fields = '__all__'
+
+class VolunteeringForm(forms.ModelForm):
+	class Meta:
+		model = Volunteering
+		fields = '__all__'
+class ProfessionalForm(forms.ModelForm):
+	class Meta:
+		model = ProfessionalDevelopment
+		fields = '__all__'
+class SideForm(forms.ModelForm):
+	class Meta:
+		model = SideProject
+		fields = '__all__'
+class LanguageForm(forms.ModelForm):
+	class Meta:
+		model = LanguageSpoken
+		fields = '__all__'
+class ClearanceForm(forms.ModelForm):
+	class Meta:
+		model = Clearance
+		fields = '__all__'
+class CourseForm(forms.ModelForm):
+	class Meta:
+		model = Coursework
+		fields = '__all__'
+class ShoolForm(forms.ModelForm):
+	class Meta:
+		model = School
+		fields = '__all__'
