@@ -466,12 +466,12 @@ def detail(request,pk):
             query_set1 = Major.objects.all()
         
         
-            if not query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major"):
+            if not query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor']):
                 majorform.save()
-                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major")[0]            
+                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor'])[0]            
                 print(query_set1)
             else:
-                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major")[0]
+                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor'])[0]
                 print(query_set1)
         
             if persontoschool.is_valid():

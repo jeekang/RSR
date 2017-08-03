@@ -9,39 +9,50 @@
 </h1>
 <br/>
 <div class = "personal" >
-	<section><b> Personal Info</b><br>
-	<table class = "table-fill" style="max-width:100px;">
-   
-   <tbody class="table-hover">
+  <div style="overflow-x: auto">
+	<table class = "table-fill">
+   <thead >
+     <tr>
      {% for field in person %}
+       
+         <th style = "height:50px; padding:14px;" class = "text-left">{{field.0}}</td>
+     {% endfor %}
+     </tr>
+   </thead>
+   <tbody class="table-hover">
+    
        <tr>
-         <td style = "padding:14px; max-width: 300px; 
-word-wrap:break-word;" class = "text-left">{{field.0}}</td>
+         {% for field in person %}
+         
          <td style = "padding:14px; max-width: 300px; 
 word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
-       </tr>
-     {% empty %}
-       <tr>
+{% empty %}
+      
          <td colspan="2">No data</td>
+{% endfor %}
+
+       
+     
        </tr>
-     {% endfor %}
+     
    </tbody>
  </table>
+  </div>
 	<br/>
   
 
 	<a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
   <br/>
-  <br/>
-  <p></p>
+  
   <br/>
     <form method="POST" class="post-form">{% csrf_token %}
       {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
 <br/>
       <button type="submit" class = "button-style">Add Comment</button>
       </form>
-    </section>
 </div>
+    <br/>
+    <br/>
 
 
 <!--Right hand side all tables -->
@@ -136,10 +147,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
         {% render_field persontocompany.ExperienceOnJob class="form-control" placeholder="Experience"%} 
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.StartDate class="form-control" placeholder="Start Date"%} 
+        {% render_field persontocompany.StartDate class="form-control" placeholder="XX/XX/XX"%} 
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.EndDate class="form-control" placeholder="End Date"%} 
+        {% render_field persontocompany.EndDate class="form-control" placeholder="XX/XX/XX"%} 
        </td>
       <td style = "padding:14px;"class = "text-left">
         {% render_field persontocompany.Desc class="form-control" placeholder="Description"%} 
@@ -164,10 +175,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">University</th>
-        <th style = "padding:14px;"class = "text-left">Type</th>
+        <th style = "padding:14px;"class = "text-left">Degree</th>
 
        <th style = "padding:14px;"class = "text-left">Grad Date</th>
        <th style = "padding:14px;"class = "text-left">Major</th>
+       <th style = "padding:14px;"class = "text-left">Dept</th>
+       <th style = "width:130px; padding:14px;"class = "text-left">Type</th>
 
        <th style = "padding:14px;"class = "text-left">GPA</th>
        <th style = "padding:14px;"class = "text-left">Action</th>
@@ -183,6 +196,8 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.SchoolID.DegreeLevel}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GradDate}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.MajorID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.MajorID.Dept}}</td>
+         <td style = "width:130px; padding:14px;"class = "text-left"> {{obj.MajorID.MajorMinor}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
        </tr>
      {% empty %}
@@ -203,6 +218,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        </td>
       <td style = "padding:14px;"class = "text-left">
         {% render_field majorform.Name class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.Dept class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.MajorMinor class="form-control" placeholder="Major"%} 
        </td>
       <td style = "padding:14px;"class = "text-left">
         {% render_field persontoschool.GPA class="form-control" placeholder="GPA"%} 
@@ -298,7 +319,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Language</th>
-       <th style = "padding:14px;"class = "text-left">Action</th>
+       <th style = "width:130px;padding:14px;"class = "text-left">Action</th>
 
 
 

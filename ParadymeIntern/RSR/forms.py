@@ -32,7 +32,7 @@ class NewPersontoSchoolForm(forms.ModelForm):
 class NewMajorForm(forms.ModelForm):
 	class Meta:
 		model = Major
-		fields = ('Name',)
+		fields = ('Name','Dept','MajorMinor')
 class NewSchoolForm(forms.ModelForm):
 	class Meta:
 		model = School
