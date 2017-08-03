@@ -28,7 +28,10 @@ urlpatterns = [
     url(r'^listdelete/$', listdelete, name="listdelete"),
     url(r'^main/$', main, name = 'main'),
     url(r'^search/$', search, name='search'),
+
+    #Edit page
     url(r'^edit/(?P<person_id>\d+)/$', views.person_edit, name='person-edit'),
+    url(r'^edit_skill/(?P<skill_id>\d+)/$', views.skill_edit, name='skill-edit'),
 
     url(r'^logout/$', views.logout_page, name = 'logout'),
 

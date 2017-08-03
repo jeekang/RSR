@@ -64,6 +64,8 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.SkillsID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.YearsOfExperience}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:skill-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
        </tr>
      {% empty %}
        <tr>
