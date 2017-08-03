@@ -317,6 +317,7 @@ def uploaddoc(request):
     documents = Document.objects.all()
     return render(request,'index.html',{'documents': documents, 'form': form})
 
+#edit function
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def person_edit(request, person_id):
 	instance = get_object_or_404(Person, id=person_id)
@@ -342,13 +343,47 @@ def skill_edit(request, skill_id):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
     context = {
         'form': form,
         'pk':skill_id,
         'person': instance
     }
     return render(request, 'skill_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def company_edit(request, company_id):
+    instance = get_object_or_404(PersonToCompany, id=company_id)
+    form = PersontoCompanyForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':company_id,
+        'person': instance
+    }
+    return render(request, 'company_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def school_edit(request, school_id):
+    instance = get_object_or_404(PersonToSchool, id=school_id)
+    form = PersontoSchoolForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':school_id,
+        'person': instance
+    }
+    return render(request, 'school_update_form.html', context)
+
+#end edit
 
 
 @login_required

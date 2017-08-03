@@ -118,6 +118,9 @@ word-wrap:break-word;"class = "text-left">{{obj.ExperienceOnJob}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.EndDate}}</td>
          <td style = "padding:14px; max-width: 200px; 
 word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:company-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -184,6 +187,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GradDate}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.MajorID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
