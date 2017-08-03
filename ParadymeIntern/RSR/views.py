@@ -332,10 +332,23 @@ def person_edit(request, person_id):
 		'pk' : person_id,
 		'person':instance
 	}
-
-    
 	return render(request, 'person_update_form.html', context)
 
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def skill_edit(request, skill_id):
+    instance = get_object_or_404(PersonToSkills, id=skill_id)
+    form = PersontoSkillForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
+    context = {
+        'form': form,
+        'pk':skill_id,
+        'person': instance
+    }
+    return render(request, 'skill_update_form.html', context)
 
 
 @login_required

@@ -17,7 +17,7 @@ class PersontoSkillForm(forms.ModelForm):
     class Meta:
      	model = PersonToSkills
      	exclude = ('PersonID',)
-     	fields = ('YearsOfExperience',)
+     	fields = ('SkillsID','YearsOfExperience',)
 
 
 class CommentsForm(forms.ModelForm):
