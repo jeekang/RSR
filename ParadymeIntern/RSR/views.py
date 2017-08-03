@@ -383,6 +383,118 @@ def school_edit(request, school_id):
     }
     return render(request, 'school_update_form.html', context)
 
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def course_edit(request, course_id):
+    instance = get_object_or_404(PersonToCourse, id=course_id)
+    form = PersontoCourseForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':course_id,
+        'person': instance
+    }
+    return render(request, 'course_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def language_edit(request, language_id):
+    instance = get_object_or_404(PersonToLanguage, id=language_id)
+    form = PersontoLanguageForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':language_id,
+        'person': instance
+    }
+    return render(request, 'language_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def sidepro_edit(request, sidepro_id):
+    instance = get_object_or_404(PersonToSide, id=sidepro_id)
+    form = PersontoSideForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':sidepro_id,
+        'person': instance
+    }
+    return render(request, 'sidepro_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def award_edit(request, award_id):
+    instance = get_object_or_404(PersonToAwards, id=award_id)
+    form = PersontoAwardForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':award_id,
+        'person': instance
+    }
+    return render(request, 'award_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def club_edit(request, club_id):
+    instance = get_object_or_404(PersonToClubs_Hobbies, id=club_id)
+    form = PersontoClubForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':club_id,
+        'person': instance
+    }
+    return render(request, 'club_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def volunteer_edit(request, volunteer_id):
+    instance = get_object_or_404(PersonToVolunteering, id=volunteer_id)
+    form = PersontoVolunteeringForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':volunteer_id,
+        'person': instance
+    }
+    return render(request, 'volunteer_update_form.html', context)
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def professional_edit(request,pro_id):
+    instance = get_object_or_404(PersonToProfessionalDevelopment, id=pro_id)
+    form = PersontoProfessionalForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':pro_id,
+        'person': instance
+    }
+    return render(request, 'professional_update_form.html', context)
+
 #end edit
 
 

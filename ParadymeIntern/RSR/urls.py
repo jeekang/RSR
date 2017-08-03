@@ -34,6 +34,13 @@ urlpatterns = [
     url(r'^edit_skill/(?P<skill_id>\d+)/$', views.skill_edit, name='skill-edit'),
     url(r'^edit_company/(?P<company_id>\d+)/$', views.company_edit, name='company-edit'),
     url(r'^edit_school/(?P<school_id>\d+)/$', views.school_edit, name='school-edit'),
+    url(r'^edit_course/(?P<course_id>\d+)/$', views.course_edit, name='course-edit'),
+    url(r'^edit_language/(?P<language_id>\d+)/$', views.language_edit, name='language-edit'),
+    url(r'^edit_sidepro/(?P<sidepro_id>\d+)/$', views.sidepro_edit, name='sidepro-edit'),
+    url(r'^edit_award/(?P<award_id>\d+)/$', views.award_edit, name='award-edit'),
+    url(r'^edit_club/(?P<club_id>\d+)/$', views.club_edit, name='club-edit'),
+    url(r'^edit_volunteer/(?P<volunteer_id>\d+)/$', views.volunteer_edit, name='volunteer-edit'),
+    url(r'^edit_professional/(?P<pro_id>\d+)/$', views.professional_edit, name='professional-edit'),
 
     url(r'^logout/$', views.logout_page, name = 'logout'),
 
