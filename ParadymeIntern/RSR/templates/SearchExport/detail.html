@@ -295,6 +295,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.CourseID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -358,6 +361,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      {% for obj in language %}
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -393,6 +399,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.SideID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -433,6 +442,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.AwardID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -472,6 +484,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.CHID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -512,6 +527,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.VolunID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
@@ -551,6 +569,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.ProfID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
+
        </tr>
      {% empty %}
        <tr>
