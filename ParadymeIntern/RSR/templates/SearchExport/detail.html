@@ -2,13 +2,56 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<script type="text/javascript">
+document.getElementById("defaultOpen").click();
+
+  function openTab(evt, category) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(category).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
 
 <!-- Personal info block, left hand side -->
 <h1 style = "font-family: Raleway, Arial">
     {{person.Name}}
 </h1>
 <br/>
-<div class = "personal" >
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Personal')" id="defaultOpen">Personal Info</button>
+  <button class="tablinks" onclick="openTab(event, 'Skills')">Skills</button>
+  <button class="tablinks" onclick="openTab(event, 'Past Work')">Past Work</button>
+  <button class="tablinks" onclick="openTab(event, 'School')">Academics</button>
+  <button class="tablinks" onclick="openTab(event, 'Course Work')">Course Work</button>
+  <button class="tablinks" onclick="openTab(event, 'Clearance')">Clearance</button>
+  <button class="tablinks" onclick="openTab(event, 'Languages')">Languages</button>
+  <button class="tablinks" onclick="openTab(event, 'Side Projects')">Side Projects</button>
+  <button class="tablinks" onclick="openTab(event, 'Awards')">Awards</button>
+  <button class="tablinks" onclick="openTab(event, 'Clubs')">Clubs/Hobbies</button>
+  <button class="tablinks" onclick="openTab(event, 'Volunteering')">Volunteering</button>
+  <button class="tablinks" onclick="openTab(event, 'Professional Developement')">Professional Developement</button>
+</div>
+<br/>
+<script>
+  document.getElementById("defaultOpen").click();
+</script>
+<div id="Personal" class="tabcontent"class = "personal"style="display:block" >
   <div style="overflow-x: auto">
 	<table class = "table-fill">
    <thead >
@@ -42,25 +85,13 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
   
 
 	<a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
-  <br/>
+  </div>
   
-  <br/>
-    <form method="POST" class="post-form">{% csrf_token %}
-      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
-<br/>
-      <button type="submit" class = "button-style">Add Comment</button>
-      </form>
-</div>
-    <br/>
-    <br/>
-
 
 <!--Right hand side all tables -->
 
 
-<div class = "skills">
-	<section><b> Skills</b><br>
-
+    <div id="Skills" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -98,10 +129,10 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
 
    </tbody>
  </table>
- </section>
+    </div>
 
-<div style = "padding-top:30px;">
-	<section><b> Company</b><br>
+
+<div id="Past Work" class="tabcontent">
 
 	<table class = "table-fill">
    <thead>
@@ -162,14 +193,11 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
 
 
 
- <div style = "padding-top:30px;">
-	<section><b> Academics</b><br>
+<div id="School" class="tabcontent">
 
 	<table class = "table-fill">
    <thead>
@@ -235,14 +263,11 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </form>
       </tr>
    </tbody>
- </table>
-	
-    </section>
+ </table>	
 </div>
 
-<div style = "padding-top:30px;">
-	<section><b> Courses</b><br>
 
+<div id="Course Work" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -280,13 +305,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 
    </tbody>
  </table>
-	
-    </section>
 </div>
 	
-<div style = "padding-top:30px;">
-	<section><b> Clearance</b><br>
-
+<div id="Clearance" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -308,13 +329,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
-    </section>
 </div>
 
-<div style = "padding-top:30px;">
-	<section><b> Languages</b><br>
-
+<div id="Languages" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -348,13 +365,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
 
-<div style = "padding-top:30px;">
-	<section><b> Side Projects</b><br>
-
+<div id="Side Projects" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -389,12 +402,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
-<div style = "padding-top:30px;">
-	<section><b> Awards</b><br>
 
+
+<div id="Awards" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
@@ -431,17 +442,13 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
 
-<div style = "padding-top:30px;">
-	<section><b> Clubs & Hobbies</b><br>
-
+<div id="Clubs" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
-       <th style = "padding:14px;"class = "text-left">Name</th>
+       <th style = "padding:14px;"class = "text-left">Club/Hobby</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
        <th style = "padding:14px;"class = "text-left">Action</th>
 
@@ -474,16 +481,14 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
-<div style = "padding-top:30px;">
-	<section><b> Volunteering</b><br>
 
+
+<div id="Volunteering" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
-       <th style = "padding:14px;"class = "text-left">Name</th>
+       <th style = "padding:14px;"class = "text-left">Volunteer</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
         <th style = "padding:14px;"class = "text-left">Action</th>
 
@@ -516,16 +521,13 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
-<div style = "padding-top:30px;">
-	<section><b> Professional Developement</b><br>
 
+<div id="Professional Developement" class="tabcontent">
 	<table class = "table-fill">
    <thead>
      <tr>
-       <th style = "padding:14px;"class = "text-left">Name</th>
+       <th style = "padding:14px;"class = "text-left">Development</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
         <th style = "padding:14px;"class = "text-left">Action</th>
 
@@ -558,13 +560,16 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </tr>
    </tbody>
  </table>
-	
-    </section>
 </div>
-</div>
+<br/>
+  <br/>
+    <form method="POST" class="post-form">{% csrf_token %}
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+<br/>
+      <button type="submit" class = "button-style">Add Comment</button>
+      </form>
 <!-- t
 odo Awards, Clubs, Volunteering, Professional Dev -->
-
 
 
 
