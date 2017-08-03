@@ -74,13 +74,13 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
-       <td>
+       <td style = "padding:14px;"class = "text-left">
         {% render_field skillform.Name class="form-control" placeholder="Add Skill"%} 
        </td>
-       <td>
+       <td style = "padding:14px;"class = "text-left">
         {% render_field persontoskill.YearsOfExperience class="form-control" placeholder="Years Of Experience"%} 
        </td>
-      <td style = "text-align:center;"class = "text-left"><button type="submit" style = "margin:auto" class = "button-style">Add</button>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
       </form>
       </tr>
@@ -101,6 +101,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
         <th style = "padding:14px;"class = "text-left">Start Date</th>
         <th style = "padding:14px;"class = "text-left">End Date</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -111,16 +112,43 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.CompanyID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Title}}</td>
-         <td style = "padding:14px;"class = "text-left">{{obj.ExperienceOnJob}}</td>
+         <td style = "padding:14px; max-width: 150px; 
+word-wrap:break-word;"class = "text-left">{{obj.ExperienceOnJob}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.StartDate}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.EndDate}}</td>
-         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px; max-width: 200px; 
+word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        </tr>
      {% empty %}
        <tr>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+      <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field companyform.Name class="form-control" placeholder="Add Company"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.Title class="form-control" placeholder="Title"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.ExperienceOnJob class="form-control" placeholder="Experience"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.StartDate class="form-control" placeholder="Start Date"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.EndDate class="form-control" placeholder="End Date"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+     
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -138,10 +166,12 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
        <th style = "padding:14px;"class = "text-left">University</th>
         <th style = "padding:14px;"class = "text-left">Type</th>
 
-       <th style = "padding:14px;"class = "text-left">Matriculation</th>
+       <th style = "padding:14px;"class = "text-left">Grad Date</th>
        <th style = "padding:14px;"class = "text-left">Major</th>
 
        <th style = "padding:14px;"class = "text-left">GPA</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
 
      </tr>
 
@@ -160,6 +190,29 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field schoolform.Name class="form-control" placeholder="Add Education"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field schoolform.DegreeLevel class="form-control" placeholder="Degree"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoschool.GradDate class="form-control" placeholder="Grad Date"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.Name class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoschool.GPA class="form-control" placeholder="GPA"%} 
+       </td>
+      
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+     
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -174,6 +227,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Course</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -190,6 +244,19 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field courseform.Name class="form-control" placeholder="Add Course"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocourse.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+
    </tbody>
  </table>
 	
@@ -231,6 +298,8 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Language</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
 
 
      </tr>
@@ -246,6 +315,16 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field langform.Language class="form-control" placeholder="Add Language"%} 
+       </td>
+     
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -260,8 +339,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Project</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
-
-
+       <th style = "padding:14px;"class = "text-left">Action</th>
      </tr>
 
    </thead>
@@ -276,6 +354,18 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+      <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field sideform.Name class="form-control" placeholder="Add Project"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoside.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -289,6 +379,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Award</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -305,6 +396,18 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field awardform.Name class="form-control" placeholder="Add Award"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoaward.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -319,6 +422,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -335,6 +439,18 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field clubform.Name class="form-control" placeholder="Add Club"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoclub.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -348,6 +464,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -364,6 +481,18 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field volunteerform.Name class="form-control" placeholder="Add Volunteering"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontovolunteer.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -377,6 +506,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -393,6 +523,18 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field professionalform.Name class="form-control" placeholder="Add Pro Develop"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoprofessional.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
