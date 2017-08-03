@@ -370,14 +370,14 @@ def detail(request,pk):
     related_obj_list=Detail(person)
 
     detail_dic = Detail2(person)
-    School = detail_dic['PersonToSchool']
+    School_Detail = detail_dic['PersonToSchool']
     Course = detail_dic['PersonToCourse']
     Pro = detail_dic['PersonToProfessionalDevelopment']
     Side = detail_dic['PersonToSide']
     Skills_Detail = detail_dic['PersonToSkills']
     Language = detail_dic['PersonToLanguage']
     Clearance = detail_dic['PersonToClearance']
-    Company = detail_dic['PersonToCompany']
+    Company_Detail = detail_dic['PersonToCompany']
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
     Award = detail_dic['PersonToAwards']
@@ -416,20 +416,95 @@ def detail(request,pk):
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add skill
     
+     #add Company
+    companyform = CompanyForm(request.POST)
+    persontocompany = NewPersontoCompanyForm(request.POST)
+    if companyform.is_valid():
+        companyform.save(commit=False)
+        query_set = Company.objects.all()
+        
+        
+        if not query_set.filter(Name=companyform.cleaned_data['Name']):
+            companyform.save()
+            query_set = query_set.filter(Name=companyform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=companyform.cleaned_data['Name'])[0]
+        if persontocompany.is_valid():
+            persontocompany_temp = persontocompany.save(commit=False)
+            persontocompany_temp.CompanyID = query_set
+            
+            persontocompany_temp.PersonID = person
+            
+            persontocompany_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add company
+
+      #add school
+    majorform = NewMajorForm(prefix = "majorform")
+    schoolform = NewSchoolForm(prefix = "schoolform")
+
+    majorform = NewMajorForm(request.POST, prefix = "majorform")
+    schoolform = NewSchoolForm(request.POST, prefix = "schoolform")
+    persontoschool  = NewPersontoSchoolForm(request.POST)
+ 
+    if schoolform.is_valid():
+        print(1)
+        schoolform.save(commit=False)
+        query_set = School.objects.all()
+        
+        
+        if not query_set.filter(Name=schoolform.cleaned_data['Name']):
+            schoolform.save()
+            query_set = query_set.filter(Name=schoolform.cleaned_data['Name'])[0]            
+            print(query_set)
+        else:
+            query_set = query_set.filter(Name=schoolform.cleaned_data['Name'])[0]
+            print(query_set)
+        if majorform.is_valid():
+            majorform.save(commit=False)
+            query_set1 = Major.objects.all()
+        
+        
+            if not query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major"):
+                majorform.save()
+                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major")[0]            
+                print(query_set1)
+            else:
+                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = "Major")[0]
+                print(query_set1)
+        
+            if persontoschool.is_valid():
+                persontoschool_temp = persontoschool.save(commit=False)
+                print (12)
+                persontoschool_temp.MajorID = query_set1
+                persontoschool_temp.SchoolID = query_set
+            
+                persontoschool_temp.PersonID = person
+            
+                persontoschool_temp.save()
+                return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add school
+
     context = { 
                 'form' : form,
                 'skillform': skillform,
+                'majorform':majorform,
+                'schoolform':schoolform,
+                'persontoschool':persontoschool,
+                'companyform':companyform,
+                'persontocompany':persontocompany,
                 'persontoskill':persontoskill,
                 'person':person,
                 'list': related_obj_list,
-                'school':School,
+                'school':School_Detail,
                 'course':Course,
                 'pro':Pro,
                 'side':Side,
                 'skills':Skills_Detail,
                 'language':Language,
                 'clearance':Clearance,
-                'company':Company,
+                'company':Company_Detail,
                 'clubs':Clubs,
                 'volunteer':Volunteer,
                 'award':Award,

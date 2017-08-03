@@ -11,14 +11,36 @@ class PersonForm(forms.ModelForm):
         exclude=('Resume',)
         fields = '__all__'
     	
-
+#### EDIT TEAM DO NOT USE THESE, THESE ARE FOR ADD FORMS ###
 class NewPersontoSkillForm(forms.ModelForm):
 
     class Meta:
      	model = PersonToSkills
      	exclude = ('PersonID',)
      	fields = ('YearsOfExperience',)
+class NewPersontoCompanyForm(forms.ModelForm):
+	class Meta:
+		model = PersonToCompany
+		exclude = ('PersonID', 'CompanyID')
+		fields = '__all__'
 
+class NewPersontoSchoolForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSchool
+		exclude = ('PersonID', 'SchoolID','MajorID')
+		fields = '__all__'
+class NewMajorForm(forms.ModelForm):
+	class Meta:
+		model = Major
+		fields = ('Name',)
+class NewSchoolForm(forms.ModelForm):
+	class Meta:
+		model = School
+		fields = ('Name','DegreeLevel',)
+
+
+#### USE BELOW FOR EDIT ###
+	
 class PersontoSkillForm(forms.ModelForm):
 	class Meta:
 		model = PersonToSkills
@@ -63,7 +85,7 @@ class PersontoCourseForm(forms.ModelForm):
 	class Meta:
 		model = PersonToCourse
 		fields = '__all__'
-class PersontoShoolForm(forms.ModelForm):
+class PersontoSchoolForm(forms.ModelForm):
 	class Meta:
 		model = PersonToSchool
 		fields = '__all__'
@@ -128,7 +150,11 @@ class CourseForm(forms.ModelForm):
 	class Meta:
 		model = Coursework
 		fields = '__all__'
-class ShoolForm(forms.ModelForm):
+class SchoolForm(forms.ModelForm):
 	class Meta:
 		model = School
+		fields = '__all__'
+class MajorForm(forms.ModelForm):
+	class Meta:
+		model = Major
 		fields = '__all__'
