@@ -12,12 +12,17 @@ class PersonForm(forms.ModelForm):
         fields = '__all__'
     	
 
-class PersontoSkillForm(forms.ModelForm):
+class NewPersontoSkillForm(forms.ModelForm):
 
     class Meta:
      	model = PersonToSkills
      	exclude = ('PersonID',)
      	fields = ('YearsOfExperience',)
+
+class PersontoSkillForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSkills
+		fields = '__all__'
 
 class PersontoCompanyForm(forms.ModelForm):
 	class Meta:

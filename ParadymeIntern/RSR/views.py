@@ -380,7 +380,7 @@ def detail(request,pk):
 
     #add Skill
     skillform = SkillForm(request.POST)
-    persontoskill = PersontoSkillForm(request.POST)
+    persontoskill = NewPersontoSkillForm(request.POST)
     if skillform.is_valid():
         skillform.save(commit=False)
         query_set = Skills.objects.all()
