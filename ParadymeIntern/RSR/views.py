@@ -72,14 +72,14 @@ def parsing(request):
 
 # SEARCH/EXPORT TEAM
 def search(request):
-    query_set = Person.objects.order_by('Name')
+    query_set = Person.objects.order_by('Name').distinct()
     personFilter = PersonFilter(request.GET, query_set)
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 class ProfessionalDevelopmentAutocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for ProfessionalDevelopment class
     def get_queryset(self):
-        qs = ProfessionalDevelopment.objects.all()
+        qs = ProfessionalDevelopment.order_by('Name').distinct()
 
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
@@ -88,7 +88,7 @@ class ProfessionalDevelopmentAutocomplete(autocomplete.Select2QuerySetView):
 class Skillsutocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for Skills class
     def get_queryset(self):
-        qs = Skills.objects.all()
+        qs = Skills.objects.order_by('Name').distinct()
 
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
@@ -97,7 +97,7 @@ class Skillsutocomplete(autocomplete.Select2QuerySetView):
 class Volunteeringautocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for Volunteering class
     def get_queryset(self):
-        qs = Volunteering.objects.all()
+        qs = Volunteering.objects.order_by('Name').distinct()
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
         return qs
@@ -105,7 +105,7 @@ class Volunteeringautocomplete(autocomplete.Select2QuerySetView):
 class SearchBarautocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for Search Bar that sorts by Person Names
     def get_queryset(self):
-        qs = Person.objects.order_by('Name')
+        qs = Person.objects.order_by('Name').distinct()
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
         return qs
@@ -113,7 +113,7 @@ class SearchBarautocomplete(autocomplete.Select2QuerySetView):
 class Languageautocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for LanguageSpoken class
     def get_queryset(self):
-        qs = LanguageSpoken.objects.order_by('Language')
+        qs = LanguageSpoken.objects.order_by('Language').distinct()
         if self.q:
             qs = qs.filter(Language__istartswith=self.q)
         return qs
@@ -121,7 +121,7 @@ class Languageautocomplete(autocomplete.Select2QuerySetView):
 class Companyautocomplete(autocomplete.Select2QuerySetView):
     # autocomplete function for Company class
     def get_queryset(self):
-        qs = Company.objects.order_by('Name')
+        qs = Company.objects.order_by('Name').distinct()
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
         return qs

@@ -20,7 +20,7 @@ def preview_details(person):
     return fields_dict
 
 @register.filter
-#Get value of a key in dictionary
+#Get value of a key in dictionary placed in string format
 def get_key(dictionary, key):
     result=""
     for value in dictionary.get(key):

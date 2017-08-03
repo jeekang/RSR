@@ -13,6 +13,7 @@ import string
 class Document(models.Model):
     docfile = models.FileField(upload_to='documents/%Y%m%d')
 
+
 class Person(models.Model):
     def get_absolute_url(self):
         return reverse('person_detail', args=[str(self.id)])
@@ -81,6 +82,7 @@ class OCR(models.Model):
     CreatedBy = models.ForeignKey(settings.AUTH_USER_MODEL)
     NewPath = models.ForeignKey(Person, blank=True, null=True)
 
+
 class Major(models.Model):
     def get_absolute_url(self):
         return reverse('major_detail', args=[str(self.id)])
@@ -117,7 +119,7 @@ class School(models.Model):
 
     Name = models.CharField("School", max_length=50,default = "None")
     DegreeLevel = models.CharField("Degree Level", max_length=50, choices = DEGREELEVEL_CHOICES, default = 'Undergraduate')
-    Students = models.ManyToManyField(Person, through='PersonToSchool')
+
 
 class Coursework(models.Model):
     def get_absolute_url(self):
@@ -132,7 +134,7 @@ class Coursework(models.Model):
             yield (field, value)
 
     Name = models.CharField("Coursework", max_length=50)
-    Coursetake = models.ManyToManyField(Person, through='PersonToCourse')
+
 
 
 class ProfessionalDevelopment(models.Model):
@@ -148,7 +150,7 @@ class ProfessionalDevelopment(models.Model):
             yield (field, value)
 
     Name = models.CharField("Professional Development", max_length=20,default = "None")
-    ProfessionalExperience = models.ManyToManyField(Person, through='PersonToProfessionalDevelopment')
+
 
 class SideProject(models.Model):
     def get_absolute_url(self):
@@ -179,7 +181,6 @@ class Skills(models.Model):
             yield (field, value)
 
     Name = models.CharField("Skills", max_length=20,default = "None")
-   #skill = models.ManyToManyField(Person, through='PersonToSkills')
 
 
 class LanguageSpoken(models.Model):
@@ -270,7 +271,7 @@ class Volunteering(models.Model):
             yield (field, value)
 
     Name = models.CharField("Volunteering Name", max_length=100,default = "None")
-    Volunteer = models.ManyToManyField(Person, through='PersonToVolunteering')
+
 
 
 ######### INTERMEDIARY TABLES ##########
