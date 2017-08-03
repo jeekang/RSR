@@ -17,9 +17,9 @@ class NewPersontoSkillForm(forms.ModelForm):
     class Meta:
      	model = PersonToSkills
      	exclude = ('PersonID',)
-     	fields = ('SkillsID','YearsOfExperience',)
+     	fields = ('YearsOfExperience',)
 
-class PersontoSkillsForm(forms.ModelForm):
+class PersontoSkillForm(forms.ModelForm):
 	class Meta:
 		model = PersonToSkills
 		fields = '__all__'
