@@ -371,7 +371,7 @@ def detail(request,pk):
 
     detail_dic = Detail2(person)
     School_Detail = detail_dic['PersonToSchool']
-    Course = detail_dic['PersonToCourse']
+    Course_Detail = detail_dic['PersonToCourse']
     Pro = detail_dic['PersonToProfessionalDevelopment']
     Side = detail_dic['PersonToSide']
     Skills_Detail = detail_dic['PersonToSkills']
@@ -394,7 +394,7 @@ def detail(request,pk):
     #add Skill
     skillform = SkillForm(request.POST)
     persontoskill = NewPersontoSkillForm(request.POST)
-    if skillform.is_valid():
+    if skillform.is_valid() and not skillform.cleaned_data['Name'] == "":
         skillform.save(commit=False)
         query_set = Skills.objects.all()
         
@@ -419,7 +419,7 @@ def detail(request,pk):
      #add Company
     companyform = CompanyForm(request.POST)
     persontocompany = NewPersontoCompanyForm(request.POST)
-    if companyform.is_valid():
+    if companyform.is_valid() and not companyform.cleaned_data['Name'] == "":
         companyform.save(commit=False)
         query_set = Company.objects.all()
         
@@ -448,7 +448,7 @@ def detail(request,pk):
     schoolform = NewSchoolForm(request.POST, prefix = "schoolform")
     persontoschool  = NewPersontoSchoolForm(request.POST)
  
-    if schoolform.is_valid():
+    if schoolform.is_valid() and not schoolform.cleaned_data['Name'] == "":
         print(1)
         schoolform.save(commit=False)
         query_set = School.objects.all()
@@ -485,7 +485,175 @@ def detail(request,pk):
                 persontoschool_temp.save()
                 return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add school
+     #add Course
+    courseform = CourseForm(prefix = "courseform")
+    courseform = CourseForm(request.POST, prefix = "courseform")
+    persontocourse = NewPersontoCourseForm(request.POST)
+    if courseform.is_valid() and not courseform.cleaned_data['Name'] == "":
+        print ("how1")
+        courseform.save(commit=False)
+        query_set = Coursework.objects.all()
+        
+        
+        if not query_set.filter(Name=courseform.cleaned_data['Name']):
+            courseform.save()
+            query_set = query_set.filter(Name=courseform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=courseform.cleaned_data['Name'])[0]
+        if persontocourse.is_valid():
+            print ("how")
+            persontocourse_temp = persontocourse.save(commit=False)
+            persontocourse_temp.CourseID = query_set
+            
+            persontocourse_temp.PersonID = person
+            
+            persontocourse_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add course
+    #add Lang
+    langform = LanguageForm(prefix = "langform")
+    langform = LanguageForm(request.POST, prefix = "langform")
+    if langform.is_valid() and not langform.cleaned_data['Language'] == "":
+        langform.save(commit=False)
+        query_set = LanguageSpoken.objects.all()
+        
+        
+        if not query_set.filter(Language=langform.cleaned_data['Language']):
+            langform.save()
+            query_set = query_set.filter(Language=langform.cleaned_data['Language'])[0]            
+           
+        else:
+            query_set = query_set.filter(Language=langform.cleaned_data['Name'])[0]
+        language_to_person = PersonToLanguage(LangID=query_set, PersonID=person)
+        language_to_person.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add Lang
 
+        #add Side Project
+    sideform = SideForm(prefix = "sideform")
+    sideform = SideForm(request.POST, prefix = "sideform")
+    persontoside = NewPersontoSideForm(request.POST)
+    if sideform.is_valid() and not sideform.cleaned_data['Name'] == "":
+        sideform.save(commit=False)
+        query_set = SideProject.objects.all()
+        
+        
+        if not query_set.filter(Name=sideform.cleaned_data['Name']):
+            sideform.save()
+            query_set = query_set.filter(Name=sideform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=sideform.cleaned_data['Name'])[0]
+        if persontoside.is_valid():
+            persontoside_temp = persontoside.save(commit=False)
+            persontoside_temp.SideID = query_set
+            
+            persontoside_temp.PersonID = person
+            
+            persontoside_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add Project
+    #add Award
+    awardform = AwardForm(prefix = "awardform")
+    awardform = AwardForm(request.POST, prefix = "awardform")
+    persontoaward = NewPersontoAwardForm(request.POST)
+    if awardform.is_valid() and not awardform.cleaned_data['Name'] == "":
+        awardform.save(commit=False)
+        query_set = Awards.objects.all()
+        
+        
+        if not query_set.filter(Name=awardform.cleaned_data['Name']):
+            awardform.save()
+            query_set = query_set.filter(Name=awardform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=awardform.cleaned_data['Name'])[0]
+        if persontoaward.is_valid():
+            persontoaward_temp = persontoaward.save(commit=False)
+            persontoaward_temp.AwardID = query_set
+            
+            persontoaward_temp.PersonID = person
+            
+            persontoaward_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add award
+
+    #add Club
+    clubform = ClubForm(prefix = "clubform")
+    clubform = ClubForm(request.POST, prefix = "clubform")
+    persontoclub = NewPersontoClubForm(request.POST)
+    if clubform.is_valid() and not clubform.cleaned_data['Name'] == "":
+        clubform.save(commit=False)
+        query_set = Clubs_Hobbies.objects.all()
+        
+        
+        if not query_set.filter(Name=clubform.cleaned_data['Name']):
+            clubform.save()
+            query_set = query_set.filter(Name=clubform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=clubform.cleaned_data['Name'])[0]
+        if persontoclub.is_valid():
+            persontoclub_temp = persontoclub.save(commit=False)
+            persontoclub_temp.CHID = query_set
+            
+            persontoclub_temp.PersonID = person
+            
+            persontoclub_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add club
+
+  
+     #add volunteer
+    volunteerform = VolunteeringForm(prefix = "volunteerform")
+    volunteerform = VolunteeringForm(request.POST, prefix = "volunteerform")
+    persontovolunteer = NewPersontoVolunteerForm(request.POST)
+    if volunteerform.is_valid() and not volunteerform.cleaned_data['Name'] == "":
+        volunteerform.save(commit=False)
+        query_set = Volunteering.objects.all()
+        
+        
+        if not query_set.filter(Name=volunteerform.cleaned_data['Name']):
+            volunteerform.save()
+            query_set = query_set.filter(Name=volunteerform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=volunteerform.cleaned_data['Name'])[0]
+        if persontovolunteer.is_valid():
+            persontovolunteer_temp = persontovolunteer.save(commit=False)
+            persontovolunteer_temp.VolunID = query_set
+            
+            persontovolunteer_temp.PersonID = person
+            
+            persontovolunteer_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add volunteer
+
+     #add Professional
+    professionalform = ProfessionalForm(prefix = "professionalform")
+    professionalform = ProfessionalForm(request.POST, prefix = "professionalform")
+    persontoprofessional = NewPersontoProfessionalForm(request.POST)
+    if professionalform.is_valid() and not professionalform.cleaned_data['Name'] == "":
+        professionalform.save(commit=False)
+        query_set = ProfessionalDevelopment.objects.all()
+        
+        
+        if not query_set.filter(Name=professionalform.cleaned_data['Name']):
+            professionalform.save()
+            query_set = query_set.filter(Name=professionalform.cleaned_data['Name'])[0]            
+           
+        else:
+            query_set = query_set.filter(Name=professionalform.cleaned_data['Name'])[0]
+        if persontoprofessional.is_valid():
+            persontoprofessional_temp = persontoprofessional.save(commit=False)
+            persontoprofessional_temp.ProfID = query_set
+            
+            persontoprofessional_temp.PersonID = person
+            
+            persontoprofessional_temp.save()
+            return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
+    ## end add club
     context = { 
                 'form' : form,
                 'skillform': skillform,
@@ -493,21 +661,34 @@ def detail(request,pk):
                 'schoolform':schoolform,
                 'persontoschool':persontoschool,
                 'companyform':companyform,
+                'courseform':courseform,
+                'persontocourse':persontocourse,
                 'persontocompany':persontocompany,
                 'persontoskill':persontoskill,
                 'person':person,
                 'list': related_obj_list,
                 'school':School_Detail,
-                'course':Course,
+                'course':Course_Detail,
                 'pro':Pro,
+                'professionalform':professionalform,
+                'persontoprofessional':persontoprofessional,
                 'side':Side,
+                'sideform':sideform,
+                'persontoside':persontoside,
                 'skills':Skills_Detail,
                 'language':Language,
+                'langform':langform,
                 'clearance':Clearance,
                 'company':Company_Detail,
                 'clubs':Clubs,
+                'clubform':clubform,
+                'persontoclub':persontoclub,
                 'volunteer':Volunteer,
+                'volunteerform':volunteerform,
+                'persontovolunteer':persontovolunteer,
                 'award':Award,
+                'awardform':awardform,
+                'persontoaward':persontoaward,
                 }
 
     return render(request, 'SearchExport/detail.html', context)

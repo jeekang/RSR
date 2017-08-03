@@ -227,6 +227,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Course</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -243,6 +244,19 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field courseform.Name class="form-control" placeholder="Add Course"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocourse.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+
    </tbody>
  </table>
 	
@@ -284,6 +298,8 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Language</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
 
 
      </tr>
@@ -299,6 +315,16 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field langform.Language class="form-control" placeholder="Add Language"%} 
+       </td>
+     
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -313,8 +339,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Project</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
-
-
+       <th style = "padding:14px;"class = "text-left">Action</th>
      </tr>
 
    </thead>
@@ -329,6 +354,18 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+      <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field sideform.Name class="form-control" placeholder="Add Project"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoside.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -342,6 +379,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Award</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -358,6 +396,18 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field awardform.Name class="form-control" placeholder="Add Award"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoaward.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -372,6 +422,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -388,6 +439,18 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field clubform.Name class="form-control" placeholder="Add Club"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoclub.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -401,6 +464,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -417,6 +481,18 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field volunteerform.Name class="form-control" placeholder="Add Volunteering"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontovolunteer.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	
@@ -430,6 +506,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <th style = "padding:14px;"class = "text-left">Name</th>
         <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
 
 
      </tr>
@@ -446,6 +523,18 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td colspan="2">No data</td>
        </tr>
      {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field professionalform.Name class="form-control" placeholder="Add Pro Develop"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoprofessional.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
    </tbody>
  </table>
 	

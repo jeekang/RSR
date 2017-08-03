@@ -37,7 +37,36 @@ class NewSchoolForm(forms.ModelForm):
 	class Meta:
 		model = School
 		fields = ('Name','DegreeLevel',)
-
+class NewPersontoCourseForm(forms.ModelForm):
+	class Meta:
+		model = PersonToCourse
+		exclude = ('PersonID', 'CourseID')
+		fields = '__all__'
+class NewPersontoSideForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSide
+		exclude = ('PersonID', 'SideID')
+		fields = '__all__'
+class NewPersontoAwardForm(forms.ModelForm):
+	class Meta:
+		model = PersonToSide
+		exclude = ('PersonID', 'AwardID')
+		fields = '__all__'
+class NewPersontoClubForm(forms.ModelForm):
+	class Meta:
+		model = PersonToClubs_Hobbies
+		exclude = ('PersonID', 'CHID')
+		fields = '__all__'
+class NewPersontoVolunteerForm(forms.ModelForm):
+	class Meta:
+		model = PersonToVolunteering
+		exclude = ('PersonID', 'VolunID')
+		fields = '__all__'
+class NewPersontoProfessionalForm(forms.ModelForm):
+	class Meta:
+		model = PersonToProfessionalDevelopment
+		exclude = ('PersonID', 'ProfID')
+		fields = '__all__'
 
 #### USE BELOW FOR EDIT ###
 	
@@ -129,11 +158,11 @@ class ClubForm(forms.ModelForm):
 class VolunteeringForm(forms.ModelForm):
 	class Meta:
 		model = Volunteering
-		fields = '__all__'
+		fields = ('Name',)
 class ProfessionalForm(forms.ModelForm):
 	class Meta:
 		model = ProfessionalDevelopment
-		fields = '__all__'
+		fields = ('Name',)
 class SideForm(forms.ModelForm):
 	class Meta:
 		model = SideProject
