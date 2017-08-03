@@ -3,10 +3,8 @@
 
 {% block content %}
 <script type="text/javascript">
-document.getElementById("defaultOpen").click();
 
   function openTab(evt, category) {
-    // Declare all variables
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
@@ -21,18 +19,11 @@ document.getElementById("defaultOpen").click();
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
-    // Show the current tab, and add an "active" class to the button that opened the tab
+    // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(category).style.display = "block";
     evt.currentTarget.className += " active";
 }
 </script>
-
-
-<!-- Personal info block, left hand side -->
-<h1 style = "font-family: Raleway, Arial">
-    {{person.Name}}
-</h1>
-<br/>
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Personal')" id="defaultOpen">Personal Info</button>
   <button class="tablinks" onclick="openTab(event, 'Skills')">Skills</button>
@@ -47,11 +38,18 @@ document.getElementById("defaultOpen").click();
   <button class="tablinks" onclick="openTab(event, 'Volunteering')">Volunteering</button>
   <button class="tablinks" onclick="openTab(event, 'Professional Developement')">Professional Developement</button>
 </div>
+
+
+
+<!-- Personal info block, left hand side -->
+<h1 style = "font-family: Raleway, Arial">
+    {{person.Name}}
+</h1>
 <br/>
-<script>
-  document.getElementById("defaultOpen").click();
-</script>
-<div id="Personal" class="tabcontent"class = "personal"style="display:block" >
+
+<br/>
+
+<div id="Personal" class="tabcontent" style="display:block" >
   <div style="overflow-x: auto">
 	<table class = "table-fill">
    <thead >
@@ -84,7 +82,14 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
 	<br/>
   
 
-	<a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
+  <a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
+  <br/>
+  <br/>
+  <form method="POST" class="post-form">{% csrf_token %}
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+<br/>
+      <button type="submit" class = "button-style">Add Comment</button>
+      </form>
   </div>
   
 
@@ -569,11 +574,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 </div>
 <br/>
   <br/>
-    <form method="POST" class="post-form">{% csrf_token %}
-      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
-<br/>
-      <button type="submit" class = "button-style">Add Comment</button>
-      </form>
+    
 <!-- t
 odo Awards, Clubs, Volunteering, Professional Dev -->
 
