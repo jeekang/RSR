@@ -610,6 +610,7 @@ def detail(request,pk):
 
     detail_dic = Detail2(person)
     School_Detail = detail_dic['PersonToSchool']
+    print(School_Detail)
     Course_Detail = detail_dic['PersonToCourse']
     Pro = detail_dic['PersonToProfessionalDevelopment']
     Side = detail_dic['PersonToSide']

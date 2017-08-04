@@ -45,6 +45,7 @@ class Person(models.Model):
             yield (field, value)'''
         for field in self._meta.fields:
             field_name = field.get_attname()
+            field_name_1 = field.verbose_name
             # In self._meta.fields for foreign key it returns field_name +"_id" so I just removed id so we get the value
             # of the field instead of id.
             if field_name == "id":
@@ -54,7 +55,7 @@ class Person(models.Model):
             val = getattr(self, field_name)
             # Removing underscore and capitalizing the first word for each field name
             field_name = string.capwords(field_name)
-            yield field_name + ": " + str(val)
+            yield [field_name_1,str(val)]
 
     TYPERESUME_CHOICES = (('Employee', 'Employee'),
     ('Intern', 'Intern'),
@@ -389,7 +390,6 @@ class PersonToSchool(models.Model):
     SchoolID = models.ForeignKey(School,  on_delete=models.CASCADE)
     GradDate = models.CharField("Graduation Date", max_length=20,default = "None")
     GPA = models.FloatField("GPA", max_length=20,default = "None")
-    CourseID = models.ForeignKey(Coursework,  on_delete=models.CASCADE)
     PersonID = models.ForeignKey(Person,  on_delete=models.CASCADE)
     MajorID = models.ForeignKey(Major,  on_delete=models.CASCADE)
 
