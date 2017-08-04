@@ -1,0 +1,36 @@
+Metadata-Version: 2.0
+Name: polcart
+Version: 2017.1.16.14.45
+Summary: A small utility for converting between polarand cartesian units.
+Home-page: https://github.com/ericmjl/polcart
+Author: Eric J. Ma
+Author-email: ericmajinglong@gmail.com
+License: MIT license
+Keywords: geometry,math,polar coordinates,cartesian coordinates
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: numpy (==1.12.0)
+
+[![Build Status](https://travis-ci.org/ericmjl/polcart.svg?branch=master)](https://travis-ci.org/ericmjl/polcart)
+
+# polcart
+A small utility for converting between polar and cartesian units
+
+## Installation
+Install via `pip`:
+
+```bash
+$ pip install polcart
+```
+
+Install via `conda`:
+
+```bash
+$ conda install -c ericmjl polcart
+```
+
+

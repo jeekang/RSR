@@ -33,14 +33,16 @@ import json
 #from wand.image import Image as IMG
 #import pytesseract
 #import textract
+###
+import networkx as nx
+from networkx.drawing.nx_agraph import graphviz_layout
+from networkx_viewer import Viewer
+import pandas as pd
+import nxviz as nv
+import numpy as np
+import matplotlib.pyplot as plt
 
-### Limit group###
 
-from django.contrib.auth.decorators import user_passes_test  
-
-
-
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 
 def logout_page(request):
     logout(request)
@@ -58,14 +60,13 @@ def main(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploaddoc(request):
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             temp_doc = Document(docfile=request.FILES['docfile'])
-           
+
             #temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
             #temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
             #temp_doc.type = Document(docfile=request.POST.get('type'))
@@ -81,18 +82,18 @@ def uploaddoc(request):
                 temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
-            
+
             #else:
 
             #    temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
-                
+
             #    if len(temp_doc.docfile.wordstr) < 50:
             #       img=IMG(filename=temp_doc.docfile.path,resolution=200)
-                    
+
             #        img.save(filename='temp.jpg')
             #        utf8_text = get_string('temp.jpg')
             #        os.remove('temp.jpg')
-                    
+
             #        print (utf8_text)
             #        temp_doc.docfile.wordstr = utf8_text
             #        temp_doc.save(update_fields=['wordstr'])
@@ -100,7 +101,7 @@ def uploaddoc(request):
             #    print (temp_doc.docfile.wordstr)
             #    temp_doc.save(update_fields=['wordstr'])
 
-
+            parsed_json  = parse_file(temp_do.docfile.wordstr)
             #json testing#
             #check for json file, wont be needed as parsing will return json#
             if ".json" in temp_doc.docfile.path:
@@ -111,7 +112,7 @@ def uploaddoc(request):
                 #initialize person out side of for loop/if statements so we can use it later
                 person = Person(Name="temp")
                 for label in js:
-                    
+
                     #Checking Labels to see which table to create
                     if label == "person":
                         for key in js[label]:
@@ -317,15 +318,14 @@ def uploaddoc(request):
     documents = Document.objects.all()
     return render(request,'index.html',{'documents': documents, 'form': form})
 
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def person_edit(request, person_id):
 	instance = get_object_or_404(Person, id=person_id)
 	form = PersonForm(request.POST or None, instance=instance)
-   
+
 
 	if form.is_valid():
 		form.save()
-		
+
 		return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
 	context = {
 		'form' : form,
@@ -333,13 +333,21 @@ def person_edit(request, person_id):
 		'person':instance
 	}
 
-    
+
 	return render(request, 'person_update_form.html', context)
 
 
 
+
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def ocr (request):
+    return render(request, 'ocr.html')
+
+@login_required
+def parsing(request):
+    return render(request, 'parsing.html')
+
+@login_required
 def search(request):
     query_set = Person.objects.all()
     query = request.GET.get("q")
@@ -347,10 +355,12 @@ def search(request):
         query_set=query_set.filter(Name__icontains=query)
     # The filtered query_set is then put through more filters from django
     personFilter = PersonFilter(request.GET, query_set)
+    print(personFilter)
+    #dump2csv.dump(personFilter, './Dummy_Data.csv')
+
     return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def detail(request,pk):
        # Get the current person object using pk or id
     person = get_object_or_404(Person, pk=pk)
@@ -368,18 +378,7 @@ def detail(request,pk):
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
     Award = detail_dic['PersonToAwards']
-
-    form = CommentsForm(request.POST or None, instance=person)
-   
-
-    if form.is_valid():
-        form.save()
-        
-        return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
- 
-
-    context = { 
-                'form' : form,
+    context = {
                 'person':person,
                 'list': related_obj_list,
                 'school':School,
@@ -401,11 +400,44 @@ def detail(request,pk):
 
 
 
-
-
+@login_required
+def user_acc_cont (request):
+    return render(request, 'acc_cont.html')
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def export(request):
+    return render (request, 'export.html')
+
+@login_required
+def linkanalysis(request):
+    df = pd.read_csv('./Dummy_Data.csv', header=None, skiprows=1)
+    if '2' in df.columns:
+        G=nx.from_pandas_dataframe(df[0:5],0,1)
+        H=nx.from_pandas_dataframe(df[0:5],0,2)
+        G.add_edges_from(H.edges())
+    else:
+        G=nx.from_pandas_dataframe(df[0:5],0,1)
+        G.add_edges_from(H.edges())
+    nx.info(G)
+    Nodes = G.number_of_nodes()
+    Edges = G.number_of_edges()
+
+    pos = nx.spring_layout(G, k=0.9, iterations=1, scale=2)
+    #pos = nx.shell_layout(G)
+    N = Nodes
+    E = Edges
+
+    plt.figure(1, figsize = (20,20), dpi=100)
+    colors_nodes = np.random.rand(N)
+    colors_edges = np.random.rand(E)
+    nx.draw_networkx(G, pos, node_color=color_nodes, edge_color=color_edges, arrows= True, node_size= 4500, node_shape= 'p', alpha= 1, linewidths= 10, clip_on=1)
+    nx.draw_networkx_labels(G,pos,font_size=12,font_color= 'R')
+    labels = nx.get_edge_attributes(G,'weight')
+    nx.draw_networkx_edge_labels(G,pos,edge_labels=labels)
+    plt.show()
+    return render(request, 'linkanalysis.html')
+
+@login_required
 def uploadlist (request):
    # documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
     documents = UploadListFilter(request.GET,queryset = Document.objects.all())
@@ -413,7 +445,6 @@ def uploadlist (request):
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
 
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def listdelete(request, template_name='uploadlist.html'):
     docId = request.POST.get('docfile', None)
     documents = get_object_or_404(Document, pk=docId)
@@ -425,8 +456,9 @@ def listdelete(request, template_name='uploadlist.html'):
 
     return render(request, template_name, {'object': documents})
 
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+
 def parse_word_file(filepath):
 	parsed_string = docx2txt.process(filepath)
 	return parsed_string
-
+def parse_file(res_string):
+    return 1

@@ -11,13 +11,13 @@
 <div class = "personal" >
 	<section><b> Personal Info</b><br>
 	<table class = "table-fill" style="max-width:100px;">
-   
+
    <tbody class="table-hover">
      {% for field in person %}
        <tr>
-         <td style = "padding:14px; max-width: 300px; 
+         <td style = "padding:14px; max-width: 300px;
 word-wrap:break-word;" class = "text-left">{{field.0}}</td>
-         <td style = "padding:14px; max-width: 300px; 
+         <td style = "padding:14px; max-width: 300px;
 word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
        </tr>
      {% empty %}
@@ -28,7 +28,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
    </tbody>
  </table>
 	<br/>
-  
+
 
 	<a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
   <br/>
@@ -36,7 +36,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
   <p></p>
   <br/>
     <form method="POST" class="post-form">{% csrf_token %}
-      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%}
 <br/>
       <button type="submit" class = "button-style">Add Comment</button>
       </form>
@@ -108,7 +108,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 
@@ -147,7 +147,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 
@@ -177,10 +177,10 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
-	
+
 <div style = "padding-top:30px;">
 	<section><b> Clearance</b><br>
 
@@ -197,7 +197,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% for obj in clearance %}
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.ClearanceLevel}}</td>
- 
+
      {% empty %}
        <tr>
          <td colspan="2">No data</td>
@@ -205,7 +205,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 
@@ -233,7 +233,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 
@@ -263,7 +263,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 <div style = "padding-top:30px;">
@@ -292,7 +292,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 
@@ -322,7 +322,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 <div style = "padding-top:30px;">
@@ -351,7 +351,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 <div style = "padding-top:30px;">
@@ -380,7 +380,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
      {% endfor %}
    </tbody>
  </table>
-	
+
     </section>
 </div>
 </div>
