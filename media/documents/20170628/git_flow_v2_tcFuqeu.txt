@@ -1,0 +1,96 @@
+Git Flow for Dummies
+
+ONE TIME ONLY
+==============
+1. Go to the repository (repo) of your project lead on Github.
+
+2. Click "Fork" to have your own version of the repo.
+
+3. Go to your new repo on Github on your profile. Look for the button that says
+  "Clone or download". Click it and copy the URL. It should end with .git .
+
+4. In cmd/terminal, go to the directory of your choice using the "cd"
+  (change directory) command.
+
+        Example: I start out at C://Users/Renzo/
+        If you want to view the contents of your directory use this command:
+              cmd: dir
+              terminal: ls
+        If you want to store the project here then stay here. I store it in my
+        paradyme folder, so I navigate to it through the command "cd":
+
+              cd documents/paradyme
+
+        so now I am at C://Users/Renzo/documents/paradyme
+
+5. Execute this command:
+        git clone [url of your fork.git]
+
+Now you have a folder in the directory that you are in that contains the project
+contents as you see it on Github. At this point, you should have the most updated
+version of the project as it is on Github.com.
+
+
+
+EVERYTIME YOU START EDITING FILES LOCALLY
+===================
+6. cd to the folder (RSR).
+
+7. git checkout RSR-UI (or RSR-Search/Export, RSR-Parsing, etc.)
+  #This means all changes you make will only apply to this branch.
+
+8. Now, say someone tells you they have changed something and it has been
+    updated to your lead's repository or you can just see that someone
+    has made new changes since you last worked or you just want to be safe.
+    Do the following:
+    a. Go to YOUR forked repository.
+    b. Click "New Pull Request"
+    c. The "base fork" (left) is the repo that you want to update while
+        the "head fork" (right) is the repo whose changes you want to update from. So, if you
+        are updating YOUR Github repo, the left should be your repo,
+        with the "base" set as the branch you are working on. The right is your
+        project lead's repo with "compare" set as the branch you are working on.
+    d. You should now see the changes that are made. Give it a good title then
+        Click "Create Pull Request".
+    e. Now in your Github repo, click Pull Requests. Click the Pull Request you just made
+      and merge.
+    f. Now back to cmd/terminal, execute this command:
+        git pull [url of your fork.git]
+    Your project is now updated to your forked version as it is on Github.com.
+
+9. Edit some code, add a file, delete a file, any change.
+
+10. git add -A ( I use: git add .)
+    # "." means add all files that are changed for consideration when committing.
+
+11. git commit -m “made these changes etc”
+    # You are committing to changing these files.
+
+12. git push
+    # Your forked repo on Github.com now has the changes you made.
+
+13. Now go to your project lead's
+(or yours, as I write this I realize it doesn't matter) repo on Github and
+Click "New Pull Request". You will now do the same steps as Step 8 except now
+the "base fork" should be your project lead's repo, while the "head fork" is
+your own.
+
+14. Let your lead know you have created a pull request so that they can review
+your code and accept/reject it.
+
+Once they have accepted, your changes will now be applied to your lead's
+repo. And that's a wrap.
+
+SOME NOTES
+===========
+Why are we making you do this?
+This allows projects to have a lesser chance of having conflicts. When you push
+or pull, there is a chance that you need to resolve the conflict, so you will have
+to go to the file, and look for comments that Git has made for you. It will show
+you what changes you made and what the other repo had before, so you will have to
+do one of three things:
+  1. Choose your changes
+  2. Choose the other repo's changes
+  3. Merge them together
+As you might imagine, this could be a headache with multiple files, so the extra
+step of doing a "Pull Request" allows us to review potential conflicts.
