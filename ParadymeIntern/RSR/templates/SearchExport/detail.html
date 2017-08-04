@@ -247,17 +247,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "width:130px; padding:14px;"class = "text-left"> {{obj.MajorID.MajorMinor}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-
-=======
              <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
              <form action="{% url 'RSR:school-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this school?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
        </tr>
      {% empty %}
        <tr>
@@ -316,17 +311,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.CourseID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-
-=======
              <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
             <form action="{% url 'RSR:course-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this course?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
        </tr>
      {% empty %}
        <tr>
@@ -393,16 +383,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
              <form action="{% url 'RSR:language-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this language?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
@@ -440,16 +426,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.SideID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
              <form action="{% url 'RSR:sidepro-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this side project?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
@@ -492,16 +474,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.AwardID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
             <form action="{% url 'RSR:award-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this award?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
@@ -543,16 +521,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.CHID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
             <form action="{% url 'RSR:club-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this club?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
@@ -595,16 +569,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.VolunID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
             <form action="{% url 'RSR:volunteer-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this volunteer?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
@@ -646,16 +616,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.ProfID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
-<<<<<<< HEAD
-             <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a></td>
-=======
              <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
             <form action="{% url 'RSR:professional-delete' obj.pk %}" method="post" enctype="multipart/form-data">
                  {% csrf_token %}
                  <input onclick="return confirm('Are you sure you want to delete this professional development?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
              </form>
          </td>
->>>>>>> pr/60
 
        </tr>
      {% empty %}
