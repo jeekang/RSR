@@ -34,7 +34,6 @@ urlpatterns = [
     url(r'^edit_skill/(?P<skill_id>\d+)/$', views.skill_edit, name='skill-edit'),
     url(r'^edit_company/(?P<company_id>\d+)/$', views.company_edit, name='company-edit'),
     url(r'^edit_school/(?P<school_id>\d+)/$', views.school_edit, name='school-edit'),
-
     url(r'^edit_course/(?P<course_id>\d+)/$', views.course_edit, name='course-edit'),
     url(r'^edit_language/(?P<language_id>\d+)/$', views.language_edit, name='language-edit'),
     url(r'^edit_sidepro/(?P<sidepro_id>\d+)/$', views.sidepro_edit, name='sidepro-edit'),
@@ -42,6 +41,21 @@ urlpatterns = [
     url(r'^edit_club/(?P<club_id>\d+)/$', views.club_edit, name='club-edit'),
     url(r'^edit_volunteer/(?P<volunteer_id>\d+)/$', views.volunteer_edit, name='volunteer-edit'),
     url(r'^edit_professional/(?P<pro_id>\d+)/$', views.professional_edit, name='professional-edit'),
+    url(r'^edit_clearance/(?P<clearance_id>\d+)/$', views.clearance_edit, name='clearance-edit'),
+
+    #Delete
+    url(r'^delete_skill/(?P<pk>\d+)/$', views.skill_delete, name="skill-delete"),
+    url(r'^delete_company/(?P<pk>\d+)/$', views.company_delete, name="company-delete"),
+    url(r'^delete_school/(?P<pk>\d+)/$', views.school_delete, name="school-delete"),
+    url(r'^delete_course/(?P<pk>\d+)/$', views.course_delete, name="course-delete"),
+    url(r'^delete_language/(?P<pk>\d+)/$', views.language_delete, name='language-delete'),
+    url(r'^delete_sidepro/(?P<pk>\d+)/$', views.sidepro_delete, name='sidepro-delete'),
+    url(r'^delete_award/(?P<pk>\d+)/$', views.award_delete, name='award-delete'),
+    url(r'^delete_club/(?P<pk>\d+)/$', views.club_delete, name='club-delete'),
+    url(r'^delete_volunteer/(?P<pk>\d+)/$', views.volunteer_delete, name='volunteer-delete'),
+    url(r'^delete_professional/(?P<pk>\d+)/$', views.professional_delete, name='professional-delete'),
+
+
 
     url(r'^logout/$', views.logout_page, name = 'logout'),
 
