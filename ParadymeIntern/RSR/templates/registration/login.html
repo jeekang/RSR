@@ -3,6 +3,8 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<div class="container content-section text-center">
+
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -31,6 +33,7 @@
     <br/>
     <br/>
     <br/>
+    </div>
 
     {% endblock %}
 

@@ -3,12 +3,17 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                   .tabcontent{
+                    max-width:1000px;
+                    margin:0 auto;
+                   }
+
                    /* Style the tab */
 div.tab {
-    position: fixed;
+    position: absolute;
     border-radius: 10px;
     left:20px;
-    top:80px;
+    top:150px;
     background-color: #0D0D0D	;
     width: 11%;
 }
@@ -64,6 +69,8 @@ div.tab button.active {
                     .personal {width: 100%; margin-left: 0px; padding-bottom: 30px;}
                     .skills   {width: 100%; margin-left: 0px;}
                     .comment  {width: 100%; margin-left: 0px; padding-bottom: 30px;}
+
+                    
  
                     }
                     @media screen and (max-width: 765px ) {
@@ -418,7 +425,7 @@ td.text-right {
     <!-- /.container -->
 </nav>
 
-<section style = "font-family: Raleway, Roboto, helvetica, arial, sans-serif;" id="about" class="container content-section text-center">
+<section style = "font-family: Raleway, Roboto, helvetica, arial, sans-serif;" id="about">
 <div class = "content">
 {% block content %}
 {% endblock %}
