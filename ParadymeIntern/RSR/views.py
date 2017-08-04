@@ -495,7 +495,106 @@ def professional_edit(request,pro_id):
     }
     return render(request, 'professional_update_form.html', context)
 
+def clearance_edit(request,clearance_id):
+    instance = get_object_or_404(PersonToClearance, id=clearance_id)
+    form = PersontoClearanceForm(request.POST or None, instance=instance)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[instance.PersonID.pk]))
+
+    context = {
+        'form': form,
+        'pk':clearance_id,
+        'person': instance
+    }
+    return render(request, 'clearance_update_form.html', context)
+
 #end edit
+
+##########delete##############
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def skill_delete(request,pk,template_name='detail.html'):
+    skills = get_object_or_404(PersonToSkills, pk=pk)
+    if request.method == 'POST':
+        skills.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[skills.PersonID.pk]))
+    return render(request, template_name, {'object': skills})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def company_delete(request,pk,template_name='detail.html'):
+    company = get_object_or_404(PersonToCompany, pk=pk)
+    if request.method == 'POST':
+        company.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[company.PersonID.pk]))
+    return render(request, template_name, {'object': company})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def school_delete(request,pk,template_name='detail.html'):
+    school = get_object_or_404(PersonToSchool, pk=pk)
+    if request.method == 'POST':
+        school.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[school.PersonID.pk]))
+    return render(request, template_name, {'object': school})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def course_delete(request,pk,template_name='detail.html'):
+    course = get_object_or_404(PersonToCourse, pk=pk)
+    if request.method == 'POST':
+        course.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[course.PersonID.pk]))
+    return render(request, template_name, {'object': course})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def language_delete(request,pk,template_name='detail.html'):
+    language = get_object_or_404(PersonToLanguage, pk=pk)
+    if request.method == 'POST':
+        language.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[language.PersonID.pk]))
+    return render(request, template_name, {'object': language})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def sidepro_delete(request,pk,template_name='detail.html'):
+    sidepro = get_object_or_404(PersonToSide, pk=pk)
+    if request.method == 'POST':
+        sidepro.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[sidepro.PersonID.pk]))
+    return render(request, template_name, {'object': sidepro})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def award_delete(request,pk,template_name='detail.html'):
+    award = get_object_or_404(PersonToAwards, pk=pk)
+    if request.method == 'POST':
+        award.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[award.PersonID.pk]))
+    return render(request, template_name, {'object': award})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def club_delete(request,pk,template_name='detail.html'):
+    club = get_object_or_404(PersonToClubs_Hobbies, pk=pk)
+    if request.method == 'POST':
+        club.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[club.PersonID.pk]))
+    return render(request, template_name, {'object': club})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def volunteer_delete(request,pk,template_name='detail.html'):
+    volunteer = get_object_or_404(PersonToVolunteering, pk=pk)
+    if request.method == 'POST':
+        volunteer.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[volunteer.PersonID.pk]))
+    return render(request, template_name, {'object': volunteer})
+
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def professional_delete(request,pk,template_name='detail.html'):
+    professional = get_object_or_404(PersonToProfessionalDevelopment, pk=pk)
+    if request.method == 'POST':
+        professional.delete()
+        return HttpResponseRedirect(reverse('RSR:detail', args=[professional.PersonID.pk]))
+    return render(request, template_name, {'object': professional})
+
+#########end delete###########
 
 
 @login_required
