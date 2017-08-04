@@ -1,154 +1,136 @@
+
 {% extends 'navigation.html' %}
-
 {% block content %}
-
-
-    {% load widget_tweaks %}
 <div class="container content-section text-center">
 
-    <div class = body>
-        <h1 style = "font-family: Raleway, Arial">Resume Filter System</h1>
-    
+<title>Resume Filter</title>
+    {% load static %}
+    <!--for bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--for autocomplete function-->
+    <!-- django autocomplete light gets slow with several thousands of entries may need change later on-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/collected/admin/js/vendor/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/jquery.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/vendor/select2/dist/css/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/vendor/select2/dist/js/select2.full.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/forward.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+</head>
+<style>
+   
+    .select2-selection__rendered{color:#000; }
+</style>
+<body>
+    {% load widget_tweaks %}
+   
 
-          <form action="" method="Get" class = "searchform cf">
+        <h1>Resume Filter System</h1>
+        <p>Select/type one or more the following fields</p>
 
-            <br/>
-            <!--  Hide Show filters -->
-            <a href="#search-div" class="btn btn-default" data-toggle="collapse">Advanced Search</a>
-            <div id = "search-div" class = "collapse">
-            <br/>
-            <br/>
-            <p>Select/type one or more the following fields</p>
+    <form action="" method="Get">
 
-            <!-- Search Bar -->
-            <div>
-                Search Bar:
-                <input style="color:#000000" type="text" name="q" placeholder="Input search term" value="{{request.GET.q}}"/>
-            </div>
-            <p></p>
             <div class="row">
-            <fieldset>
-                <legend style="color:#FFF">Academia</legend>
+                <!-- Search Bar -->
+                <div class="form-group col-sm-4 col-md-3">
+                Search Bar:
+                {% render_field personFilter.form.Name class="form-control" %}
+                </div>
               <!-- Filters -->
-                <div class="form-group col-sm-2 col-md-2">
-                    School Attended:
+                <div class="form-group col-sm-4 col-md-3">
+                    School Attend:
                     {% render_field personFilter.form.SchoolAttend class="form-control" %}
                 </div>
-                <div class="form-group col-sm-2 col-md-2">
+                <div class="form-group col-sm-4 col-md-3">
                     Graduation Date:
                     {% render_field personFilter.form.GraduateDate class="form-control" %}
                 </div>
-                <div class="form-group col-sm-2 col-md-2">
+                <div class="form-group col-sm-4 col-md-3">
                     Degree Level:
                     {% render_field personFilter.form.DegreeLevel class="form-control" %}
                 </div>
-                <div class="form-group col-sm-2 col-md-2">
+                <div class="form-group col-sm-4 col-md-3">
                     Major:
                     {% render_field personFilter.form.Major class="form-control" %}
                 </div>
-                <div class="form-group col-sm-2 col-md-2">
+                <div class="form-group col-sm-4 col-md-3">
                     GPA lower bound:
                     {% render_field personFilter.form.GPAlb class="form-control" %}
                 </div>
-                <div class="form-group col-sm-2 col-md-2">
+                <div class="form-group col-sm-4 col-md-3">
                     GPA upper bound:
                     {% render_field personFilter.form.GPAub class="form-control" %}
                 </div>
-                </fieldset>
+                <div class="form-group col-sm-4 col-md-3">
+                    Coursework:
+                    {% render_field personFilter.form.Coursework class="form-control" %}
                 </div>
-                <br/>
-
-                <div class = "row">
-                <fieldset>
-                <legend style="color:#FFF">Skills/Awards</legend>
-
-
-                <div class="form-group col-sm-3 col-md-3">
-                    Skill:
-                    {% render_field personFilter.form.Skills class="form-control" %}
-                </div>
-
-                <div class="form-group col-sm-3 col-md-3">
-                    Year of experience for skill:
-                    {% render_field personFilter.form.YearOfExperienceForSkill class="form-control" %}
-                </div>
-
-                <div class="form-group col-sm-3 col-md-3">
+                <div class="form-group col-sm-4 col-md-3">
                     Language Spoken:
                     {% render_field personFilter.form.Language class="form-control" %}
                 </div>
-                
-                <div class="form-group col-sm-3 col-md-3">
+                <div class="form-group col-sm-4 col-md-3">
+                    Skills:
+                    {% render_field personFilter.form.Skills class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Year of experience for skill:
+                    {% render_field personFilter.form.YearOfExperienceForSkill class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
                     Awards:
                     {% render_field personFilter.form.Award class="form-control" %}
                 </div>
-                </fieldset>
-                </div>
-
-                <br/>
-                <div class = "row">
-                <fieldset>
-                <legend style="color:#FFF">Professional Experience</legend>
-                <div class="form-group col-sm-4 col-md-4">
+                <div class="form-group col-sm-4 col-md-3">
                     Company worked at:
                     {% render_field personFilter.form.CompanyWorked class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-4">
+                <div class="form-group col-sm-4 col-md-3">
                     Title:
                     {% render_field personFilter.form.Title class="form-control" %}
                 </div>
-                <div class="form-group col-sm-4 col-md-4">
+                <div class="form-group col-sm-4 col-md-3">
                     Professional Development:
                     {% render_field personFilter.form.ProfessionalDevelopment class="form-control" %}
                 </div>
-                </fieldset>
-                </div>
-                <br/>
-                <div class = "row">
-                <fieldset>
-                <legend style="color:#FFF">Clearance</legend>
-
-       
-
-                <div class="form-group col-sm-12 col-md-12">
-                    Security Clearance:
-                    {% render_field personFilter.form.SecurityClearance class="form-control" style=" width: 300px; margin:auto;"%}
+            </div>
+             <div class="row">
                 
+                <div class="form-group col-sm-4 col-md-3">
+                    Volunteering:
+                    {% render_field personFilter.form.Volunteering class="form-control" %}
                 </div>
-                </fieldset>
-				</div>
-				
-				 <div class = "row">
-                <fieldset>
-                <legend style="color:#FFF">Extracurricular</legend>
-				 <div class="form-group col-sm-6 col-md-6">
-					Volunteering:
-                    {% render_field personFilter.form.Volunteering class="form-control" style=" width: 300px; margin:auto;"%}
-                 </div>
-                 <div class="form-group col-sm-6 col-md-6">
-                     Club:
-                     {% render_field personFilter.form.Club_Hobby class="form-control" style=" width: 300px; margin:auto;"%}
-                  </div>	
-				  </fieldset>
-				  </div>
-
-            
-            <p></p>
+                <div class="form-group col-sm-4 col-md-3">
+                    Club:
+                    {% render_field personFilter.form.Club_Hobby class="form-control" %}
+                </div>
+             </div>
+             <div class="row">
+                <div class="form-group col-sm-4 col-md-3">
+                    Security Clearance:
+                    {% render_field personFilter.form.SecurityClearance class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Work Authorization:
+                    {% render_field personFilter.form.WorkAuthorization class="form-control" %}
+                </div>
+            </div>
             <div align="center">
             <button type="submit" class="button-style">
                 <span class="glyphicon glyphicon-search"></span> Search
             </button>
-			
         </div>
-        <br/>
-        </div>
-		
-
-
     </form>
-
-    <p>   </p>
-    <div align="center">
+    <br/>
+    <br/>
+    <br/>
+    {{ form.media }}
+    {% load search_tags %}
+   <div align="center">
     <div class = "body">
   <table class = "table-fill">
    <thead>
@@ -182,11 +164,6 @@
     </div>
 
     </div>
-    </div>
+</body>
 </div>
 {% endblock %}
-
-
-
-
-

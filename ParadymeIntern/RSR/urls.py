@@ -58,10 +58,26 @@ urlpatterns = [
 
 
     url(r'^logout/$', views.logout_page, name = 'logout'),
-
-    #Search/Export Team
     url(r'^search/person_detail/(?P<pk>[0-9]+)/$', views.detail, name='detail'),
+
+        #url for autocomplete function for ProfessionalDevelopment class
+    url(r'^search/ProfessionalDevelopment-autocomplete/$', ProfessionalDevelopmentAutocomplete.as_view(),
+        name='ProfessionalDevelopment-autocomplete',),
+        #url for autocomplete function for skills class
+    url(r'^search/Skills-autocomplete/$', Skillsutocomplete.as_view(),
+        name='Skills-autocomplete',),
+        #url for autocomplete function for Volunteering class
+    url(r'^search/Volunteering-autocomplete/$', Volunteeringautocomplete.as_view(),
+        name='Volunteering-autocomplete',),
+        #url for autocomplete function for search bar
+    url(r'^search/SearchBar-autocomplete/$', SearchBarautocomplete.as_view(),
+        name='SearchBar-autocomplete',),
+        #url for autocomplete function for LanguageSpoken class
+    url(r'^search/Language-autocomplete/$', Languageautocomplete.as_view(),
+        name='LanguageSpoken-autocomplete',),
+        #url for autocomplete function for Company class
+    url(r'^search/Company-autocomplete/$', Companyautocomplete.as_view(),
+        name='Company-autocomplete',)
 
 
 ]
-
