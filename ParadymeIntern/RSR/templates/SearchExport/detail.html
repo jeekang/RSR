@@ -39,47 +39,35 @@
   <button class="tablinks" onclick="openTab(event, 'Professional Developement')">Professional Developement</button>
 </div>
 
-<div class="container content-section text-center">
+<div class="container content-section text-center" style="padding-left:100px">
 
 <!-- Personal info block, left hand side -->
 <h1 style = "font-family: Raleway, Arial">
     {{person.Name}}
 </h1>
-<br/>
 
-<br/>
 
 <div id="Personal" class="tabcontent" style="display:block" >
-  <div style="overflow-x: auto">
-	<table class = "table-fill">
-   <thead >
-     <tr>
-     {% for field in person %}
-       
-         <th style = "height:50px; padding:14px;" class = "text-left">{{field.0}}</td>
-     {% endfor %}
-     </tr>
-   </thead>
-   <tbody class="table-hover">
-    
-       <tr>
-         {% for field in person %}
-         
-         <td style = "padding:14px; max-width: 300px; 
-word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
-{% empty %}
-      
-         <td colspan="2">No data</td>
-{% endfor %}
+    <table class = "table-fill">
 
-       
-     
-       </tr>
+   <tbody class="table-hover">
+ {% for field in person %}
+   <tr>
+       <td class = "text-left" style="padding:10px;">{{field.0}}</td>
+
+
+         <td style ="word-wrap:break-word;padding:10px;" class = "text-left"> {{field.1}}</td>
+{% empty %}
+
+         <td colspan="2">No data</td>
+
+
+   </tr>
+   {% endfor %}
      
    </tbody>
  </table>
-  </div>
-	<br/>
+    <br/>
   
 
   <a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
