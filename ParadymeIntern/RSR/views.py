@@ -30,10 +30,10 @@ from dal import autocomplete
 import json
 
 ###TESTING OCR
-#from PIL import Image
-#from wand.image import Image as IMG
-#import pytesseract
-#import textract
+from PIL import Image
+from wand.image import Image as IMG
+import pytesseract
+import textract
 
 ### Limit group###
 
@@ -51,11 +51,11 @@ def logout_page(request):
 def main(request):
     return render(request, 'main.html')
 
-#def get_string(name):
-#    img=Image.open(name)
-#    utf8_text = pytesseract.image_to_string(img)
-#    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
-#    return utf8_text
+def get_string(name):
+    img=Image.open(name)
+    utf8_text = pytesseract.image_to_string(img)
+    utf8_text = str(utf8_text.encode('ascii', 'ignore'))
+    return utf8_text
 
 
 @login_required
@@ -85,34 +85,39 @@ def uploaddoc(request):
 
             if ".doc" in temp_doc.docfile.path:
                 print (temp_doc.docfile.path)
-                temp_doc.docfile.wordstr = parse_word_file(temp_doc.docfile.path)
-                print (temp_doc.docfile.wordstr)
+                temp_doc.wordstr = parse_word_file(temp_doc.docfile.path)
+                print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
             
             ### UNCOMMENT THESE LINES FOR MAC/LINUX USERS: OCR/TEXTRACT
 
-            #else:
+            else:
 
-            #    temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
+                temp_doc.wordstr = textract.process(temp_doc.docfile.path)
                 
-            #    if len(temp_doc.docfile.wordstr) < 50:
-            #       img=IMG(filename=temp_doc.docfile.path,resolution=200)
+                if len(temp_doc.wordstr) < 50:
+                    img=IMG(filename=temp_doc.docfile.path,resolution=200)
                     
-            #        img.save(filename='temp.jpg')
-            #        utf8_text = get_string('temp.jpg')
-            #        os.remove('temp.jpg')
+                    img.save(filename='temp.jpg')
+                    utf8_text = get_string('temp.jpg')
+                    os.remove('temp.jpg')
                     
-            #        print (utf8_text)
-            #        temp_doc.docfile.wordstr = utf8_text
-            #        temp_doc.save(update_fields=['wordstr'])
+                    print (utf8_text)
+                    temp_doc.wordstr = utf8_text
+                    temp_doc.save(update_fields=['wordstr'])
 
-            #    print (temp_doc.docfile.wordstr)
-            #    temp_doc.save(update_fields=['wordstr'])
+                print (temp_doc.wordstr)
+                temp_doc.save(update_fields=['wordstr'])
 
-            ## PARSING NOTE
-            ## CALL temp_doc.wordstr HERE TO GRAB STRING
+            '''
+            ============ PARSING TEAM =====================
+            FROM HERE YOU CAN CALL temp_doc.wordstr HERE TO GRAB STRING
+
+            ===============================================
             ###
-            
+
+            '''
+
             #json testing#
             #check for json file, wont be needed as parsing will return json#
             
@@ -123,6 +128,7 @@ def uploaddoc(request):
             #if True:
             # ======================================#
              
+
             if ".json" in temp_doc.docfile.path:
 
 
@@ -1050,4 +1056,21 @@ class Companyautocomplete(autocomplete.Select2QuerySetView):
         if self.q:
             qs = qs.filter(Name__istartswith=self.q)
         return qs
+
+#OCR's Search. REGEX ON RESUME TEXT
+
+def OCRSearch(request):
+    doc_objects = Document.objects.all()
+    search_item = str(request.GET.get('search'))
+    print(search_item)
+    results=[]
+    for document in doc_objects:
+        print(document.wordstr)
+        wordstr = str(document.wordstr)
+        if search_item.lower() in wordstr.lower():
+            print(document.wordstr)
+            results.append(document)
+    context = {'results': results}
+
+    return render(request, 'OCRSearch.html', context)
 
