@@ -62,9 +62,15 @@ def main(request):
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploaddoc(request):
     # Handle file upload
+
+    
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
+            #### PARSING TEAM = AT THE END OF THE NEXT LINES, USE 
+            #### temp_doc.wordstr TO GRAB STRING ####
+
+
             temp_doc = Document(docfile=request.FILES['docfile'])
            
             #temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
@@ -83,6 +89,8 @@ def uploaddoc(request):
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
             
+            ### UNCOMMENT THESE LINES FOR MAC/LINUX USERS: OCR/TEXTRACT
+
             #else:
 
             #    temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
@@ -101,12 +109,32 @@ def uploaddoc(request):
             #    print (temp_doc.docfile.wordstr)
             #    temp_doc.save(update_fields=['wordstr'])
 
-
+            ## PARSING NOTE
+            ## CALL temp_doc.wordstr HERE TO GRAB STRING
+            ###
+            
             #json testing#
             #check for json file, wont be needed as parsing will return json#
+            
+            
+            #========== PARSING TEAM JSON =========== #
+            ## GET RID OF THIS LINE BELOW
+            ## replace with below line:  (just so we dont have to redo indents)
+            #if True:
+            # ======================================#
+             
             if ".json" in temp_doc.docfile.path:
+
+
+                
                 #either load json, or recieve json file
+
+                ### ===================== ######
+                #PARSING, REPLACE temp_doc.docfile.path with the json path!!
+                ### ====================== ######
                 js = json.load(open(temp_doc.docfile.path))
+                
+                
                 #iterate through json file
 
                 #initialize person out side of for loop/if statements so we can use it later
