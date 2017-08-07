@@ -3,6 +3,13 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                     input, select, textarea{
+    color: #000;
+}
+
+textarea:focus, input:focus {
+    color: #000;
+}
                    .tabcontent{
                     max-width:1000px;
                     margin:0 auto;
@@ -369,7 +376,7 @@ td.text-right {
                        <title>RSR</title>
 
                        <!-- Bootstrap Core CSS -->
-                       <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+                       <link href="{% static 'vendor/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
                        <!-- Custom Fonts -->
                        <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
@@ -377,7 +384,7 @@ td.text-right {
                        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
                        <!-- Theme CSS -->
-                       <link href="{% static 'css/grayscale.min.css' %}" rel="stylesheet">
+                       <link href="{% static 'css/grayscale.css' %}" rel="stylesheet">
 
                        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
                        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

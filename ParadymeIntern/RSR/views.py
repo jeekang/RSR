@@ -23,6 +23,7 @@ from django.db.models import Q
 from RSR.persondetails import Detail
 from RSR.persondetails2 import Detail2
 from django.views.generic.edit import UpdateView
+from dal import autocomplete
 
 
 ### json Parsing ##
@@ -61,9 +62,15 @@ def main(request):
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploaddoc(request):
     # Handle file upload
+
+    
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
+            #### PARSING TEAM = AT THE END OF THE NEXT LINES, USE 
+            #### temp_doc.wordstr TO GRAB STRING ####
+
+
             temp_doc = Document(docfile=request.FILES['docfile'])
            
             #temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
@@ -82,6 +89,8 @@ def uploaddoc(request):
                 print (temp_doc.docfile.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
             
+            ### UNCOMMENT THESE LINES FOR MAC/LINUX USERS: OCR/TEXTRACT
+
             #else:
 
             #    temp_doc.docfile.wordstr = textract.process(temp_doc.docfile.path)
@@ -100,12 +109,32 @@ def uploaddoc(request):
             #    print (temp_doc.docfile.wordstr)
             #    temp_doc.save(update_fields=['wordstr'])
 
-
+            ## PARSING NOTE
+            ## CALL temp_doc.wordstr HERE TO GRAB STRING
+            ###
+            
             #json testing#
             #check for json file, wont be needed as parsing will return json#
+            
+            
+            #========== PARSING TEAM JSON =========== #
+            ## GET RID OF THIS LINE BELOW
+            ## replace with below line:  (just so we dont have to redo indents)
+            #if True:
+            # ======================================#
+             
             if ".json" in temp_doc.docfile.path:
+
+
+                
                 #either load json, or recieve json file
+
+                ### ===================== ######
+                #PARSING, REPLACE temp_doc.docfile.path with the json path!!
+                ### ====================== ######
                 js = json.load(open(temp_doc.docfile.path))
+                
+                
                 #iterate through json file
 
                 #initialize person out side of for loop/if statements so we can use it later
@@ -597,16 +626,8 @@ def professional_delete(request,pk,template_name='detail.html'):
 #########end delete###########
 
 
-@login_required
-@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
-def search(request):
-    query_set = Person.objects.all()
-    query = request.GET.get("q")
-    if query:
-        query_set=query_set.filter(Name__icontains=query)
-    # The filtered query_set is then put through more filters from django
-    personFilter = PersonFilter(request.GET, query_set)
-    return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
+
+
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
@@ -617,6 +638,7 @@ def detail(request,pk):
 
     detail_dic = Detail2(person)
     School_Detail = detail_dic['PersonToSchool']
+    print(School_Detail)
     Course_Detail = detail_dic['PersonToCourse']
     Pro = detail_dic['PersonToProfessionalDevelopment']
     Side = detail_dic['PersonToSide']
@@ -942,10 +964,6 @@ def detail(request,pk):
 
 
 
-
-
-
-
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def uploadlist (request):
@@ -972,4 +990,64 @@ def listdelete(request, template_name='uploadlist.html'):
 def parse_word_file(filepath):
 	parsed_string = docx2txt.process(filepath)
 	return parsed_string
+
+
+
+# SEARCH/EXPORT TEAM
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
+def search(request):
+    query_set = Person.objects.order_by('Name').distinct()
+    personFilter = PersonFilter(request.GET, query_set)
+    return render(request, 'SearchExport/search.html', {'personFilter': personFilter})
+
+class ProfessionalDevelopmentAutocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for ProfessionalDevelopment class
+    def get_queryset(self):
+        qs = ProfessionalDevelopment.order_by('Name').distinct()
+
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class Skillsutocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Skills class
+    def get_queryset(self):
+        qs = Skills.objects.order_by('Name').distinct()
+
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class Volunteeringautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Volunteering class
+    def get_queryset(self):
+        qs = Volunteering.objects.order_by('Name').distinct()
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class SearchBarautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Search Bar that sorts by Person Names
+    def get_queryset(self):
+        qs = Person.objects.order_by('Name').distinct()
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
+
+class Languageautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for LanguageSpoken class
+    def get_queryset(self):
+        qs = LanguageSpoken.objects.order_by('Language').distinct()
+        if self.q:
+            qs = qs.filter(Language__istartswith=self.q)
+        return qs
+
+class Companyautocomplete(autocomplete.Select2QuerySetView):
+    # autocomplete function for Company class
+    def get_queryset(self):
+        qs = Company.objects.order_by('Name').distinct()
+        if self.q:
+            qs = qs.filter(Name__istartswith=self.q)
+        return qs
 
