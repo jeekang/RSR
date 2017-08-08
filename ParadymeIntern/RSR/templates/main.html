@@ -3,12 +3,15 @@
                    <!DOCTYPE html>
                    <html lang="en">
                    <style>
+                   @import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
                    .TextBox{
                      -moz-border-radius:1px;
                      -webkit-border-radius:1px;
                      border-radius:1px;
                      border: #solid 10px #000;
-                     background-color: rgba(255,255,255,0.8);
+                     background-color: rgba(255,255,255,0.7);
+                     padding-top: 35px;
+                     padding-bottom: 15px;
                      height:100%;
                      width:100%;
                      margin-left: auto ;
@@ -24,7 +27,7 @@
                        <meta name="description" content="">
                        <meta name="author" content="">
 
-                       <title>RSR</title>
+                       <title >RSR</title>
 
                        <!-- Bootstrap Core CSS -->
                        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -73,12 +76,7 @@
                                        <li>
                                            <a href="{% url 'RSR:search' %}">Search</a>
                                        </li>
-                                       <li>
-                                           <a href="{% url 'RSR:linkanalysis' %}">Link Analysis</a>
-                                       </li>
-                                       <li>
-                                           <a href="{% url 'RSR:user_access' %}">User Access</a>
-                                       </li>
+                                    
                                        <li>
                                            <a href="{% url 'logout' %}">Log Out</a>
                                        </li>
@@ -96,7 +94,7 @@
                                    <div class="row">
                                        <div class="col-md-8 col-md-offset-2">
                                          <div class="TextBox">
-                                           <h2 style = "color: #262626; font-family: Open Sans  , Arial, sans-serif;text-decoration: underline;text-decoration-color: orange;"class="brand-heading">RSR</h2>
+                                           <h2 style = "color: #262626; font-family: Raleway, Open Sans  , Arial, sans-serif;text-decoration: underline;text-decoration-color: orange;"class="brand-heading">RSR</h2>
                                            <h4 style = "font-weight: normal;color: #666666; font-family:  Open Sans  , Arial, sans-serif;">Resume Parser and Skills Repository</h4>
                                          </div>
                                            <a href="#about" class="btn btn-circle page-scroll">
@@ -113,7 +111,7 @@
                        <section id="about" class="container content-section text-center">
                            <div class="row">
                                <div class="col-lg-8 col-lg-offset-2">
-                                   <h2 style = " text-decoration: underline;text-decoration-color: orange;font-family: 'Open Sans', Helvetica, Arial, sans-serif;">About RSR</h2>
+                                   <h2 style = " text-decoration: underline;text-decoration-color: orange;font-family: Raleway, 'Open Sans', Helvetica, Arial, sans-serif;">About RSR</h2>
                                    <p>Use this place if needed for an about. </p>
                                    <p>Here too, maybe a user guide</p>
                                    <p>Continued.</p>

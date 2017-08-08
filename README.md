@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RSR
 Resume Parser and Skills Repository - Paradyme Summer 2017 Internship Project
 
@@ -11,3 +12,9 @@ Changes:
 Bugs:
 	Cannot upload more than one page of a image. Be wary. 
 
+=======
+# RSR
+Resume Parser and Skills Repository - Paradyme Summer 2017 Internship Project
+
+Testing Changes
+>>>>>>> pr/62

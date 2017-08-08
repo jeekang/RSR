@@ -1,43 +1,63 @@
 {% extends 'navigation.html' %}
 
 {% block content %}
+<div class="container content-section text-center">
+
+    <body>
 
            <div class="inner cover">
-             <h1 class="cover-heading">Upload your resume</h1>
+             <h1 class="cover-heading" style = "font-family: Raleway, Arial">Upload your resume</h1>
+
+             <br/>
+
 
 
              <form action="{% url 'RSR:uploaddoc' %}" method="post" enctype="multipart/form-data" align="center">
                          <div align="center">
 
              {% csrf_token %}
-                <p>{{ form.non_field_errors }}</p>
-                <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-                <p>{{ form.docfile.errors }}{{ form.docfile }}</p>
+             <span class="btn btn-default btn-file">
+                Browse 
+                <input type="file">
+                {{ form.non_field_errors }}
+                {{ form.docfile.errors }}{{ form.docfile }}
+                </span>
+
+             <br/>
+
+             <br/>
+            <p></p>
                 </div>
-                First name:
-                <input style="color: #000000;" type="text" name="firstname">
 
-                Last name:
-                <input style="color: #000000;" type="text" name="lastname">
-                <br><br>
-                <p>   </p>
-                <input type="radio" name="type" value="Prospective Intern"> Prospective Intern<br>
-                <input type="radio" name="type" value="Prospective Employee"> Prospective Employee<br>
-                <input type="radio" name="type" value="Intern">Intern<br>
-                <input type="radio" name="type" value="Employee"> Employee<br><br>
-                <p>   </p>
-                <input class = "button-style" type="submit" value="Upload"/>
+                
+
+             
+                    <input type="text" class="form-control" name = "firstname" id="firstname" style="width: 300px; margin:auto;" placeholder="First Name" />
+
+                    <br/>
+                       
+                    <div style = "color:#FFF">
+                    <input type="text" class="form-control" name = "lastname" id="lastname" style="width: 300px; margin:auto;" placeholder="Last Name"/>
+                    <br/><br/>
+                    <input type="radio" name="type" id="pi" value="Prospective Intern" style="margin-left: 12px; margin-right: 10px">Prospective Intern</input><br/>
+                    <input type="radio" name="type" id="pe" value="Prospective Employee" style="margin-left: 39px;margin-right: 10px">Prospective Employee</input><br/>
+                    <input type="radio" name="type" id="i" value="Intern" style="margin-left: -64px;margin-right: 10px">Intern</input><br/>
+                    <input type="radio" name="type" id="e" value="Employee" style="margin-left: -37px;margin-right: 10px">Employee</input><br/>
+                    <br/>
+                    </div>
+            <p></p>
+                    <input class = "button-style" type="submit" value="Upload"/>
             </form>
+            <p></p>
 
-            <p>
 
             <form action="{% url 'RSR:uploadlist' %}">
                                   <input class = "button-style" type="submit" value="Check the upload list" />
              </form>
-            </p>
 
            </div>
-
+</body>
+</div>
 
 
   {% endblock %}
