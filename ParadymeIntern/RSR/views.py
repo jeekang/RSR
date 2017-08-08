@@ -552,7 +552,6 @@ def skill_delete(request,pk,template_name='skill_update_form.html'):
     return render(request, template_name, {'object': skills})
 
 
-
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def company_delete(request,pk,template_name='detail.html'):
     company = get_object_or_404(PersonToCompany, pk=pk)
