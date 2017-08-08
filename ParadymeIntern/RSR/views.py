@@ -111,11 +111,12 @@ def uploaddoc(request):
                 print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
 
-            
+            '''
             ============ PARSING TEAM =====================
             FROM HERE YOU CAN CALL temp_doc.wordstr HERE TO GRAB STRING
 
             ===============================================
+            '''
             ###
 
             
