@@ -5,7 +5,7 @@
 <div class="container content-section text-center">
 
 <div style="color:#000">
-	<h3 style = "color:#FFF"> Editing {{person.Name}}'s Work History Info</h3>
+	<h3 style = "color:#FFF"> Editing {{person.PersonID.Name}}'s Work History Info</h3>
 	<br/>
     <form method="POST" class="post-form">{% csrf_token %}
 	    {% for field in form %}
@@ -15,6 +15,11 @@
         <button type="submit" class="save btn btn-default">Save</button>
 
     </form>
+	<!--delete --></p>
+			<form action="{% url 'RSR:company-delete' pk %}" method="post">
+                 {% csrf_token %}
+                 <input onclick="return confirm('Are you sure you want to delete this history?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
+             </form>
 </div>
 
 {% endblock %}

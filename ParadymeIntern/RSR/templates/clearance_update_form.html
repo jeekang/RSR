@@ -5,7 +5,7 @@
 <div class="container content-section text-center">
 
 <div style="color:#000">
-	<h3 style = "color:#FFF"> Editing {{person.Name}}'s Award Info</h3>
+	<h3 style = "color:#FFF"> Editing {{person.PersonID.Name}}'s Clearance Info</h3>
 	<br/>
     <form method="POST" class="post-form">{% csrf_token %}
 	    {% for field in form %}
