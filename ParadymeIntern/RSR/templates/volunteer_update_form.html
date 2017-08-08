@@ -1,6 +1,9 @@
 {% extends 'navigation.html' %}
 {% load widget_tweaks %}
 {% block content %}
+<!--ADD THIS DIV CLASS TO ALL-->
+<div class="container content-section text-center">
+
 <div style="color:#000">
 	<h3 style = "color:#FFF"> Editing {{person.Name}}'s Voluntering Info</h3>
 	<br/>
@@ -12,4 +15,5 @@
         <button type="submit" class="save btn btn-default">Save</button>
 
     </form>
+</div>
 {% endblock %}

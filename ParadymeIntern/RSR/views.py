@@ -544,12 +544,14 @@ def clearance_edit(request,clearance_id):
 ##########delete##############
 
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
-def skill_delete(request,pk,template_name='detail.html'):
+def skill_delete(request,pk,template_name='skill_update_form.html'):
     skills = get_object_or_404(PersonToSkills, pk=pk)
     if request.method == 'POST':
         skills.delete()
         return HttpResponseRedirect(reverse('RSR:detail', args=[skills.PersonID.pk]))
     return render(request, template_name, {'object': skills})
+
+
 
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
 def company_delete(request,pk,template_name='detail.html'):
