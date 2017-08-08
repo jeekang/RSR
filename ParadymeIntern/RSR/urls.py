@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^edit_clearance/(?P<clearance_id>\d+)/$', views.clearance_edit, name='clearance-edit'),
 
     #Delete
-    url(r'^delete_skill/(?P<pk>\d+)/$', views.skill_delete, name="skill-delete"),
+    url(r'^delete_skill/(?P<pk>\d+)$', views.skill_delete, name="skill-delete"),
     url(r'^delete_company/(?P<pk>\d+)/$', views.company_delete, name="company-delete"),
     url(r'^delete_school/(?P<pk>\d+)/$', views.school_delete, name="school-delete"),
     url(r'^delete_course/(?P<pk>\d+)/$', views.course_delete, name="course-delete"),
