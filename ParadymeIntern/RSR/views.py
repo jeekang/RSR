@@ -147,15 +147,16 @@ def uploaddoc(request):
                 #iterate through json file
 
                 #initialize person out side of for loop/if statements so we can use it later
-                person = Person(Name="temp")
+                p_name = temp_doc.firstname + " " + temp_doc.lastname
+                person = Person(Name=p_name)
                 for label in js:
                     
                     #Checking Labels to see which table to create
                     if label == "person":
                         for key in js[label]:
-                            if key == "name":
-                                person.Name = js[label][key]
-                            elif key == "email":
+                            #if key == "name":
+                            #    person.Name = js[label][key]
+                            if key == "email":
                                 person.Email = js[label][key]
                             elif key == "address":
                                 person.Address = js[label][key]
