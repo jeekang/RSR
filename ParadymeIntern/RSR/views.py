@@ -30,12 +30,12 @@ from dal import autocomplete
 import json
 
 ###TESTING OCR
-
+'''
 from PIL import Image
 from wand.image import Image as IMG
 import pytesseract
 import textract
-
+'''
 ### Limit group###
 
 from django.contrib.auth.decorators import user_passes_test  
@@ -52,13 +52,13 @@ def logout_page(request):
 def main(request):
     return render(request, 'main.html')
 
-
+'''
 def get_string(name):
     img=Image.open(name)
     utf8_text = pytesseract.image_to_string(img)
     utf8_text = str(utf8_text.encode('ascii', 'ignore'))
     return utf8_text
-
+'''
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='RSR').exists())
@@ -92,7 +92,7 @@ def uploaddoc(request):
                 temp_doc.save(update_fields=['wordstr'])
             
             ### UNCOMMENT THESE LINES FOR MAC/LINUX USERS: OCR/TEXTRACT
-           
+            '''
             else:
 
                 temp_doc.wordstr = textract.process(temp_doc.docfile.path)
@@ -110,6 +110,8 @@ def uploaddoc(request):
 
                 print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
+
+            '''
 
             '''
             ============ PARSING TEAM =====================
