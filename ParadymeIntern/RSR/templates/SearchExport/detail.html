@@ -24,7 +24,6 @@
     evt.currentTarget.className += " active";
 }
 </script>
-
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Personal')" id="defaultOpen">Personal Info</button>
   <button class="tablinks" onclick="openTab(event, 'Skills')">Skills</button>
@@ -40,47 +39,35 @@
   <button class="tablinks" onclick="openTab(event, 'Professional Developement')">Professional Developement</button>
 </div>
 
-<div class="container content-section text-center">
+<div class="container content-section text-center" style="padding-left:100px">
 
 <!-- Personal info block, left hand side -->
 <h1 style = "font-family: Raleway, Arial">
     {{person.Name}}
 </h1>
-<br/>
 
-<br/>
 
 <div id="Personal" class="tabcontent" style="display:block" >
-  <div style="overflow-x: auto">
-	<table class = "table-fill">
-   <thead >
-     <tr>
-     {% for field in person %}
-       
-         <th style = "height:50px; padding:14px;" class = "text-left">{{field.0}}</td>
-     {% endfor %}
-     </tr>
-   </thead>
-   <tbody class="table-hover">
-    
-       <tr>
-         {% for field in person %}
-         
-         <td style = "padding:14px; max-width: 300px; 
-word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
-{% empty %}
-      
-         <td colspan="2">No data</td>
-{% endfor %}
+    <table class = "table-fill">
 
-       
-     
-       </tr>
+   <tbody class="table-hover">
+ {% for field in person %}
+   <tr>
+       <td class = "text-left" style="padding:10px;">{{field.0}}</td>
+
+
+         <td style ="word-wrap:break-word;padding:10px;" class = "text-left"> {{field.1}}</td>
+{% empty %}
+
+         <td colspan="2">No data</td>
+
+
+   </tr>
+   {% endfor %}
      
    </tbody>
  </table>
-  </div>
-	<br/>
+    <br/>
   
 
   <a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
@@ -98,7 +85,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
 
 
     <div id="Skills" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Skill</th>
@@ -114,6 +101,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.YearsOfExperience}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:skill-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+             
          </td>
        </tr>
      {% empty %}
@@ -141,7 +129,7 @@ word-wrap:break-word;" class = "text-left"> {{field.1}}</td>
 
 <div id="Past Work" class="tabcontent">
 
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Company Name</th>
@@ -169,7 +157,7 @@ word-wrap:break-word;"class = "text-left">{{obj.ExperienceOnJob}}</td>
 word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:company-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
 
 
@@ -212,7 +200,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 
 <div id="School" class="tabcontent">
 
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">University</th>
@@ -242,7 +230,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+             
          </td>
        </tr>
      {% empty %}
@@ -280,12 +268,12 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       </form>
       </tr>
    </tbody>
- </table>	
+ </table> 
 </div>
 
 
 <div id="Course Work" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Course</th>
@@ -303,7 +291,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
        </tr>
      {% empty %}
@@ -327,9 +315,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
    </tbody>
  </table>
 </div>
-	
+  
 <div id="Clearance" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Clearance Level</th>
@@ -342,7 +330,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      {% for obj in clearance %}
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.ClearanceLevel}}</td>
-         <td>
+         <td style = "padding:14px;"class = "text-left">
            <a href="{% url 'RSR:clearance-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
          </td>
      {% empty %}
@@ -355,7 +343,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 </div>
 
 <div id="Languages" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Language</th>
@@ -372,7 +360,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+             
          </td>
 
        </tr>
@@ -396,7 +384,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 </div>
 
 <div id="Side Projects" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Project</th>
@@ -412,7 +400,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+             
          </td>
 
        </tr>
@@ -439,7 +427,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 
 
 <div id="Awards" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Award</th>
@@ -457,7 +445,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
 
        </tr>
@@ -483,7 +471,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 </div>
 
 <div id="Clubs" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Club/Hobby</th>
@@ -501,7 +489,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
 
        </tr>
@@ -528,7 +516,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 
 
 <div id="Volunteering" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Volunteer</th>
@@ -546,7 +534,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
 
        </tr>
@@ -572,7 +560,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
 </div>
 
 <div id="Professional Developement" class="tabcontent">
-	<table class = "table-fill">
+  <table class = "table-fill">
    <thead>
      <tr>
        <th style = "padding:14px;"class = "text-left">Development</th>
@@ -590,7 +578,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-
+            
          </td>
 
        </tr>
