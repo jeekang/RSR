@@ -34,11 +34,11 @@ import json
 from PIL import Image
 from wand.image import Image as IMG
 import pytesseract
-import textract
+# import textract
 
 ### Limit group###
 
-from django.contrib.auth.decorators import user_passes_test  
+from django.contrib.auth.decorators import user_passes_test
 
 
 
@@ -65,16 +65,16 @@ def get_string(name):
 def uploaddoc(request):
     # Handle file upload
 
-    
+
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            #### PARSING TEAM = AT THE END OF THE NEXT LINES, USE 
+            #### PARSING TEAM = AT THE END OF THE NEXT LINES, USE
             #### temp_doc.wordstr TO GRAB STRING ####
 
 
             temp_doc = Document(docfile=request.FILES['docfile'])
-           
+
             #temp_doc.firstname = Document(docfile=request.POST.get('firstname'))
             #temp_doc.lastname = Document(docfile=request.POST.get('lastname'))
             #temp_doc.type = Document(docfile=request.POST.get('type'))
@@ -90,23 +90,23 @@ def uploaddoc(request):
                 temp_doc.wordstr = parse_word_file(temp_doc.docfile.path)
                 print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
-            
+
             ### UNCOMMENT THESE LINES FOR MAC/LINUX USERS: OCR/TEXTRACT
-           
+
             else:
 
-                temp_doc.wordstr = textract.process(temp_doc.docfile.path)
-                
-                if len(temp_doc.wordstr) < 50:
-                    img=IMG(filename=temp_doc.docfile.path,resolution=200)
-                    
-                    img.save(filename='temp.jpg')
-                    utf8_text = get_string('temp.jpg')
-                    os.remove('temp.jpg')
-                    
-                    print (utf8_text)
-                    temp_doc.wordstr = utf8_text
-                    temp_doc.save(update_fields=['wordstr'])
+                # temp_doc.wordstr = textract.process(temp_doc.docfile.path)
+
+                # if len(temp_doc.wordstr) < 50:
+                img=IMG(filename=temp_doc.docfile.path,resolution=200)
+
+                img.save(filename='temp.jpg')
+                utf8_text = get_string('temp.jpg')
+                os.remove('temp.jpg')
+
+                print (utf8_text)
+                temp_doc.wordstr = utf8_text
+                temp_doc.save(update_fields=['wordstr'])
 
                 print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
@@ -119,38 +119,38 @@ def uploaddoc(request):
             '''
             ###
 
-            
+
 
             #json testing#
             #check for json file, wont be needed as parsing will return json#
-            
-            
+
+
             #========== PARSING TEAM JSON =========== #
             ## GET RID OF THIS LINE BELOW
             ## replace with below line:  (just so we dont have to redo indents)
             #if True:
             # ======================================#
-             
+
 
             if ".json" in temp_doc.docfile.path:
 
 
-                
+
                 #either load json, or recieve json file
 
                 ### ===================== ######
                 #PARSING, REPLACE temp_doc.docfile.path with the json path!!
                 ### ====================== ######
                 js = json.load(open(temp_doc.docfile.path))
-                
-                
+
+
                 #iterate through json file
 
                 #initialize person out side of for loop/if statements so we can use it later
                 p_name = temp_doc.firstname + " " + temp_doc.lastname
                 person = Person(Name=p_name)
                 for label in js:
-                    
+
                     #Checking Labels to see which table to create
                     if label == "person":
                         for key in js[label]:
@@ -361,11 +361,11 @@ def uploaddoc(request):
 def person_edit(request, person_id):
 	instance = get_object_or_404(Person, id=person_id)
 	form = PersonForm(request.POST or None, instance=instance)
-   
+
 
 	if form.is_valid():
 		form.save()
-		
+
 		return HttpResponseRedirect(reverse('RSR:detail', args=[instance.pk]))
 	context = {
 		'form' : form,
@@ -661,15 +661,15 @@ def detail(request,pk):
     Clubs = detail_dic['PersonToClubs_Hobbies']
     Volunteer = detail_dic['PersonToVolunteering']
     Award = detail_dic['PersonToAwards']
-    
+
     form = CommentsForm(request.POST or None, instance=person)
-   
-    
+
+
     if form.is_valid():
         form.save()
-        
+
         return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
-    
+
 
     #add Skill
     skillform = SkillForm(request.POST)
@@ -677,45 +677,45 @@ def detail(request,pk):
     if skillform.is_valid() and not skillform.cleaned_data['Name'] == "":
         skillform.save(commit=False)
         query_set = Skills.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=skillform.cleaned_data['Name']):
             skillform.save()
-            query_set = query_set.filter(Name=skillform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=skillform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=skillform.cleaned_data['Name'])[0]
         if persontoskill.is_valid():
             print(persontoskill.cleaned_data['YearsOfExperience'])
             persontoskill_temp = persontoskill.save(commit=False)
             persontoskill_temp.SkillsID = query_set
-            
+
             persontoskill_temp.PersonID = person
-            
+
             persontoskill_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add skill
-    
+
      #add Company
     companyform = CompanyForm(request.POST)
     persontocompany = NewPersontoCompanyForm(request.POST)
     if companyform.is_valid() and not companyform.cleaned_data['Name'] == "":
         companyform.save(commit=False)
         query_set = Company.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=companyform.cleaned_data['Name']):
             companyform.save()
-            query_set = query_set.filter(Name=companyform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=companyform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=companyform.cleaned_data['Name'])[0]
         if persontocompany.is_valid():
             persontocompany_temp = persontocompany.save(commit=False)
             persontocompany_temp.CompanyID = query_set
-            
+
             persontocompany_temp.PersonID = person
-            
+
             persontocompany_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add company
@@ -727,16 +727,16 @@ def detail(request,pk):
     majorform = NewMajorForm(request.POST, prefix = "majorform")
     schoolform = NewSchoolForm(request.POST, prefix = "schoolform")
     persontoschool  = NewPersontoSchoolForm(request.POST)
- 
+
     if schoolform.is_valid() and not schoolform.cleaned_data['Name'] == "":
         print(1)
         schoolform.save(commit=False)
         query_set = School.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=schoolform.cleaned_data['Name']):
             schoolform.save()
-            query_set = query_set.filter(Name=schoolform.cleaned_data['Name'])[0]            
+            query_set = query_set.filter(Name=schoolform.cleaned_data['Name'])[0]
             print(query_set)
         else:
             query_set = query_set.filter(Name=schoolform.cleaned_data['Name'])[0]
@@ -744,24 +744,24 @@ def detail(request,pk):
         if majorform.is_valid():
             majorform.save(commit=False)
             query_set1 = Major.objects.all()
-        
-        
+
+
             if not query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor']):
                 majorform.save()
-                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor'])[0]            
+                query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor'])[0]
                 print(query_set1)
             else:
                 query_set1 = query_set1.filter(Name=majorform.cleaned_data['Name'],MajorMinor = majorform.cleaned_data['MajorMinor'])[0]
                 print(query_set1)
-        
+
             if persontoschool.is_valid():
                 persontoschool_temp = persontoschool.save(commit=False)
                 print (12)
                 persontoschool_temp.MajorID = query_set1
                 persontoschool_temp.SchoolID = query_set
-            
+
                 persontoschool_temp.PersonID = person
-            
+
                 persontoschool_temp.save()
                 return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add school
@@ -773,21 +773,21 @@ def detail(request,pk):
         print ("how1")
         courseform.save(commit=False)
         query_set = Coursework.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=courseform.cleaned_data['Name']):
             courseform.save()
-            query_set = query_set.filter(Name=courseform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=courseform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=courseform.cleaned_data['Name'])[0]
         if persontocourse.is_valid():
             print ("how")
             persontocourse_temp = persontocourse.save(commit=False)
             persontocourse_temp.CourseID = query_set
-            
+
             persontocourse_temp.PersonID = person
-            
+
             persontocourse_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add course
@@ -797,12 +797,12 @@ def detail(request,pk):
     if langform.is_valid() and not langform.cleaned_data['Language'] == "":
         langform.save(commit=False)
         query_set = LanguageSpoken.objects.all()
-        
-        
+
+
         if not query_set.filter(Language=langform.cleaned_data['Language']):
             langform.save()
-            query_set = query_set.filter(Language=langform.cleaned_data['Language'])[0]            
-           
+            query_set = query_set.filter(Language=langform.cleaned_data['Language'])[0]
+
         else:
             query_set = query_set.filter(Language=langform.cleaned_data['Name'])[0]
         language_to_person = PersonToLanguage(LangID=query_set, PersonID=person)
@@ -817,20 +817,20 @@ def detail(request,pk):
     if sideform.is_valid() and not sideform.cleaned_data['Name'] == "":
         sideform.save(commit=False)
         query_set = SideProject.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=sideform.cleaned_data['Name']):
             sideform.save()
-            query_set = query_set.filter(Name=sideform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=sideform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=sideform.cleaned_data['Name'])[0]
         if persontoside.is_valid():
             persontoside_temp = persontoside.save(commit=False)
             persontoside_temp.SideID = query_set
-            
+
             persontoside_temp.PersonID = person
-            
+
             persontoside_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add Project
@@ -841,20 +841,20 @@ def detail(request,pk):
     if awardform.is_valid() and not awardform.cleaned_data['Name'] == "":
         awardform.save(commit=False)
         query_set = Awards.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=awardform.cleaned_data['Name']):
             awardform.save()
-            query_set = query_set.filter(Name=awardform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=awardform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=awardform.cleaned_data['Name'])[0]
         if persontoaward.is_valid():
             persontoaward_temp = persontoaward.save(commit=False)
             persontoaward_temp.AwardID = query_set
-            
+
             persontoaward_temp.PersonID = person
-            
+
             persontoaward_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add award
@@ -866,25 +866,25 @@ def detail(request,pk):
     if clubform.is_valid() and not clubform.cleaned_data['Name'] == "":
         clubform.save(commit=False)
         query_set = Clubs_Hobbies.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=clubform.cleaned_data['Name']):
             clubform.save()
-            query_set = query_set.filter(Name=clubform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=clubform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=clubform.cleaned_data['Name'])[0]
         if persontoclub.is_valid():
             persontoclub_temp = persontoclub.save(commit=False)
             persontoclub_temp.CHID = query_set
-            
+
             persontoclub_temp.PersonID = person
-            
+
             persontoclub_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add club
 
-  
+
      #add volunteer
     volunteerform = VolunteeringForm(prefix = "volunteerform")
     volunteerform = VolunteeringForm(request.POST, prefix = "volunteerform")
@@ -892,20 +892,20 @@ def detail(request,pk):
     if volunteerform.is_valid() and not volunteerform.cleaned_data['Name'] == "":
         volunteerform.save(commit=False)
         query_set = Volunteering.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=volunteerform.cleaned_data['Name']):
             volunteerform.save()
-            query_set = query_set.filter(Name=volunteerform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=volunteerform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=volunteerform.cleaned_data['Name'])[0]
         if persontovolunteer.is_valid():
             persontovolunteer_temp = persontovolunteer.save(commit=False)
             persontovolunteer_temp.VolunID = query_set
-            
+
             persontovolunteer_temp.PersonID = person
-            
+
             persontovolunteer_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add volunteer
@@ -917,24 +917,24 @@ def detail(request,pk):
     if professionalform.is_valid() and not professionalform.cleaned_data['Name'] == "":
         professionalform.save(commit=False)
         query_set = ProfessionalDevelopment.objects.all()
-        
-        
+
+
         if not query_set.filter(Name=professionalform.cleaned_data['Name']):
             professionalform.save()
-            query_set = query_set.filter(Name=professionalform.cleaned_data['Name'])[0]            
-           
+            query_set = query_set.filter(Name=professionalform.cleaned_data['Name'])[0]
+
         else:
             query_set = query_set.filter(Name=professionalform.cleaned_data['Name'])[0]
         if persontoprofessional.is_valid():
             persontoprofessional_temp = persontoprofessional.save(commit=False)
             persontoprofessional_temp.ProfID = query_set
-            
+
             persontoprofessional_temp.PersonID = person
-            
+
             persontoprofessional_temp.save()
             return HttpResponseRedirect(reverse('RSR:detail', args=[person.pk]))
     ## end add club
-    context = { 
+    context = {
                 'form' : form,
                 'skillform': skillform,
                 'majorform':majorform,
@@ -982,7 +982,7 @@ def uploadlist (request):
    # documents = Document.objects.filter(firstname = Document.firstname).filter(lastname = Document.lastname).filter(type = Document.type).filter(docfile = Document.docfile)
     document = Document.objects.all()
     documents = UploadListFilter(request.GET,queryset = document)
-    
+
     context ={'documents':documents}
     return render(request,'uploadlist.html',context)
 
@@ -1079,4 +1079,3 @@ def OCRSearch(request):
     context = {'results': results}
 
     return render(request, 'OCRSearch.html', context)
-
