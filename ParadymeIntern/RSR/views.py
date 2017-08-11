@@ -1068,13 +1068,13 @@ class Companyautocomplete(autocomplete.Select2QuerySetView):
 def OCRSearch(request):
     doc_objects = Document.objects.all()
     search_item = str(request.GET.get('search'))
-    print(search_item)
+    # print(search_item)
     results=[]
     for document in doc_objects:
-        print(document.wordstr)
+        # print(document.wordstr)
         wordstr = str(document.wordstr)
         if search_item.lower() in wordstr.lower():
-            print(document.wordstr)
+            # print(document.wordstr)
             results.append(document)
     context = {'results': results}
 
