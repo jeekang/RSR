@@ -1,0 +1,613 @@
+{% extends 'navigation.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<script type="text/javascript">
+
+  function openTab(evt, category) {
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(category).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Personal')" id="defaultOpen">Personal Info</button>
+  <button class="tablinks" onclick="openTab(event, 'Skills')">Skills</button>
+  <button class="tablinks" onclick="openTab(event, 'Past Work')">Past Work</button>
+  <button class="tablinks" onclick="openTab(event, 'School')">Academics</button>
+  <button class="tablinks" onclick="openTab(event, 'Course Work')">Course Work</button>
+  <button class="tablinks" onclick="openTab(event, 'Clearance')">Clearance</button>
+  <button class="tablinks" onclick="openTab(event, 'Languages')">Languages</button>
+  <button class="tablinks" onclick="openTab(event, 'Side Projects')">Side Projects</button>
+  <button class="tablinks" onclick="openTab(event, 'Awards')">Awards</button>
+  <button class="tablinks" onclick="openTab(event, 'Clubs')">Clubs/Hobbies</button>
+  <button class="tablinks" onclick="openTab(event, 'Volunteering')">Volunteering</button>
+  <button class="tablinks" onclick="openTab(event, 'Professional Developement')">Professional Developement</button>
+</div>
+
+<div class="container content-section text-center" style="padding-left:100px">
+
+<!-- Personal info block, left hand side -->
+<h1 style = "font-family: Raleway, Arial">
+    {{person.Name}}
+</h1>
+
+
+<div id="Personal" class="tabcontent" style="display:block" >
+    <table class = "table-fill">
+
+   <tbody class="table-hover">
+ {% for field in person %}
+   <tr>
+       <td class = "text-left" style="padding:10px;">{{field.0}}</td>
+
+
+         <td style ="word-wrap:break-word;padding:10px;" class = "text-left"> {{field.1}}</td>
+{% empty %}
+
+         <td colspan="2">No data</td>
+
+
+   </tr>
+   {% endfor %}
+     
+   </tbody>
+ </table>
+    <br/>
+  
+
+  <a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
+  <br/>
+  <br/>
+  <form method="POST" class="post-form">{% csrf_token %}
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+<br/>
+      <button type="submit" class = "button-style">Add Comment</button>
+      </form>
+  </div>
+  
+
+<!--Right hand side all tables -->
+
+
+    <div id="Skills" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Skill</th>
+       <th style = "padding:14px;"class = "text-left">Years Of Experience</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in skills %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SkillsID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.YearsOfExperience}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:skill-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+             
+         </td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field skillform.Name class="form-control" placeholder="Add Skill"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoskill.YearsOfExperience class="form-control" placeholder="Years Of Experience"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+
+   </tbody>
+ </table>
+    </div>
+
+
+<div id="Past Work" class="tabcontent">
+
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Company Name</th>
+        <th style = "padding:14px;"class = "text-left">Title</th>
+        <th style = "padding:14px;"class = "text-left">Experience</th>
+        <th style = "padding:14px;"class = "text-left">Start Date</th>
+        <th style = "padding:14px;"class = "text-left">End Date</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in company %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CompanyID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Title}}</td>
+         <td style = "padding:14px; max-width: 150px; 
+word-wrap:break-word;"class = "text-left">{{obj.ExperienceOnJob}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.StartDate}}</td>
+         <td style = "padding:14px;"class = "text-left">{{obj.EndDate}}</td>
+         <td style = "padding:14px; max-width: 200px; 
+word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:company-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+      <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field companyform.Name class="form-control" placeholder="Add Company"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.Title class="form-control" placeholder="Title"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.ExperienceOnJob class="form-control" placeholder="Experience"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.StartDate class="form-control" placeholder="XX/XX/XX"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.EndDate class="form-control" placeholder="XX/XX/XX"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocompany.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+     
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+
+
+<div id="School" class="tabcontent">
+
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">University</th>
+        <th style = "padding:14px;"class = "text-left">Degree</th>
+
+       <th style = "padding:14px;"class = "text-left">Grad Date</th>
+       <th style = "padding:14px;"class = "text-left">Major</th>
+       <th style = "padding:14px;"class = "text-left">Dept</th>
+       <th style = "width:130px; padding:14px;"class = "text-left">Type</th>
+
+       <th style = "padding:14px;"class = "text-left">GPA</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in school %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SchoolID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.SchoolID.DegreeLevel}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.GradDate}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.MajorID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.MajorID.Dept}}</td>
+         <td style = "width:130px; padding:14px;"class = "text-left"> {{obj.MajorID.MajorMinor}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+             
+         </td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field schoolform.Name class="form-control" placeholder="Add Education"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field schoolform.DegreeLevel class="form-control" placeholder="Degree"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoschool.GradDate class="form-control" placeholder="Grad Date"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.Name class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.Dept class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field majorform.MajorMinor class="form-control" placeholder="Major"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoschool.GPA class="form-control" placeholder="GPA"%} 
+       </td>
+      
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+     
+      </form>
+      </tr>
+   </tbody>
+ </table> 
+</div>
+
+
+<div id="Course Work" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Course</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in course %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CourseID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field courseform.Name class="form-control" placeholder="Add Course"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontocourse.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+
+   </tbody>
+ </table>
+</div>
+  
+<div id="Clearance" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Clearance Level</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in clearance %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.ClearanceLevel}}</td>
+         <td style = "padding:14px;"class = "text-left">
+           <a href="{% url 'RSR:clearance-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+         </td>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+</div>
+
+<div id="Languages" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Language</th>
+       <th style = "width:130px;padding:14px;"class = "text-left">Action</th>
+
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in language %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+             
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field langform.Language class="form-control" placeholder="Add Language"%} 
+       </td>
+     
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+<div id="Side Projects" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Project</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in side %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.SideID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+             
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+      <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field sideform.Name class="form-control" placeholder="Add Project"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoside.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+
+<div id="Awards" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Award</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in award %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.AwardID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field awardform.Name class="form-control" placeholder="Add Award"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoaward.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+<div id="Clubs" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Club/Hobby</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+       <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in clubs %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.CHID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field clubform.Name class="form-control" placeholder="Add Club"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoclub.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+
+<div id="Volunteering" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Volunteer</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in volunteer %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.VolunID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field volunteerform.Name class="form-control" placeholder="Add Volunteering"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontovolunteer.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+</div>
+
+<div id="Professional Developement" class="tabcontent">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Development</th>
+        <th style = "padding:14px;"class = "text-left">Description</th>
+        <th style = "padding:14px;"class = "text-left">Action</th>
+
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in pro %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.ProfID}}</td>
+         <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
+         <td style = "padding:14px;"class = "text-left">
+             <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
+            
+         </td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="2">No data</td>
+       </tr>
+     {% endfor %}
+     <tr>
+       <form method="POST" class="post-form">{% csrf_token %}
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field professionalform.Name class="form-control" placeholder="Add Pro Develop"%} 
+       </td>
+       <td style = "padding:14px;"class = "text-left">
+        {% render_field persontoprofessional.Desc class="form-control" placeholder="Description"%} 
+       </td>
+      <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
+        </td>
+      </form>
+      </tr>
+   </tbody>
+ </table>
+ </div>
+<br/>
+  <br/>
+</div>
+
+<!-- t
+odo Awards, Clubs, Volunteering, Professional Dev -->
+
+
+{% endblock %}

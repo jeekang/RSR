@@ -1,0 +1,40 @@
+
+{% extends 'navigation.html'%}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container content-section text-center">
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+
+
+ <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <div style="color:#000000">
+
+        <h2 style = "color: #FFF">Welcome</h2>
+        <br/>
+       
+        {% render_field form.username class="form-control" style=" width: 300px; margin:auto;" placeholder="Username" %}
+        <br />
+       
+         {% render_field form.password class="form-control" style=" width: 300px; margin:auto;" placeholder="Password" %}
+
+
+    <br><br>
+        <button class = "button-style">Login</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+    </form>
+    <br/>
+    <br/>
+    <br/>
+    </div>
+
+    {% endblock %}
+
+

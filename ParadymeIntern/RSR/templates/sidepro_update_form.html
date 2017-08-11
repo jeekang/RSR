@@ -1,0 +1,24 @@
+{% extends 'navigation.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<!--ADD THIS DIV CLASS TO ALL-->
+<div class="container content-section text-center">
+
+<div style="color:#000">
+		<h3 style = "color:#FFF"> Editing {{person.PersonID.Name}}'s Side Project Info</h3>
+	<br/>
+    <form method="POST" class="post-form">{% csrf_token %}
+	    {% for field in form %}
+			<div style= "color:#FFF">{{field.label_tag}}</div> {% render_field field class="form-control" style=" width: 300px; margin:auto;" %}
+		{% endfor %}
+		<br/>
+        <button type="submit" class="save btn btn-default">Save</button>
+
+    </form>
+	 </p><form action="{% url 'RSR:sidepro-delete' pk %}" method="post" enctype="multipart/form-data">
+                 {% csrf_token %}
+                 <input onclick="return confirm('Are you sure you want to delete this side project?')" class = "btn btn-default btn-file" type="submit" value="Delete" />
+     </form>
+</div>
+
+{% endblock %}

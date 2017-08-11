@@ -1,0 +1,22 @@
+{% extends 'navigation.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<!--ADD THIS DIV CLASS TO ALL-->
+<div class="container content-section text-center">
+
+
+<div style="color:#000">
+	<h3 style = "color:#FFF"> Editing {{person.Name}}'s Personal Info</h3>
+	<br/>
+    <form method="POST" class="post-form">{% csrf_token %}
+		{% for field in form %}
+			<div style= "color:#FFF">{{field.label_tag}}</div> {% render_field field class="form-control" style=" width: 300px; margin:auto;" %}
+		{% endfor %}
+		<br/>
+		<button type="submit" class = "button-style">Edit</button>
+
+ </form>
+
+<!-- DONT FORGET TO CLOSE DIV-->
+ </div>
+{% endblock %}

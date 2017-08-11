@@ -1,0 +1,349 @@
+
+                   {%load static%}
+                   <!DOCTYPE html>
+                   <html lang="en">
+                   <style>
+                   .left{
+
+                   }
+                   .right{
+
+                   }
+                   }
+                   .background{
+  background: linear-gradient(to bottom, #000046, #1cb5e0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                   }
+                   /* upload button*/
+                   .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+
+                   /* LOGIN INFO */
+                    .form {
+                      border-radius: 25px;
+                        font-family: "Roboto", helvetica, arial, sans-serif;
+
+                           position: relative;
+                           top: 30%;
+                           z-index: 1;
+                           background: #e3e3e3;
+                           max-width: 360px;
+                           margin: auto;
+ 
+                           padding: 45px;
+                           text-align: center;
+                           box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                           }
+                     .form button {
+                      font-family: "Roboto", helvetica, arial, sans-serif;
+
+                       width: 75%;
+                       height: 50%;
+                       border: 0;
+                       padding: 15px;
+                       cursor: pointer;
+                     }
+ 
+                   /* table css */
+                   @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+.body {
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+   display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  overflow: auto;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:50px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+  border-spacing: 0 50px;}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  word-wrap: break-word;
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+  border-bottom: 1px solid #22262e;
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+ 
+tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  word-wrap: break-word;
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+                   .TextBox{
+                     -moz-border-radius:1px;
+                     -webkit-border-radius:1px;
+                     border-radius:1px;
+                     border: #solid 10px #000;
+                     background-color: rgba(255,255,255,0.8);
+                     height:100%;
+                     width:100%;
+                     margin-left: auto ;
+                     margin-right: auto ;
+                   }
+                   .button-style{
+    
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    border-radius: 4px;
+                    display: inline-block;
+                    margin: 2px 0;
+                    padding: 12px 25px;
+                    background: none;
+                    background-image: none;
+                    background-color: #fdd200;
+                    background-color: #ff7e00;
+                    /* button color */
+                    color: #ffffff;
+                    vertical-align: middle;
+                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: normal;
+                    font-size: 13px;
+                    font-family: Montserrat, 'Open Sans', Helvetica, Arial, sans-serif;
+                    line-height: 20px;
+                    cursor: pointer;
+                    -webkit-appearance: none;
+                    border: 0px;
+                    }
+
+                   </style>
+                   <head>
+
+                       <meta charset="utf-8">
+                       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                       <meta name="viewport" content="width=device-width, initial-scale=1">
+                       <meta name="description" content="">
+                       <meta name="author" content="">
+
+                       <title>RSR</title>
+
+                       <!-- Bootstrap Core CSS -->
+                       <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+                       <!-- Custom Fonts -->
+                       <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+                       <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+                       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+                       <!-- Theme CSS -->
+                       <link href="{% static 'css/grayscale.min.css' %}" rel="stylesheet">
+
+                       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                       <!--[if lt IE 9]>
+                           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                       <![endif]-->
+
+                   </head>
+<div class = "background">
+<!-- Navigation -->
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="{% url 'RSR:main' %}">
+                <img style = "width: auto; height: 25px;" src = "http://www.paradymemanagement.com/wp-content/uploads/2015/11/paradyme-green.png">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a href="{% url 'RSR:uploaddoc' %}" >Upload</a>
+                </li>
+                <li>
+                    <a href="{% url 'RSR:search' %}">Search</a>
+                </li>
+                <li>
+                    <a href="{% url 'RSR:linkanalysis' %}">Link Analysis</a>
+                </li>
+                <li>
+                    <a href="{% url 'RSR:user_access' %}">User Access</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<section style = "font-family: Roboto, helvetica, arial, sans-serif;" id="about" class="container content-section text-center">
+{% block content %}
+{% endblock %}
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy; Paradyme Management 2017</p>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="{% static 'vendor/jquery/jquery.js' %}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+<!-- Theme JavaScript -->
+<script src="{% static 'js/grayscale.min.js' %}"></script>
+
+</body>
+</div>
+</html>

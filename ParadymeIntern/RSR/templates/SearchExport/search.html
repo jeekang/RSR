@@ -1,0 +1,214 @@
+
+{% extends 'navigation.html' %}
+{% block content %}
+<div class="container content-section text-center">
+
+<title>Resume Filter</title>
+    {% load static %}
+    <!--for bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--for autocomplete function-->
+    <!-- django autocomplete light gets slow with several thousands of entries may need change later on-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/collected/admin/js/vendor/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/jquery.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/vendor/select2/dist/css/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/vendor/select2/dist/js/select2.full.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/forward.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+</head>
+<style>
+   
+    .select2-container {
+    color:black !important;
+    width: 100% !important;
+    min-width: 10em !important;
+    font-family: Raleway, "Roboto", helvetica, arial, sans-serif;
+
+}
+</style>
+<body>
+    {% load widget_tweaks %}
+   
+
+        <h1>Resume Filter System</h1>
+        <br/>
+        <!--  Hide Show filters -->
+            <a href="#search-div" class="btn btn-default" data-toggle="collapse">Advanced Search</a>
+            <div id = "search-div" class = "collapse">
+            <br/>
+            <br/>
+        <p>Select/type one or more the following fields</p>
+
+    <form action="" method="Get">
+
+            <div class="row">
+                <!-- Search Bar -->
+                <div class="form-group col-sm-12 col-md-12">
+                Search Bar:
+                {% render_field personFilter.form.Name class="form-control" %}
+                </div>
+            </div>
+            <div class="row">
+                <fieldset>
+                <legend style="color:#FFF">Academia</legend>
+              <!-- Filters -->
+                <div class="form-group col-sm-3 col-md-3">
+                    School Attend:
+                    {% render_field personFilter.form.SchoolAttend class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Graduation Date:
+                    {% render_field personFilter.form.GraduateDate class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Degree Level:
+                    {% render_field personFilter.form.DegreeLevel class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Major:
+                    {% render_field personFilter.form.Major class="form-control" %}
+                </div>
+                </div>
+
+                <div class = "row">
+                <div class="form-group col-sm-3 col-md-3">
+                    GPA lower bound:
+                    {% render_field personFilter.form.GPAlb class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    GPA upper bound:
+                    {% render_field personFilter.form.GPAub class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Coursework:
+                    {% render_field personFilter.form.Coursework class="form-control" %}
+                </div>
+               
+                    
+                </fieldset>
+                </div>
+            <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Skills/Awards</legend>
+                <div class="form-group col-sm-3 col-md-3">
+                    Skills:
+                    {% render_field personFilter.form.Skills class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Year of experience for skill:
+                    {% render_field personFilter.form.YearOfExperienceForSkill class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Language Spoken:
+                    {% render_field personFilter.form.Language class="form-control" %}
+                </div>
+                <div class="form-group col-sm-3 col-md-3">
+                    Awards:
+                    {% render_field personFilter.form.Award class="form-control" %}
+                </div>
+                </fieldset>
+                </div>
+            <div class = "row">
+                <fieldset>
+                <legend style="color:#FFF">Professional</legend>
+                <div class="form-group col-sm-4 col-md-3">
+                    Company worked at:
+                    {% render_field personFilter.form.CompanyWorked class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Title:
+                    {% render_field personFilter.form.Title class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Professional Development:
+                    {% render_field personFilter.form.ProfessionalDevelopment class="form-control" %}
+                </div>
+                </fieldset>
+            </div>
+
+<div class="row">
+                <fieldset>
+                <legend style="color:#FFF">Clearance</legend>
+                <div class="form-group col-sm-4 col-md-3">
+                    Security Clearance:
+                    {% render_field personFilter.form.SecurityClearance class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Work Authorization:
+                    {% render_field personFilter.form.WorkAuthorization class="form-control" %}
+                </div>
+                </fieldset>
+            </div>
+
+             <div class="row">
+                <fieldset>
+                <legend style="color:#FFF">Extracurricular</legend>
+                <div class="form-group col-sm-4 col-md-3">
+                    Volunteering:
+                    {% render_field personFilter.form.Volunteering class="form-control" %}
+                </div>
+                <div class="form-group col-sm-4 col-md-3">
+                    Club:
+                    {% render_field personFilter.form.Club_Hobby class="form-control" %}
+                </div>
+                </fieldset>
+             </div>
+
+             
+            <div align="center">
+                <br/>
+            <button type="submit" class="button-style">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+    </form>
+    </div>
+<br/>
+<br/>
+    <br/>
+    <br/>
+    <br/>
+    {{ form.media }}
+    {% load search_tags %}
+   <div align="center">
+    <div class = "body">
+  <table class = "table-fill">
+   <thead>
+     <tr>
+       <th style = "padding:14px;"class = "text-left">Type</th>
+       <th style = "padding:14px;"class = "text-left">Name</th>
+       <th style = "padding:14px;"class = "text-left">Resume</th>
+       <th style = "padding:14px;"class = "text-left">E-Mail</th>
+       <th style = "padding:14px;"class = "text-left">Phone</th>
+
+     </tr>
+
+   </thead>
+   <tbody class="table-hover">
+     {% for obj in personFilter.qs %}
+       <tr>
+         <td style = "padding:14px;"class = "text-left">{{obj.TypeResume}}</td>
+         <td style = "padding:14px;"class = "text-left"> <a  style = "color:#ff7e00;"href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
+         <td style = "padding:14px;"class = "text-left"><a class = "button-style" href="{{ obj.Resume.url }}">View</a></td>     
+         <td style = "padding:14px;"class = "text-left">{{ obj.Email }}</td>
+        <td style = "padding:14px;"class = "text-left">{{ obj.PhoneNumber }}</td>
+
+       </tr>
+     {% empty %}
+       <tr>
+         <td colspan="5">No data</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+    </div>
+
+    </div>
+</body>
+</div>
+{% endblock %}

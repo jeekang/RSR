@@ -1,1 +1,5 @@
 .idea/
+*.pyc 
+.DS_Store
+*.sqlite3
+ParadymeIntern/db.sqlite3

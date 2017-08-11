@@ -1,0 +1,109 @@
+{
+ "person": {
+   "name": "Jee Kang",
+   "email": "jkang@paradymemanagement.com",
+   "address":"College Park",
+   "zipcode":20740,
+   "state":"Maryland",
+   "phone": "4430000000",
+   "linkedin":"linkedin.com",
+   "github":"github.com"
+ },
+
+ "work": [{
+   "company": "Company",
+   "title": "President",
+   "experience": "exp",
+   "startDate": "2013-01-01",
+   "endDate": "2014-01-01",
+   "summary": "Description..."
+  },
+   {
+   "company": "Paradyme",
+   "title": "Intern",
+   "experience": "exp",
+   "startDate": "2013-01-01",
+   "endDate": "2014-01-01",
+   "summary": "Description..."
+   }
+  ],
+  
+  "skills": [{
+    "skill": "Python",
+    "YearsOfExperience": "5"
+  },
+  {
+    "skill":"Java",
+    "YearsOfExperience": "2"
+  }],
+  
+  "education":[{
+    "school":{
+      "name":"University of Maryland",
+      "degreeLevel":"Undergraduate"
+    },
+    "gradDate":"Dec 2018",
+    "GPA":3.7,
+    "major":{
+      "major":"Computer Science",
+      "dept":"CMNS",
+      "major/minor":"Major"
+    }
+  }],
+  
+  "course":[{
+    "name":"CMSC351",
+    "description":"algorithms"
+  },
+  {
+    "name":"CMSC330",
+    "description":"Programming Lang"
+  }],
+  "clearance":{
+    "level":"None"
+  },
+  
+  "languages":[{
+    "language":"Korean"
+  },
+  {
+    "language":"English"
+  }],
+  
+  "sideprojects":[{
+    "name":"AppName",
+    "description":"Description"
+  },
+  {
+    "name":"AppName2",
+    "description":"Description2"
+  }],
+  
+  "volunteering":[{
+    "name":"Volunteer",
+    "description":"Description"
+  },
+  {
+    "name":"Org2",
+    "description":"Description2"
+  }],
+  
+  "clubs":[{
+    "name":"Club",
+    "description":"Description"
+  },
+  {
+    "name":"Hobby",
+    "description":"Description2"
+  }],
+  
+  "award":[{
+    "name":"Presidential Scholarship",
+    "description":"Description"
+  },
+  {
+    "name":"Dean's List",
+    "description":"Description2"
+  }]
+  
+}
