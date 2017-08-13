@@ -53,7 +53,7 @@
    <tbody class="table-hover">
  {% for field in person %}
    <tr>
-       <td class = "text-left" style="padding:10px;">{{field.0}}</td>
+       <td class = "text-left" style="padding:10px;font-weight: bold;">{{field.0}}</td>
 
 
          <td style ="word-wrap:break-word;padding:10px;" class = "text-left"> {{field.1}}</td>
@@ -64,22 +64,22 @@
 
    </tr>
    {% endfor %}
-     
+
    </tbody>
  </table>
     <br/>
-  
+
 
   <a href="{% url 'RSR:person-edit' person.pk %}" class="btn btn-default btn-file">Edit</a>
   <br/>
   <br/>
   <form method="POST" class="post-form">{% csrf_token %}
-      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%} 
+      {% render_field form.Comments ROWS=5 COLS=30 class="form-control" style=" width: 300px;height: 100px !important; margin:auto;" placeholder="Comments"%}
 <br/>
       <button type="submit" class = "button-style">Add Comment</button>
       </form>
   </div>
-  
+
 
 <!--Right hand side all tables -->
 
@@ -101,7 +101,7 @@
          <td style = "padding:14px;"class = "text-left"> {{obj.YearsOfExperience}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:skill-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-             
+
          </td>
        </tr>
      {% empty %}
@@ -112,10 +112,10 @@
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field skillform.Name class="form-control" placeholder="Add Skill"%} 
+        {% render_field skillform.Name class="form-control" placeholder="Add Skill"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoskill.YearsOfExperience class="form-control" placeholder="Years Of Experience"%} 
+        {% render_field persontoskill.YearsOfExperience class="form-control" placeholder="Years Of Experience"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -149,15 +149,15 @@
        <tr>
          <td style = "padding:14px;"class = "text-left">{{obj.CompanyID}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Title}}</td>
-         <td style = "padding:14px; max-width: 150px; 
+         <td style = "padding:14px; max-width: 150px;
 word-wrap:break-word;"class = "text-left">{{obj.ExperienceOnJob}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.StartDate}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.EndDate}}</td>
-         <td style = "padding:14px; max-width: 200px; 
+         <td style = "padding:14px; max-width: 200px;
 word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:company-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
 
 
@@ -170,26 +170,26 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field companyform.Name class="form-control" placeholder="Add Company"%} 
+        {% render_field companyform.Name class="form-control" placeholder="Add Company"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.Title class="form-control" placeholder="Title"%} 
+        {% render_field persontocompany.Title class="form-control" placeholder="Title"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.ExperienceOnJob class="form-control" placeholder="Experience"%} 
+        {% render_field persontocompany.ExperienceOnJob class="form-control" placeholder="Experience"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.StartDate class="form-control" placeholder="XX/XX/XX"%} 
+        {% render_field persontocompany.StartDate class="form-control" placeholder="XX/XX/XX"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.EndDate class="form-control" placeholder="XX/XX/XX"%} 
+        {% render_field persontocompany.EndDate class="form-control" placeholder="XX/XX/XX"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocompany.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontocompany.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
-     
+
       </form>
       </tr>
    </tbody>
@@ -230,7 +230,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.GPA}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:school-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-             
+
          </td>
        </tr>
      {% empty %}
@@ -241,34 +241,34 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field schoolform.Name class="form-control" placeholder="Add Education"%} 
+        {% render_field schoolform.Name class="form-control" placeholder="Add Education"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field schoolform.DegreeLevel class="form-control" placeholder="Degree"%} 
+        {% render_field schoolform.DegreeLevel class="form-control" placeholder="Degree"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoschool.GradDate class="form-control" placeholder="Grad Date"%} 
+        {% render_field persontoschool.GradDate class="form-control" placeholder="Grad Date"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field majorform.Name class="form-control" placeholder="Major"%} 
+        {% render_field majorform.Name class="form-control" placeholder="Major"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field majorform.Dept class="form-control" placeholder="Major"%} 
+        {% render_field majorform.Dept class="form-control" placeholder="Major"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field majorform.MajorMinor class="form-control" placeholder="Major"%} 
+        {% render_field majorform.MajorMinor class="form-control" placeholder="Major"%}
        </td>
       <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoschool.GPA class="form-control" placeholder="GPA"%} 
+        {% render_field persontoschool.GPA class="form-control" placeholder="GPA"%}
        </td>
-      
+
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
-     
+
       </form>
       </tr>
    </tbody>
- </table> 
+ </table>
 </div>
 
 
@@ -291,7 +291,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:course-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
        </tr>
      {% empty %}
@@ -302,10 +302,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field courseform.Name class="form-control" placeholder="Add Course"%} 
+        {% render_field courseform.Name class="form-control" placeholder="Add Course"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontocourse.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontocourse.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -315,7 +315,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
    </tbody>
  </table>
 </div>
-  
+
 <div id="Clearance" class="tabcontent">
   <table class = "table-fill">
    <thead>
@@ -360,7 +360,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">{{obj.LangID}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:language-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-             
+
          </td>
 
        </tr>
@@ -372,9 +372,9 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field langform.Language class="form-control" placeholder="Add Language"%} 
+        {% render_field langform.Language class="form-control" placeholder="Add Language"%}
        </td>
-     
+
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
       </form>
@@ -400,7 +400,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:sidepro-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-             
+
          </td>
 
        </tr>
@@ -412,10 +412,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
       <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field sideform.Name class="form-control" placeholder="Add Project"%} 
+        {% render_field sideform.Name class="form-control" placeholder="Add Project"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoside.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontoside.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -445,7 +445,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:award-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
 
        </tr>
@@ -457,10 +457,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field awardform.Name class="form-control" placeholder="Add Award"%} 
+        {% render_field awardform.Name class="form-control" placeholder="Add Award"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoaward.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontoaward.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -489,7 +489,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:club-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
 
        </tr>
@@ -501,10 +501,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field clubform.Name class="form-control" placeholder="Add Club"%} 
+        {% render_field clubform.Name class="form-control" placeholder="Add Club"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoclub.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontoclub.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -534,7 +534,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:volunteer-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
 
        </tr>
@@ -546,10 +546,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field volunteerform.Name class="form-control" placeholder="Add Volunteering"%} 
+        {% render_field volunteerform.Name class="form-control" placeholder="Add Volunteering"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontovolunteer.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontovolunteer.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
@@ -578,7 +578,7 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left"> {{obj.Desc}}</td>
          <td style = "padding:14px;"class = "text-left">
              <a href="{% url 'RSR:professional-edit' obj.pk %}" class="btn btn-default btn-file">Edit</a>
-            
+
          </td>
 
        </tr>
@@ -590,10 +590,10 @@ word-wrap:break-word;"class = "text-left"> {{obj.Desc}}</td>
      <tr>
        <form method="POST" class="post-form">{% csrf_token %}
        <td style = "padding:14px;"class = "text-left">
-        {% render_field professionalform.Name class="form-control" placeholder="Add Pro Develop"%} 
+        {% render_field professionalform.Name class="form-control" placeholder="Add Pro Develop"%}
        </td>
        <td style = "padding:14px;"class = "text-left">
-        {% render_field persontoprofessional.Desc class="form-control" placeholder="Description"%} 
+        {% render_field persontoprofessional.Desc class="form-control" placeholder="Description"%}
        </td>
       <td style = "padding:14px;"class = "text-left"><button type="submit" style = "margin:auto" class = "btn btn-default btn-file">Add</button>
         </td>
