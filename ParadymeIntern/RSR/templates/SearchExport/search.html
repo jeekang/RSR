@@ -185,6 +185,8 @@
        <th style = "padding:14px;"class = "text-left">Resume</th>
        <th style = "padding:14px;"class = "text-left">E-Mail</th>
        <th style = "padding:14px;"class = "text-left">Phone</th>
+         <th style = "padding:14px;"class = "text-left">Major</th>
+         <th style = "padding:14px;"class = "text-left">Skills</th>
 
      </tr>
 
@@ -196,7 +198,11 @@
          <td style = "padding:14px;"class = "text-left"> <a  style = "color:#ff7e00;"href="{% url 'RSR:detail' obj.pk %}">{{obj.Name}}</a></td>
          <td style = "padding:14px;"class = "text-left"><a class = "button-style" href="{{ obj.Resume.url }}">View</a></td>     
          <td style = "padding:14px;"class = "text-left">{{ obj.Email }}</td>
-        <td style = "padding:14px;"class = "text-left">{{ obj.PhoneNumber }}</td>
+         <td style = "padding:14px;"class = "text-left">{{ obj.PhoneNumber }}</td>
+           {% with obj|preview_details as detailsDict %}
+           <td style = "padding:14px;"class = "text-left">{{ detailsDict|get_key:'Major' }}</td>
+           <td style = "padding:14px;"class = "text-left">{{ detailsDict|get_key:'Skills' }}</td>
+           {% endwith %}
 
        </tr>
      {% empty %}
