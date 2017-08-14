@@ -34,7 +34,7 @@ import json
 from PIL import Image
 from wand.image import Image as IMG
 import pytesseract
-# import textract
+import textract
 
 ### Limit group###
 
@@ -95,18 +95,18 @@ def uploaddoc(request):
 
             else:
 
-                # temp_doc.wordstr = textract.process(temp_doc.docfile.path)
+                temp_doc.wordstr = textract.process(temp_doc.docfile.path)
 
-                # if len(temp_doc.wordstr) < 50:
-                img=IMG(filename=temp_doc.docfile.path,resolution=200)
+                if len(temp_doc.wordstr) < 50:
+                    img=IMG(filename=temp_doc.docfile.path,resolution=200)
 
-                img.save(filename='temp.jpg')
-                utf8_text = get_string('temp.jpg')
-                os.remove('temp.jpg')
+                    img.save(filename='temp.jpg')
+                    utf8_text = get_string('temp.jpg')
+                    os.remove('temp.jpg')
 
-                print (utf8_text)
-                temp_doc.wordstr = utf8_text
-                temp_doc.save(update_fields=['wordstr'])
+                    print (utf8_text)
+                    temp_doc.wordstr = utf8_text
+                    temp_doc.save(update_fields=['wordstr'])
 
                 print (temp_doc.wordstr)
                 temp_doc.save(update_fields=['wordstr'])
